@@ -5,6 +5,7 @@ mod funding_rate_history;
 mod historical_volatility;
 mod index_price_kline;
 mod instrument_info;
+mod insurance;
 mod mark_price_kline;
 mod open_interest;
 mod order_book;
