@@ -2,6 +2,7 @@ mod kline;
 mod server_time;
 
 mod funding_rate_history;
+mod historical_volatility;
 mod index_price_kline;
 mod instrument_info;
 mod mark_price_kline;
