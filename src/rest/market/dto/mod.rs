@@ -11,4 +11,5 @@ mod open_interest;
 mod order_book;
 mod premium_index_price_kline;
 mod recent_trade;
+mod risk_limit;
 mod tickers;
