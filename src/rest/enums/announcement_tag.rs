@@ -172,8 +172,12 @@ impl Display for AnnouncementTag {
             AnnouncementTag::Спот => write!(f, "Спот"),
             AnnouncementTag::Спотлістинги => write!(f, "Спот лістинги"),
             AnnouncementTag::Торговіботи => write!(f, "Торгові боти"),
-            AnnouncementTag::Токенизкредитнимплечем => write!(f, "Токени з кредитним плечем"),
-            AnnouncementTag::Маржинальнаторгівля => write!(f, "Маржинальна торгівля"),
+            AnnouncementTag::Токенизкредитнимплечем => {
+                write!(f, "Токени з кредитним плечем")
+            }
+            AnnouncementTag::Маржинальнаторгівля => {
+                write!(f, "Маржинальна торгівля")
+            }
             AnnouncementTag::Партнерство => write!(f, "Партнерство"),
             AnnouncementTag::Оновлення => write!(f, "Оновлення"),
             AnnouncementTag::Делістинги => write!(f, "Делістинги"),
@@ -181,9 +185,15 @@ impl Display for AnnouncementTag {
             AnnouncementTag::Опціони => write!(f, "Опціони"),
             AnnouncementTag::Копітрейдинг => write!(f, "Копітрейдинг"),
             AnnouncementTag::BybitНакопичення => write!(f, "Bybit Накопичення"),
-            AnnouncementTag::Бівалютніінвестиції => write!(f, "Бівалютні інвестиції"),
-            AnnouncementTag::Майнінгліквідності => write!(f, "Майнінг ліквідності"),
-            AnnouncementTag::Купівлякриптовалюти => write!(f, "Купівля криптовалюти"),
+            AnnouncementTag::Бівалютніінвестиції => {
+                write!(f, "Бівалютні інвестиції")
+            }
+            AnnouncementTag::Майнінгліквідності => {
+                write!(f, "Майнінг ліквідності")
+            }
+            AnnouncementTag::Купівлякриптовалюти => {
+                write!(f, "Купівля криптовалюти")
+            }
             AnnouncementTag::P2Pторгівля => write!(f, "P2P торгівля"),
             AnnouncementTag::Фіатнідепозити => write!(f, "Фіатні депозити"),
             AnnouncementTag::Криптодепозити => write!(f, "Криптодепозити"),
@@ -196,10 +206,18 @@ impl Display for AnnouncementTag {
             AnnouncementTag::MT4 => write!(f, "MT4"),
             AnnouncementTag::LuckyDraw => write!(f, "Lucky Draw"),
             AnnouncementTag::UnifiedTradingAccount => write!(f, "Unified Trading Account"),
-            AnnouncementTag::Єдинийторговийакаунт => write!(f, "Єдиний торговий акаунт"),
-            AnnouncementTag::Единыйторговыйаккаунт => write!(f, "Единый торговый аккаунт"),
-            AnnouncementTag::Институциональныйтрейдинг => write!(f, "Институциональный трейдинг"),
-            AnnouncementTag::Інституціональнийтрейдинг => write!(f, "Інституціональний трейдинг"),
+            AnnouncementTag::Єдинийторговийакаунт => {
+                write!(f, "Єдиний торговий акаунт")
+            }
+            AnnouncementTag::Единыйторговыйаккаунт => {
+                write!(f, "Единый торговый аккаунт")
+            }
+            AnnouncementTag::Институциональныйтрейдинг => {
+                write!(f, "Институциональный трейдинг")
+            }
+            AnnouncementTag::Інституціональнийтрейдинг => {
+                write!(f, "Інституціональний трейдинг")
+            }
             AnnouncementTag::Делистинг => write!(f, "Делистинг"),
         }
     }
