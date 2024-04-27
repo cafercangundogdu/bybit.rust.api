@@ -7,3 +7,4 @@ pub mod market;
 pub mod order;
 pub mod position;
 pub mod pre_upgrade;
+pub mod user;
