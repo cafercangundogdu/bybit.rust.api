@@ -8,4 +8,5 @@ pub mod order;
 pub mod position;
 pub mod pre_upgrade;
 pub mod spot_leverage_token;
+pub mod spot_margin_trade;
 pub mod user;
