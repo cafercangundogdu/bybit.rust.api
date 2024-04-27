@@ -1,6 +1,7 @@
 mod kline;
 mod server_time;
 
+mod delivery_price;
 mod funding_rate_history;
 mod historical_volatility;
 mod index_price_kline;
