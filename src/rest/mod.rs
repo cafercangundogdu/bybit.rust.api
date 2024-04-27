@@ -7,4 +7,5 @@ pub mod market;
 pub mod order;
 pub mod position;
 pub mod pre_upgrade;
+pub mod spot_leverage_token;
 pub mod user;
