@@ -1,5 +1,6 @@
 pub mod account;
 pub mod api_key_pair;
+pub mod asset;
 pub mod client;
 pub mod enums;
 pub mod market;
