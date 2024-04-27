@@ -3,4 +3,4 @@ pub mod api_key_pair;
 pub mod client;
 pub mod enums;
 pub mod market;
-pub mod trade;
+pub mod order;
