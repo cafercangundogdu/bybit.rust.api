@@ -4,6 +4,7 @@ pub mod asset;
 pub mod broker;
 pub mod client;
 pub mod enums;
+pub mod errors;
 pub mod institutional_loan;
 pub mod market;
 pub mod order;
