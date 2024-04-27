@@ -7,6 +7,7 @@ mod historical_volatility;
 mod index_price_kline;
 mod instrument_info;
 mod insurance;
+mod long_short_ratio;
 mod mark_price_kline;
 mod open_interest;
 mod order_book;
