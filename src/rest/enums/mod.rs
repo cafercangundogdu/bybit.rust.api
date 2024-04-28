@@ -1,6 +1,7 @@
 pub mod account_type;
 pub mod announcement_tag;
 pub mod announcement_type;
+pub mod cancel_type;
 pub mod category;
 pub mod create_type;
 pub mod deposit_status;
