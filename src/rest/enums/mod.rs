@@ -13,6 +13,7 @@ pub mod exec_type;
 pub mod interval;
 pub mod interval_time;
 pub mod locale;
+pub mod lt_status;
 pub mod margin_trading;
 pub mod option_period;
 pub mod order_status;
