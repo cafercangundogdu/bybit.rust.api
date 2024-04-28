@@ -26,5 +26,6 @@ pub mod tick_direction;
 pub mod time_in_force;
 pub mod transfer_status;
 pub mod trigger_by;
+pub mod unified_margin_status;
 pub mod uta_translog_type;
 pub mod withdraw_status;
