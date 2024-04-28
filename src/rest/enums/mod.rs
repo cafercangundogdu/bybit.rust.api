@@ -4,6 +4,7 @@ pub mod announcement_type;
 pub mod cancel_type;
 pub mod category;
 pub mod create_type;
+pub mod data_recording_period;
 pub mod deposit_status;
 pub mod exec_type;
 pub mod interval;
