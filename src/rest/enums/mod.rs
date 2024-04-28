@@ -1,3 +1,4 @@
+pub mod account_type;
 pub mod announcement_tag;
 pub mod announcement_type;
 pub mod category;
