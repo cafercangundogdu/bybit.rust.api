@@ -8,4 +8,5 @@ pub mod locale;
 pub mod option_period;
 pub mod order_status;
 pub mod order_type;
+pub mod stop_order_type;
 pub mod time_in_force;
