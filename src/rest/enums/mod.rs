@@ -22,6 +22,7 @@ pub mod order_type;
 pub mod position_idx;
 pub mod position_status;
 pub mod reject_reason;
+pub mod smp_type;
 pub mod status;
 pub mod stop_order_type;
 pub mod symbol;
