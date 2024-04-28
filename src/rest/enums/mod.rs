@@ -1,4 +1,5 @@
 pub mod account_type;
+pub mod adl_rank_indicator;
 pub mod announcement_tag;
 pub mod announcement_type;
 pub mod cancel_type;
