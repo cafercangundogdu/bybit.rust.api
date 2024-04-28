@@ -9,6 +9,7 @@ pub mod locale;
 pub mod option_period;
 pub mod order_status;
 pub mod order_type;
+pub mod position_idx;
 pub mod stop_order_type;
 pub mod tick_direction;
 pub mod time_in_force;
