@@ -3,6 +3,7 @@ pub mod announcement_tag;
 pub mod announcement_type;
 pub mod category;
 pub mod create_type;
+pub mod deposit_status;
 pub mod exec_type;
 pub mod interval;
 pub mod interval_time;
