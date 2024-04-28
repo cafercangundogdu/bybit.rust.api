@@ -11,6 +11,7 @@ pub mod order_status;
 pub mod order_type;
 pub mod position_idx;
 pub mod position_status;
+pub mod reject_reason;
 pub mod stop_order_type;
 pub mod tick_direction;
 pub mod time_in_force;
