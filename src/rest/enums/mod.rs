@@ -3,6 +3,7 @@ pub mod announcement_tag;
 pub mod announcement_type;
 pub mod cancel_type;
 pub mod category;
+pub mod contract_translog_type;
 pub mod contract_type;
 pub mod copy_trading;
 pub mod create_type;
