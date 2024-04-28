@@ -16,3 +16,4 @@ pub mod reject_reason;
 pub mod stop_order_type;
 pub mod tick_direction;
 pub mod time_in_force;
+pub mod transfer_status;
