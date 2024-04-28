@@ -16,6 +16,24 @@ pub enum TriggerBy {
     CancelByPrepareAdl, // cancelled due to ADL
     #[serde(rename = "CancelAllBeforeAdl")]
     CancelAllBeforeAdl, // cancelled due to ADL
+    #[serde(rename = "CancelBySettle")]
+    CancelBySettle,
+    #[serde(rename = "CancelByCannotAffordOrderCost")]
+    CancelByCannotAffordOrderCost,
+    #[serde(rename = "CancelByPmTrialMmOverEquity")]
+    CancelByPmTrialMmOverEquity,
+    #[serde(rename = "CancelByAccountBlocking")]
+    CancelByAccountBlocking,
+    #[serde(rename = "CancelByDelivery")]
+    CancelByDelivery,
+    #[serde(rename = "CancelByMmpTriggered")]
+    CancelByMmpTriggered,
+    #[serde(rename = "CancelByCrossSelfMuch")]
+    CancelByCrossSelfMuch,
+    #[serde(rename = "CancelByCrossReachMaxTradeNum")]
+    CancelByCrossReachMaxTradeNum,
+    #[serde(rename = "CancelByDCP")]
+    CancelByDCP,
     #[serde(rename = "CancelByAdmin")]
     CancelByAdmin,
     #[serde(rename = "CancelByTpSlTsClear")]
@@ -36,6 +54,15 @@ impl Display for TriggerBy {
             TriggerBy::CancelByAdmin => write!(f, "CancelByAdmin"),
             TriggerBy::CancelByTpSlTsClear => write!(f, "CancelByTpSlTsClear"),
             TriggerBy::CancelBySmp => write!(f, "CancelBySmp"),
+            TriggerBy::CancelBySettle => write!(f, "CancelBySettle"),
+            TriggerBy::CancelByCannotAffordOrderCost => write!(f, "CancelByCannotAffordOrderCost"),
+            TriggerBy::CancelByPmTrialMmOverEquity => write!(f, "CancelByPmTrialMmOverEquity"),
+            TriggerBy::CancelByAccountBlocking => write!(f, "CancelByAccountBlocking"),
+            TriggerBy::CancelByDelivery => write!(f, "CancelByDelivery"),
+            TriggerBy::CancelByMmpTriggered => write!(f, "CancelByMmpTriggered"),
+            TriggerBy::CancelByCrossSelfMuch => write!(f, "CancelByCrossSelfMuch"),
+            TriggerBy::CancelByCrossReachMaxTradeNum => write!(f, "CancelByCrossReachMaxTradeNum"),
+            TriggerBy::CancelByDCP => write!(f, "CancelByDCP"),
         }
     }
 }
