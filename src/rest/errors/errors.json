@@ -1,0 +1,1992 @@
+[
+  {
+    "code": "400",
+    "description": "Bad request. Need to send the request with GET / POST (must be capitalized)",
+    "type": "http"
+  },
+  {
+    "code": "401",
+    "description": "Invalid request. 1. Need to use the correct key to access; 2. Need to put authentication params in the request header",
+    "type": "http"
+  },
+  {
+    "code": "403",
+    "description": "Forbidden request. Possible causes: 1. IP rate limit breached; 2. You send GET request with an empty json body; 3. You are using U.S IP",
+    "type": "http"
+  },
+  {
+    "code": "404",
+    "description": "Cannot find path. Possible causes: 1. Wrong path; 2. Category value does not match account mode",
+    "type": "http"
+  },
+  {
+    "code": "429",
+    "description": "System level frequency protection. Please retry when encounter this",
+    "type": "http"
+  },
+  {
+    "code": "0",
+    "description": "Ok",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10000",
+    "description": "Server Timeout",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10001",
+    "description": "Request parameter error",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10002",
+    "description": "The request time exceeds the time window range.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10003",
+    "description": "API key is invalid. Check whether the key and domain are matched, there are 4 env: mainnet, testnet, mainnet-demo, testnet-demo",
+    "type": "uta_classic"
+  },
+  {
+    "code": "33004",
+    "description": "Your api key has expired",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10004",
+    "description": "Error sign, please check your signature generation algorithm.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10005",
+    "description": "Permission denied, please check your API key permissions.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10006",
+    "description": "Too many visits. Exceeded the API Rate Limit.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10007",
+    "description": "User authentication failed.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10008",
+    "description": "Common banned, please check your account mode",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10009",
+    "description": "IP has been banned.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10010",
+    "description": "Unmatched IP, please check your API key's bound IP addresses.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10014",
+    "description": "Invalid duplicate request.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10016",
+    "description": "Server error.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10017",
+    "description": "Route not found.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10018",
+    "description": "Exceeded the IP Rate Limit.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10024",
+    "description": "Compliance rules triggered",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10027",
+    "description": "Transactions are banned.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10029",
+    "description": "The requested symbol is invalid, please check symbol whitelist",
+    "type": "uta_classic"
+  },
+  {
+    "code": "10028",
+    "description": "The API can only be accessed by unified account users.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "30133",
+    "description": "OTC loan: The symbol you select for USDT Perpetual is not allowed by Institutional Lending",
+    "type": "uta_classic"
+  },
+  {
+    "code": "30134",
+    "description": "OTC loan: The symbol you select for USDC Contract is not allowed by Institutional Lending",
+    "type": "uta_classic"
+  },
+  {
+    "code": "30135",
+    "description": "The leverage you select for USDT Perpetual trading cannot exceed the maximum leverage allowed by Institutional Lending.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "30136",
+    "description": "The leverage you select for USDC Perpetual or Futures trading cannot exceed the maximum leverage allowed by Institutional Lending.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "40004",
+    "description": "the order is modified during the process of replacing , please check the order status again",
+    "type": "uta_classic"
+  },
+  {
+    "code": "100028",
+    "description": "The API cannot be accessed by unified account users.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110001",
+    "description": "Order does not exist",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110003",
+    "description": "Order price exceeds the allowable range.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110004",
+    "description": "Wallet balance is insufficient",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110005",
+    "description": "position status",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110006",
+    "description": "The assets are estimated to be unable to cover the position margin",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110007",
+    "description": "Available balance is insufficient",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110008",
+    "description": "The order has been completed or cancelled.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110009",
+    "description": "The number of stop orders exceeds the maximum allowable limit. You can find references in our API doc.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110010",
+    "description": "The order has been cancelled",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110011",
+    "description": "Liquidation will be triggered immediately by this adjustment",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110012",
+    "description": "Insufficient available balance.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110013",
+    "description": "Cannot set leverage due to risk limit level.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110014",
+    "description": "Insufficient available balance to add additional margin.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110015",
+    "description": "The position is in cross margin mode.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110016",
+    "description": "The quantity of contracts requested exceeds the risk limit, please adjust your risk limit level before trying again",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110017",
+    "description": "Reduce-only rule not satisfied",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110018",
+    "description": "User ID is illegal.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110019",
+    "description": "Order ID is illegal.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110020",
+    "description": "Not allowed to have more than 500 active orders.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110021",
+    "description": "Not allowed to exceeded position limits due to Open Interest.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110022",
+    "description": "Quantity has been restricted and orders cannot be modified to increase the quantity.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110023",
+    "description": "Currently you can only reduce your position on this contract. please check our announcement or contact customer service for details.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110024",
+    "description": "You have an existing position, so the position mode cannot be switched.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110025",
+    "description": "Position mode has not been modified.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110026",
+    "description": "Cross/isolated margin mode has not been modified.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110027",
+    "description": "Margin has not been modified.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110028",
+    "description": "You have existing open orders, so the position mode cannot be switched.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110029",
+    "description": "Hedge mode is not supported for this symbol.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110030",
+    "description": "Duplicate orderId",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110031",
+    "description": "Non-existing risk limit info, please check the risk limit rules.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110032",
+    "description": "Order is illegal",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110033",
+    "description": "You can't set margin without an open position",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110034",
+    "description": "There is no net position",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110035",
+    "description": "Cancellation of orders was not completed before liquidation",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110036",
+    "description": "You are not allowed to change leverage due to cross margin mode.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110037",
+    "description": "User setting list does not have this symbol",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110038",
+    "description": "You are not allowed to change leverage due to portfolio margin mode.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110039",
+    "description": "Maintenance margin rate is too high. This may trigger liquidation.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110040",
+    "description": "The order will trigger a forced liquidation, please re-submit the order.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110041",
+    "description": "Skip liquidation is not allowed when a position or maker order exists",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110042",
+    "description": "Currently,due to pre-delivery status, you can only reduce your position on this contract.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110043",
+    "description": "Set leverage has not been modified.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110044",
+    "description": "Available margin is insufficient.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110045",
+    "description": "Wallet balance is insufficient.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110046",
+    "description": "Liquidation will be triggered immediately by this adjustment.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110047",
+    "description": "Risk limit cannot be adjusted due to insufficient available margin.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110048",
+    "description": "Risk limit cannot be adjusted as the current/expected position value exceeds the revised risk limit.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110049",
+    "description": "Tick notes can only be numbers",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110050",
+    "description": "Invalid coin",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110051",
+    "description": "The user's available balance cannot cover the lowest price of the current market",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110052",
+    "description": "Your available balance is insufficient to set the price",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110053",
+    "description": "The user's available balance cannot cover the current market price and upper limit price",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110054",
+    "description": "This position has at least one take profit link order, so the take profit and stop loss mode cannot be switched",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110055",
+    "description": "This position has at least one stop loss link order, so the take profit and stop loss mode cannot be switched",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110056",
+    "description": "This position has at least one trailing stop link order, so the take profit and stop loss mode cannot be switched",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110057",
+    "description": "Conditional order or limit order contains TP/SL related params",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110058",
+    "description": "You can't set take profit and stop loss due to insufficient size of remaining position size.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110059",
+    "description": "Not allowed to modify the TP/SL of a partially filled open order",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110060",
+    "description": "Under full TP/SL mode, it is not allowed to modify TP/SL",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110061",
+    "description": "Not allowed to have more than 20 TP/SLs under Partial tpSlMode",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110062",
+    "description": "There is no MMP information of the institution found.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110063",
+    "description": "Settlement in progress! {{key0}} not available for trading.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110064",
+    "description": "The modified contract quantity cannot be less than or equal to the filled quantity.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110065",
+    "description": "MMP hasn't yet been enabled for your account. Please contact your BD manager.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110066",
+    "description": "Trading is currently not allowed.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110067",
+    "description": "Unified account is not supported.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110068",
+    "description": "Leveraged trading is not allowed.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110069",
+    "description": "Ins lending customer is not allowed to trade.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110070",
+    "description": "ETP symbols cannot be traded.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110071",
+    "description": "Sorry, we're revamping the Unified Margin Account! Currently, new upgrades are not supported. If you have any questions, please contact our 24/7 customer support.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110072",
+    "description": "OrderLinkedID is duplicate",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110073",
+    "description": "Set margin mode failed",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110075",
+    "description": "RiskId not modified",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182021",
+    "description": "Cannot enable spot margin while in isolated margin mode. Please switch to cross margin mode or portfolio margin mode to trade spot with margin.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110076",
+    "description": "Only isolated mode can set auto-add-margin",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110077",
+    "description": "Pm mode cannot support",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110078",
+    "description": "Added margin more than max can reduce margin",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110079",
+    "description": "The order is processing and can not be operated, please try again later",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110080",
+    "description": "Operations Restriction: The current LTV ratio of your Institutional Lending has hit the liquidation threshold. Assets in your account are being liquidated (trade/risk limit/leverage)",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110082",
+    "description": "You cannot lift Reduce-Only restrictions, as no Reduce-Only restrictions are applied to your position",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110083",
+    "description": "Reduce-Only restrictions must be lifted for both Long and Short positions at the same time",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110085",
+    "description": "The risk limit and margin ratio for this contract has been updated, please select a supported risk limit and place your order again",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110086",
+    "description": "Current order leverage exceeds the maximum available for your current Risk Limit tier. Please lower leverage before placing an order",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110087",
+    "description": "Leverage for Perpetual or Futures contracts cannot exceed the maximum allowed for your Institutional loan",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110088",
+    "description": "Please Upgrade to UTA to trade",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110089",
+    "description": "Exceeds the maximum risk limit level",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110090",
+    "description": "Exceeds the maximum leverage limit of the current risk limit level.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110092",
+    "description": "expect Rising, but trigger_price[XXXXX] <= current[XXXXX]??laste",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110093",
+    "description": "expect Falling, but trigger_price[XXXXX] >= current[XXXXX]??last",
+    "type": "uta_classic"
+  },
+  {
+    "code": "110094",
+    "description": "Order notional value below the lower limit",
+    "type": "uta_classic"
+  },
+  {
+    "code": "181017",
+    "description": "OrderStatus must be final status",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182100",
+    "description": "Compulsory closing of positions, no repayment allowed",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182101",
+    "description": "Failed repayment, insufficient collateral balance",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182102",
+    "description": "Failed repayment, there are no liabilities in the current currency",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182103",
+    "description": "Institutional lending users are not supported",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182108",
+    "description": "Switching failed, margin verification failed, please re-adjust the currency status",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182110",
+    "description": "Failed to switch",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182111",
+    "description": "The requested currency has a non guaranteed gold currency or does not support switching status currencies",
+    "type": "uta_classic"
+  },
+  {
+    "code": "182112",
+    "description": "Duplicate currency, please re-adjust",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3100181",
+    "description": "UID can not be null",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3100197",
+    "description": "Temporary banned due to the upgrade to UTA",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3200316",
+    "description": "USDC Options Trading Restriction: The current LTV ratio for your Institutional Lending has reached the maximum allowable amount for USDC Options trading.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3200317",
+    "description": "USDC Options Open Position Restriction: The current LTV ratio for your Institutional Lending has reached the maximum allowable amount for opening USDC Options positions.",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3100326",
+    "description": "BaseCoin is required",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3200403",
+    "description": "isolated margin can not create order",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3200320",
+    "description": "Operations Restriction: The current LTV ratio of your Institutional Lending has hit the liquidation threshold. Assets in your account are being liquidated. (margin mode or spot leverage)",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400208",
+    "description": "You have unclosed hedge mode or isolated mode USDT perpetual positions",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400209",
+    "description": "You have USDT perpetual positions, so upgrading is prohibited for 10 minutes before and after the hour every hour",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400210",
+    "description": "The risk rate of your Derivatives account is too high",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400211",
+    "description": "Once upgraded, the estimated risk rate will be too high",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400212",
+    "description": "You have USDC perpetual positions or Options positions, so upgrading is prohibited for 10 minutes before and after the hour every hour",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400213",
+    "description": "The risk rate of your USDC Derivatives account is too high",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400052",
+    "description": "You have uncancelled USDC perpetual orders",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400053",
+    "description": "You have uncancelled Options orders",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400054",
+    "description": "You have uncancelled USDT perpetual orders",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400214",
+    "description": "Server error, please try again later",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400071",
+    "description": "The net asset is not satisfied",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3401010",
+    "description": "Cannot switch to PM mode (for copy trading master trader)",
+    "type": "uta_classic"
+  },
+  {
+    "code": "3400139",
+    "description": "The total value of your positions and orders has exceeded the risk limit for a Perpetual or Futures contract",
+    "type": "uta_classic"
+  },
+  {
+    "code": "500010",
+    "description": "The sub-account specified does not belong to the parent account",
+    "type": "uta_classic"
+  },
+  {
+    "code": "500011",
+    "description": "The Uid %s provided is not associated with a Unified Trading Account",
+    "type": "uta_classic"
+  },
+  {
+    "code": "170001",
+    "description": "Internal error.",
+    "type": "spot"
+  },
+  {
+    "code": "170005",
+    "description": "Too many new orders; current limit is %s orders per %s.",
+    "type": "spot"
+  },
+  {
+    "code": "170007",
+    "description": "Timeout waiting for response from backend server.",
+    "type": "spot"
+  },
+  {
+    "code": "170010",
+    "description": "Purchase failed: Exceed the maximum position limit of leveraged tokens, the current available limit is %s USDT",
+    "type": "spot"
+  },
+  {
+    "code": "170011",
+    "description": "Purchase failed: Exceed the maximum position limit of innovation tokens, the current available limit is ''{{.replaceKey0}}'' USDT",
+    "type": "spot"
+  },
+  {
+    "code": "170019",
+    "description": "The feature has been suspended",
+    "type": "spot"
+  },
+  {
+    "code": "170032",
+    "description": "Network error. Please try again later",
+    "type": "spot"
+  },
+  {
+    "code": "170033",
+    "description": "margin Insufficient account balance",
+    "type": "spot"
+  },
+  {
+    "code": "170034",
+    "description": "Liability over flow in spot leverage trade!",
+    "type": "spot"
+  },
+  {
+    "code": "170035",
+    "description": "Submitted to the system for processing!",
+    "type": "spot"
+  },
+  {
+    "code": "170036",
+    "description": "You haven't enabled Cross Margin Trading yet. To do so, please head to the PC trading site or the Bybit app",
+    "type": "spot"
+  },
+  {
+    "code": "170037",
+    "description": "Cross Margin Trading not yet supported by the selected coin",
+    "type": "spot"
+  },
+  {
+    "code": "170105",
+    "description": "Parameter '%s' was empty.",
+    "type": "spot"
+  },
+  {
+    "code": "170115",
+    "description": "Invalid timeInForce.",
+    "type": "spot"
+  },
+  {
+    "code": "170116",
+    "description": "Invalid orderType.",
+    "type": "spot"
+  },
+  {
+    "code": "170117",
+    "description": "Invalid side.",
+    "type": "spot"
+  },
+  {
+    "code": "170121",
+    "description": "Invalid symbol.",
+    "type": "spot"
+  },
+  {
+    "code": "170124",
+    "description": "Order amount too large.",
+    "type": "spot"
+  },
+  {
+    "code": "170130",
+    "description": "Data sent for paramter '%s' is not valid.",
+    "type": "spot"
+  },
+  {
+    "code": "170131",
+    "description": "Balance insufficient",
+    "type": "spot"
+  },
+  {
+    "code": "170132",
+    "description": "Order price too high.",
+    "type": "spot"
+  },
+  {
+    "code": "170133",
+    "description": "Order price lower than the minimum.",
+    "type": "spot"
+  },
+  {
+    "code": "170134",
+    "description": "Order price decimal too long.",
+    "type": "spot"
+  },
+  {
+    "code": "170135",
+    "description": "Order quantity too large.",
+    "type": "spot"
+  },
+  {
+    "code": "170136",
+    "description": "Order quantity lower than the minimum.",
+    "type": "spot"
+  },
+  {
+    "code": "170137",
+    "description": "Order volume decimal too long",
+    "type": "spot"
+  },
+  {
+    "code": "170139",
+    "description": "Order has been filled.",
+    "type": "spot"
+  },
+  {
+    "code": "170140",
+    "description": "Transaction amount lower than the minimum.",
+    "type": "spot"
+  },
+  {
+    "code": "170141",
+    "description": "Duplicate clientOrderId",
+    "type": "spot"
+  },
+  {
+    "code": "170142",
+    "description": "Order has been canceled",
+    "type": "spot"
+  },
+  {
+    "code": "170143",
+    "description": "Cannot be found on order book",
+    "type": "spot"
+  },
+  {
+    "code": "170144",
+    "description": "Order has been locked",
+    "type": "spot"
+  },
+  {
+    "code": "170145",
+    "description": "This order type does not support cancellation",
+    "type": "spot"
+  },
+  {
+    "code": "170146",
+    "description": "Order creation timeout",
+    "type": "spot"
+  },
+  {
+    "code": "170147",
+    "description": "Order cancellation timeout",
+    "type": "spot"
+  },
+  {
+    "code": "170148",
+    "description": "Market order amount decimal too long",
+    "type": "spot"
+  },
+  {
+    "code": "170149",
+    "description": "Create order failed",
+    "type": "spot"
+  },
+  {
+    "code": "170150",
+    "description": "Cancel order failed",
+    "type": "spot"
+  },
+  {
+    "code": "170151",
+    "description": "The trading pair is not open yet",
+    "type": "spot"
+  },
+  {
+    "code": "170157",
+    "description": "The trading pair is not available for api trading",
+    "type": "spot"
+  },
+  {
+    "code": "170159",
+    "description": "Market Order is not supported within the first %s minutes of newly launched pairs due to risk control.",
+    "type": "spot"
+  },
+  {
+    "code": "170190",
+    "description": "Cancel order has been finished",
+    "type": "spot"
+  },
+  {
+    "code": "170191",
+    "description": "Can not cancel order, please try again later",
+    "type": "spot"
+  },
+  {
+    "code": "170192",
+    "description": "Order price cannot be higher than %s .",
+    "type": "spot"
+  },
+  {
+    "code": "170193",
+    "description": "Buy order price cannot be higher than %s.",
+    "type": "spot"
+  },
+  {
+    "code": "170194",
+    "description": "Sell order price cannot be lower than %s.",
+    "type": "spot"
+  },
+  {
+    "code": "170195",
+    "description": "Please note that your order may not be filled. ETP buy order price deviates from risk control",
+    "type": "spot"
+  },
+  {
+    "code": "170196",
+    "description": "Please note that your order may not be filled. ETP sell order price deviates from risk control",
+    "type": "spot"
+  },
+  {
+    "code": "170197",
+    "description": "Your order quantity to buy is too large. The filled price may deviate significantly from the market price. Please try again",
+    "type": "spot"
+  },
+  {
+    "code": "170198",
+    "description": "Your order quantity to sell is too large. The filled price may deviate significantly from the market price. Please try again",
+    "type": "spot"
+  },
+  {
+    "code": "170199",
+    "description": "Your order quantity to buy is too large. The filled price may deviate significantly from the nav. Please try again.",
+    "type": "spot"
+  },
+  {
+    "code": "170200",
+    "description": "Your order quantity to sell is too large. The filled price may deviate significantly from the nav. Please try again.",
+    "type": "spot"
+  },
+  {
+    "code": "170201",
+    "description": "Invalid orderFilter parameter",
+    "type": "spot"
+  },
+  {
+    "code": "170202",
+    "description": "Please enter the TP/SL price.",
+    "type": "spot"
+  },
+  {
+    "code": "170203",
+    "description": "trigger price cannot be higher than 110% price.",
+    "type": "spot"
+  },
+  {
+    "code": "170204",
+    "description": "trigger price cannot be lower than 90% of qty.",
+    "type": "spot"
+  },
+  {
+    "code": "170206",
+    "description": "Stop_limit Order is not supported within the first 5 minutes of newly launched pairs",
+    "type": "spot"
+  },
+  {
+    "code": "170207",
+    "description": "The loan amount of the platform is not enough.",
+    "type": "spot"
+  },
+  {
+    "code": "170210",
+    "description": "New order rejected.",
+    "type": "spot"
+  },
+  {
+    "code": "170212",
+    "description": "Cancel order request processing",
+    "type": "spot"
+  },
+  {
+    "code": "170213",
+    "description": "Order does not exist.",
+    "type": "spot"
+  },
+  {
+    "code": "170215",
+    "description": "Spot Trading (Buy) Restriction: The current LTV ratio of your institutional lending has reached the maximum allowable amount for buy orders",
+    "type": "spot"
+  },
+  {
+    "code": "170216",
+    "description": "The leverage you select for Spot Trading cannot exceed the maximum leverage allowed by Institutional Lending",
+    "type": "spot"
+  },
+  {
+    "code": "170217",
+    "description": "Only LIMIT-MAKER order is supported for the current pair.",
+    "type": "spot"
+  },
+  {
+    "code": "170218",
+    "description": "The LIMIT-MAKER order is rejected due to invalid price.",
+    "type": "spot"
+  },
+  {
+    "code": "170219",
+    "description": "UID {{xxx}} is not available to this feature",
+    "type": "spot"
+  },
+  {
+    "code": "170220",
+    "description": "Spot Trading Restriction: The current LTV ratio of your institutional lending has reached the maximum allowable amount for Spot trading",
+    "type": "spot"
+  },
+  {
+    "code": "170221",
+    "description": "This coin does not exist.",
+    "type": "spot"
+  },
+  {
+    "code": "170222",
+    "description": "Too many requests in this time frame.",
+    "type": "spot"
+  },
+  {
+    "code": "170223",
+    "description": "Your Spot Account with Institutional Lending triggers an alert or liquidation.",
+    "type": "spot"
+  },
+  {
+    "code": "170224",
+    "description": "You're not a user of the Innovation Zone.",
+    "type": "spot"
+  },
+  {
+    "code": "170226",
+    "description": "Your Spot Account for Margin Trading is being liquidated.",
+    "type": "spot"
+  },
+  {
+    "code": "170227",
+    "description": "This feature is not supported.",
+    "type": "spot"
+  },
+  {
+    "code": "170228",
+    "description": "The purchase amount of each order exceeds the estimated maximum purchase amount.",
+    "type": "spot"
+  },
+  {
+    "code": "170229",
+    "description": "The sell quantity per order exceeds the estimated maximum sell quantity.",
+    "type": "spot"
+  },
+  {
+    "code": "170230",
+    "description": "Operations Restriction: Due to the deactivation of Margin Trading for institutional loan",
+    "type": "spot"
+  },
+  {
+    "code": "170234",
+    "description": "System Error",
+    "type": "spot"
+  },
+  {
+    "code": "170241",
+    "description": "To proceed with trading, users must read through and confirm that they fully understand the project's risk disclosure document. For App users, please update your Bybit App to version 4.16.0 to process.",
+    "type": "spot"
+  },
+  {
+    "code": "170310",
+    "description": "Order modification timeout",
+    "type": "spot"
+  },
+  {
+    "code": "170311",
+    "description": "Order modification failed",
+    "type": "spot"
+  },
+  {
+    "code": "170312",
+    "description": "The current order does not support modification",
+    "type": "spot"
+  },
+  {
+    "code": "170313",
+    "description": "The modified contract quantity cannot be less than to the filled quantity",
+    "type": "spot"
+  },
+  {
+    "code": "170341",
+    "description": "Request order quantity exceeds maximum limit",
+    "type": "spot"
+  },
+  {
+    "code": "170344",
+    "description": "symbol loanable limit",
+    "type": "spot"
+  },
+  {
+    "code": "170709",
+    "description": "OTC loan: The select trading pair is not in the whitelist pair",
+    "type": "spot"
+  },
+  {
+    "code": "175000",
+    "description": "The serialNum is already in use.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175001",
+    "description": "Daily purchase limit has been exceeded. Please try again later.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175002",
+    "description": "There's a large number of purchase orders. Please try again later.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175003",
+    "description": "Insufficient available balance. Please make a deposit and try again.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175004",
+    "description": "Daily redemption limit has been exceeded. Please try again later.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175005",
+    "description": "There's a large number of redemption orders. Please try again later.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175006",
+    "description": "Insufficient available balance. Please make a deposit and try again.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175007",
+    "description": "Order not found.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175008",
+    "description": "Purchase period hasn't started yet.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175009",
+    "description": "Purchase amount has exceeded the upper limit.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175010",
+    "description": "You haven't passed the quiz yet! To purchase and/or redeem an LT, please complete the quiz first.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175012",
+    "description": "Redemption period hasn't started yet.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175013",
+    "description": "Redemption amount has exceeded the upper limit.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175014",
+    "description": "Purchase of the LT has been temporarily suspended.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175015",
+    "description": "Redemption of the LT has been temporarily suspended.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175016",
+    "description": "Invalid format. Please check the length and numeric precision.",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175017",
+    "description": "Failed to place order：Exceed the maximum position limit of leveraged tokens, the current available limit is XXXX USDT",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "175027",
+    "description": "Subscriptions and redemptions are temporarily unavailable while account upgrade is in progress",
+    "type": "spot_leverage"
+  },
+  {
+    "code": "176002",
+    "description": "Query user account info error. Confirm that if you have completed quiz in GUI",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176003",
+    "description": "Query user loan history error",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176004",
+    "description": "Query order history start time exceeds end time",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176005",
+    "description": "Failed to borrow",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176006",
+    "description": "Repayment Failed",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176007",
+    "description": "User not found",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176008",
+    "description": "You haven't enabled Cross Margin Trading yet. To do so, please head to the PC trading site",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176009",
+    "description": "You haven't enabled Cross Margin Trading yet. Confirm that if you have turned on margin trade",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176010",
+    "description": "Failed to locate the coins to borrow",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176011",
+    "description": "Cross Margin Trading not yet supported by the selected coin",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176012",
+    "description": "Pair not available",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176013",
+    "description": "Cross Margin Trading not yet supported by the selected pair",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176014",
+    "description": "Repeated repayment requests",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176015",
+    "description": "Insufficient available balance",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176016",
+    "description": "No repayment required",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176017",
+    "description": "Repayment amount has exceeded the total liability",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176018",
+    "description": "Settlement in progress",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176019",
+    "description": "Liquidation in progress",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176020",
+    "description": "Failed to locate repayment history",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176021",
+    "description": "Repeated borrowing requests",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176022",
+    "description": "Coins to borrow not generally available yet",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176023",
+    "description": "Pair to borrow not generally available yet",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176024",
+    "description": "Invalid user status",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176025",
+    "description": "Amount to borrow cannot be lower than the min. amount to borrow (per transaction)",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176026",
+    "description": "Amount to borrow cannot be larger than the max. amount to borrow (per transaction)",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176027",
+    "description": "Amount to borrow cannot be higher than the max. amount to borrow per user",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176028",
+    "description": "Amount to borrow has exceeded Bybit's max. amount to borrow",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176029",
+    "description": "Amount to borrow has exceeded the user's estimated max. amount to borrow",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176030",
+    "description": "Query user loan info error",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176031",
+    "description": "Number of decimals for borrow amount has exceeded the maximum precision",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176034",
+    "description": "The leverage ratio is out of range",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176035",
+    "description": "Failed to close the leverage switch during liquidation",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176036",
+    "description": "Failed to adjust leverage switch during forced liquidation",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176037",
+    "description": "For non-unified transaction users, the operation failed",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176038",
+    "description": "The spot leverage is closed and the current operation is not allowed",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176039",
+    "description": "Borrowing, current operation is not allowed",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176040",
+    "description": "There is a spot leverage order, and the adjustment of the leverage switch failed!",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176132",
+    "description": "Number of decimals for repay amount has exceeded the maximum precision",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176133",
+    "description": "Liquidation may be triggered! Please adjust your transaction amount and try again",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176134",
+    "description": "Account has been upgraded (upgrading) to UTA",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176135",
+    "description": "Failed to get bond data",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176136",
+    "description": "Failed to get borrow data",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176137",
+    "description": "Failed to switch user status",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176138",
+    "description": "You need to repay all your debts before closing your disabling cross margin account",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176139",
+    "description": "Sorry, you are not eligible to enable cross margin, as you have already enabled OTC lending",
+    "type": "spot_margin"
+  },
+  {
+    "code": "176201",
+    "description": "Account exception. Check if the UID is bound to an institutional loan",
+    "type": "spot_margin"
+  },
+  {
+    "code": "182104",
+    "description": "This action could not be completed as your Unified Margin Account's IM/MM utilization rate has exceeded the threshold",
+    "type": "spot_margin"
+  },
+  {
+    "code": "182105",
+    "description": "Adjustment failed, user is upgrading",
+    "type": "spot_margin"
+  },
+  {
+    "code": "182106",
+    "description": "Adjustment failed, user forced liquidation in progress.",
+    "type": "spot_margin"
+  },
+  {
+    "code": "182107",
+    "description": "Adjustment failed, Maintenance Margin Rate too high",
+    "type": "spot_margin"
+  },
+  {
+    "code": "131001",
+    "description": "openapi svc error",
+    "type": "asset"
+  },
+  {
+    "code": "131002",
+    "description": "Parameter error / Withdraw address chain or destination tag are not equal",
+    "type": "asset"
+  },
+  {
+    "code": "131003",
+    "description": "Internal error",
+    "type": "asset"
+  },
+  {
+    "code": "131004",
+    "description": "KYC needed",
+    "type": "asset"
+  },
+  {
+    "code": "131075",
+    "description": "InternalAddressCannotBeYourself",
+    "type": "asset"
+  },
+  {
+    "code": "131076",
+    "description": "internal transfer not support sub-accounts",
+    "type": "asset"
+  },
+  {
+    "code": "131077",
+    "description": "receive user not exist",
+    "type": "asset"
+  },
+  {
+    "code": "131078",
+    "description": "receive user deposit has been banned",
+    "type": "asset"
+  },
+  {
+    "code": "131079",
+    "description": "receive user need kyc",
+    "type": "asset"
+  },
+  {
+    "code": "131080",
+    "description": "User left retry times is zero",
+    "type": "asset"
+  },
+  {
+    "code": "131081",
+    "description": "Do not input memo/tag,please.",
+    "type": "asset"
+  },
+  {
+    "code": "131082",
+    "description": "Do not repeat the request",
+    "type": "asset"
+  },
+  {
+    "code": "131083",
+    "description": "Withdraw only allowed from address book",
+    "type": "asset"
+  },
+  {
+    "code": "131084",
+    "description": "Withdraw failed because of Uta Upgrading",
+    "type": "asset"
+  },
+  {
+    "code": "131085",
+    "description": "Withdrawal amount is greater than your availale balance (the deplayed withdrawal is triggered)",
+    "type": "asset"
+  },
+  {
+    "code": "131086",
+    "description": "Withdrawal amount exceeds risk limit (the risk limit of margin trade is triggered)",
+    "type": "asset"
+  },
+  {
+    "code": "131087",
+    "description": "your current account spot risk level is too high, withdrawal is prohibited, please adjust and try again",
+    "type": "asset"
+  },
+  {
+    "code": "131088",
+    "description": "The withdrawal amount exceeds the remaining withdrawal limit of your identity verification level. The current available amount for withdrawal : %s",
+    "type": "asset"
+  },
+  {
+    "code": "131089",
+    "description": "User sensitive operation, withdrawal is prohibited within 24 hours",
+    "type": "asset"
+  },
+  {
+    "code": "131090",
+    "description": "User withdraw has been banned",
+    "type": "asset"
+  },
+  {
+    "code": "131091",
+    "description": "Blocked login status does not allow withdrawals",
+    "type": "asset"
+  },
+  {
+    "code": "131092",
+    "description": "User status is abnormal",
+    "type": "asset"
+  },
+  {
+    "code": "131093",
+    "description": "The withdrawal address is not in the whitelist",
+    "type": "asset"
+  },
+  {
+    "code": "131094",
+    "description": "UserId is not in the whitelist",
+    "type": "asset"
+  },
+  {
+    "code": "131095",
+    "description": "Withdrawl amount exceeds the 24 hour platform limit",
+    "type": "asset"
+  },
+  {
+    "code": "131096",
+    "description": "Withdraw amount does not satify the lower limit or upper limit",
+    "type": "asset"
+  },
+  {
+    "code": "131097",
+    "description": "Withdrawal of this currency has been closed",
+    "type": "asset"
+  },
+  {
+    "code": "131098",
+    "description": "Withdrawal currently is not availble from new address",
+    "type": "asset"
+  },
+  {
+    "code": "90040",
+    "description": "Please wait at least 10 seconds between withdrawals. You need to wait for another 10 sec when operate the same coin and chain",
+    "type": "asset"
+  },
+  {
+    "code": "131099",
+    "description": "Hot wallet status can cancel the withdraw",
+    "type": "asset"
+  },
+  {
+    "code": "131200",
+    "description": "Service error",
+    "type": "asset"
+  },
+  {
+    "code": "131201",
+    "description": "Internal error",
+    "type": "asset"
+  },
+  {
+    "code": "131202",
+    "description": "Invalid memberId",
+    "type": "asset"
+  },
+  {
+    "code": "131203",
+    "description": "Request parameter error",
+    "type": "asset"
+  },
+  {
+    "code": "131204",
+    "description": "Account info error",
+    "type": "asset"
+  },
+  {
+    "code": "131205",
+    "description": "Query transfer error",
+    "type": "asset"
+  },
+  {
+    "code": "131206",
+    "description": "cannot be transfer",
+    "type": "asset"
+  },
+  {
+    "code": "131207",
+    "description": "Account not exist",
+    "type": "asset"
+  },
+  {
+    "code": "131208",
+    "description": "Forbid transfer",
+    "type": "asset"
+  },
+  {
+    "code": "131209",
+    "description": "Get subMember relation error",
+    "type": "asset"
+  },
+  {
+    "code": "131210",
+    "description": "Amount accuracy error",
+    "type": "asset"
+  },
+  {
+    "code": "131211",
+    "description": "fromAccountType can't be the same as toAccountType",
+    "type": "asset"
+  },
+  {
+    "code": "131212",
+    "description": "Insufficient balance",
+    "type": "asset"
+  },
+  {
+    "code": "131213",
+    "description": "TransferLTV check error",
+    "type": "asset"
+  },
+  {
+    "code": "131214",
+    "description": "TransferId exist",
+    "type": "asset"
+  },
+  {
+    "code": "131215",
+    "description": "Amount error",
+    "type": "asset"
+  },
+  {
+    "code": "131216",
+    "description": "Query balance error",
+    "type": "asset"
+  },
+  {
+    "code": "131217",
+    "description": "Risk check error",
+    "type": "asset"
+  },
+  {
+    "code": "131227",
+    "description": "Sub-account do not have universal transfer permission",
+    "type": "asset"
+  },
+  {
+    "code": "131228",
+    "description": "your balance is not enough. Please check transfer safe amount",
+    "type": "asset"
+  },
+  {
+    "code": "131229",
+    "description": "Due to compliance requirements, the current currency is not allowed to transfer",
+    "type": "asset"
+  },
+  {
+    "code": "131230",
+    "description": "The system is busy, please try again later",
+    "type": "asset"
+  },
+  {
+    "code": "131231",
+    "description": "Transfers into this account are not supported",
+    "type": "asset"
+  },
+  {
+    "code": "131232",
+    "description": "Transfers out this account are not supported",
+    "type": "asset"
+  },
+  {
+    "code": "140001",
+    "description": "Switching the PM spot hedging switch is not allowed in non PM mode",
+    "type": "asset"
+  },
+  {
+    "code": "140002",
+    "description": "Institutional lending users do not support PM spot hedging",
+    "type": "asset"
+  },
+  {
+    "code": "140003",
+    "description": "You have position(s) being liquidated, please try again later.",
+    "type": "asset"
+  },
+  {
+    "code": "140004",
+    "description": "Operations Restriction: The current LTV ratio of your Institutional Loan has hit the liquidation threshold. Assets in your account are being liquidated.",
+    "type": "asset"
+  },
+  {
+    "code": "140005",
+    "description": "Risk level after switching modes exceeds threshold",
+    "type": "asset"
+  },
+  {
+    "code": "141004",
+    "description": "sub member is not normal",
+    "type": "asset"
+  },
+  {
+    "code": "141025",
+    "description": "This sub-account has assets and cannot be deleted",
+    "type": "asset"
+  },
+  {
+    "code": "181000",
+    "description": "category is null",
+    "type": "asset"
+  },
+  {
+    "code": "181001",
+    "description": "category only support linear or option or spot.",
+    "type": "asset"
+  },
+  {
+    "code": "181002",
+    "description": "symbol is null.",
+    "type": "asset"
+  },
+  {
+    "code": "181003",
+    "description": "side is null.",
+    "type": "asset"
+  },
+  {
+    "code": "181004",
+    "description": "side only support Buy or Sell.",
+    "type": "asset"
+  },
+  {
+    "code": "181005",
+    "description": "orderStatus is wrong",
+    "type": "asset"
+  },
+  {
+    "code": "181006",
+    "description": "startTime is not number",
+    "type": "asset"
+  },
+  {
+    "code": "181007",
+    "description": "endTime is not number",
+    "type": "asset"
+  },
+  {
+    "code": "181008",
+    "description": "Parameter startTime and endTime are both needed",
+    "type": "asset"
+  },
+  {
+    "code": "181009",
+    "description": "Parameter startTime needs to be smaller than endTime",
+    "type": "asset"
+  },
+  {
+    "code": "181010",
+    "description": "The time range between startTime and endTime cannot exceed 7 days",
+    "type": "asset"
+  },
+  {
+    "code": "181011",
+    "description": "limit is not a number",
+    "type": "asset"
+  },
+  {
+    "code": "181012",
+    "description": "symbol not exist",
+    "type": "asset"
+  },
+  {
+    "code": "181013",
+    "description": "Only support settleCoin: usdc",
+    "type": "asset"
+  },
+  {
+    "code": "181014",
+    "description": "Classic account is not supported",
+    "type": "asset"
+  },
+  {
+    "code": "181018",
+    "description": "Invalid expDate.",
+    "type": "asset"
+  },
+  {
+    "code": "181019",
+    "description": "Parameter expDate can't be earlier than 2 years",
+    "type": "asset"
+  },
+  {
+    "code": "182000",
+    "description": "symbol related quote price is null",
+    "type": "asset"
+  },
+  {
+    "code": "3777002",
+    "description": "UID cannot be bound repeatedly.",
+    "type": "institutional_loan"
+  },
+  {
+    "code": "3777003",
+    "description": "UID cannot be unbound because the UID has not been bound to a risk unit.",
+    "type": "institutional_loan"
+  },
+  {
+    "code": "3777004",
+    "description": "The main UID of the risk unit cannot be unbound.",
+    "type": "institutional_loan"
+  },
+  {
+    "code": "3777006",
+    "description": "UID cannot be bound, please try again with a different UID.",
+    "type": "institutional_loan"
+  },
+  {
+    "code": "3777007",
+    "description": "UID cannot be bound, please upgrade to UTA Pro.",
+    "type": "institutional_loan"
+  },
+  {
+    "code": "3777027",
+    "description": "UID cannot be bound, leveraged trading closure failed.",
+    "type": "institutional_loan"
+  },
+  {
+    "code": "3777029",
+    "description": "You currently have orders for pre-market trading that can’t be bind UIDs",
+    "type": "institutional_loan"
+  },
+  {
+    "code": "3500402",
+    "description": "Parameter verification failed for 'limit'.",
+    "type": "broker"
+  },
+  {
+    "code": "3500403",
+    "description": "Only available to exchange broker main-account",
+    "type": "broker"
+  },
+  {
+    "code": "3500404",
+    "description": "Invalid Cursor",
+    "type": "broker"
+  },
+  {
+    "code": "3500405",
+    "description": "Parameter \"startTime\" and \"endTime\" need to be input in pairs.",
+    "type": "broker"
+  },
+  {
+    "code": "3500406",
+    "description": "Out of query time range.",
+    "type": "broker"
+  },
+  {
+    "code": "3500407",
+    "description": "Parameter begin and end need to be input in pairs.",
+    "type": "broker"
+  }
+]
