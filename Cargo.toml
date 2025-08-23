@@ -20,6 +20,7 @@ path = "src/lib.rs"
 name = "bybit-cli"
 path = "src/main.rs"
 
+# Examples included in the package
 [[example]]
 name = "market"
 path = "examples/market_example.rs"
