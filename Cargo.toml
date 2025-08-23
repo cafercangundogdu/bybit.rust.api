@@ -1,11 +1,16 @@
 [package]
-name = "bybit_rust_api"
+name = "bybit-rust-api"
 version = "0.2.0"
 edition = "2021"
-authors = ["Bybit Rust SDK Contributors"]
-description = "Rust SDK for Bybit API V5"
-license = "MIT"
-repository = "https://github.com/bybit/bybit.rust.api"
+authors = ["Cafer Can Gundogdu <cafercangundogdu@gmail.com>"]
+description = "Complete Rust SDK for Bybit API V5 with all endpoints, comprehensive type safety and full test coverage"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/cafercangundogdu/bybit.rust.api"
+homepage = "https://github.com/cafercangundogdu/bybit.rust.api"
+documentation = "https://docs.rs/bybit-rust-api"
+readme = "README.md"
+keywords = ["bybit", "crypto", "trading", "api", "exchange"]
+categories = ["api-bindings", "cryptography::cryptocurrencies"]
 
 [lib]
 name = "bybit_rust_api"
