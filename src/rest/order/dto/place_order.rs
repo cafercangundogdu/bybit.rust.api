@@ -1,70 +1,97 @@
 use serde::{Deserialize, Serialize};
+use crate::rest::enums::{category::Category, order_type::OrderType, side::Side, time_in_force::TimeInForce, trigger_by::TriggerBy, smp_type::SmpType};
 
-use crate::rest::client::ServerResponse;
-use crate::rest::enums::{category::Category, order_type::OrderType, side::Side};
-
-// Place Order endpoint according to the given YAML configuration
 #[derive(Debug, Serialize, Deserialize)]
-pub struct CreateOrderParams {
-    pub category: Category,       // Product type
-    pub symbol: String,           // Symbol name, e.g., ETHUSDT
-    pub is_leverage: Option<i32>, // Whether to loan, only for spot
-    pub side: Side,               // Order side, Buy or Sell
-    pub order_type: OrderType,    // Order type, Market or Limit
-    pub qty: String,              // Order quantity
-    pub price: Option<String>,    // Price, ignore if Market order
+#[serde(rename_all = "camelCase")]
+pub struct PlaceOrderRequest {
+    pub category: Category,
+    pub symbol: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub trigger_price: Option<String>, // Trigger price for StopOrder
+    pub is_leverage: Option<i32>,
+    pub side: Side,
+    pub order_type: OrderType,
+    pub qty: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub trigger_direction: Option<i32>, // Trigger direction for StopOrder
+    pub price: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub trigger_by: Option<String>, // Trigger by LastPrice, MarkPrice, or IndexPrice
+    pub trigger_price: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub order_filter: Option<String>, // TP/SL, normal order, or conditional order
+    pub trigger_direction: Option<i32>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub order_iv: Option<String>, // Implied volatility for option orders
+    pub trigger_by: Option<TriggerBy>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub time_in_force: Option<String>, // Time in force (GTC, IOC, FOK, PostOnly)
+    pub order_filter: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub position_idx: Option<i32>, // Position index for hedge mode
+    pub order_iv: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub order_link_id: Option<String>, // Link ID for option orders
+    pub time_in_force: Option<TimeInForce>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub take_profit: Option<String>, // Take profit price
+    pub position_idx: Option<i32>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub stop_loss: Option<String>, // Stop loss price
+    pub order_link_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tp_trigger_by: Option<String>, // TP trigger by price type
+    pub take_profit: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub sl_trigger_by: Option<String>, // SL trigger by price type
-    pub reduce_only: Option<bool>, // Specify true for close position order
-    pub close_on_trigger: Option<bool>, // Close on trigger
+    pub stop_loss: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub smp_type: Option<String>, // SMP execution type
+    pub tp_trigger_by: Option<TriggerBy>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub mmp: Option<bool>, // Market maker protection
+    pub sl_trigger_by: Option<TriggerBy>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tpsl_mode: Option<String>, // TP/SL mode
+    pub reduce_only: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tp_limit_price: Option<String>, // Limit price when TP is triggered
+    pub close_on_trigger: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub sl_limit_price: Option<String>, // Limit price when SL is triggered
+    pub smp_type: Option<SmpType>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub tp_order_type: Option<String>, // Order type when TP is triggered
+    pub mmp: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub sl_order_type: Option<String>, // Order type when SL is triggered
+    pub tpsl_mode: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tp_limit_price: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sl_limit_price: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tp_order_type: Option<OrderType>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sl_order_type: Option<OrderType>,
 }
 
-// Struct for wrapping a server response to the create order request
 #[derive(Debug, Serialize, Deserialize)]
-pub struct CreateOrderResponse(ServerResponse<String>); // Assuming the response is just a string message
+#[serde(rename_all = "camelCase")]
+pub struct PlaceOrderResponse {
+    pub order_id: String,
+    pub order_link_id: String,
+}
 
-impl CreateOrderResponse {
-    pub fn into_inner(self) -> String {
-        self.0.result
-    }
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BatchPlaceOrderResponse {
+    pub ret_code: i32,
+    pub ret_msg: String,
+    pub result: Vec<BatchOrderResult>,
+    pub ret_ext_info: BatchRetExtInfo,
+}
 
-    pub fn into_response(self) -> ServerResponse<String> {
-        self.0
-    }
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BatchOrderResult {
+    pub category: Category,
+    pub symbol: String,
+    pub order_id: String,
+    pub order_link_id: String,
+    pub create_at: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BatchRetExtInfo {
+    pub list: Vec<BatchOrderExtInfo>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BatchOrderExtInfo {
+    pub code: i32,
+    pub msg: String,
 }

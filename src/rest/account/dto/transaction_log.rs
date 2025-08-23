@@ -1,4 +1,4 @@
-use crate::rest::account::account_type::AccountType;
+use crate::rest::enums::account_type::AccountType;
 use crate::rest::client::ServerResponse;
 use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};

@@ -1,6 +1,4 @@
 use crate::rest::client::ServerResponse;
-use crate::rest::enums::category::Category;
-use crate::rest::enums::option_period::OptionPeriod;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/insurance#request-parameters

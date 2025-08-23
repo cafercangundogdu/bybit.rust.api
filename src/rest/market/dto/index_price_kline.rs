@@ -44,18 +44,17 @@ pub struct GetIndexPriceKlineParams {
 */
 
 #[derive(Debug, Serialize, Deserialize)]
-struct IndexPriceKlineResult {
-    pub symbol: String,         // Symbol name
-    pub category: String,       // Product type
+pub struct IndexPriceKlineResult {
+    pub symbol: String,   // Symbol name
+    pub category: String, // Product type
     /**
-    ** list[0]: startTime	string	Start time of the candle (ms)
-    ** list[1]: openPrice	string	Open price
-    ** list[2]: highPrice	string	Highest price
-    ** list[3]: lowPrice	string	Lowest price
-    ** list[4]: closePrice	string	Close price. Is the last traded price when the candle is not closed
-    */
+     ** list[0]: startTime	string	Start time of the candle (ms)
+     ** list[1]: openPrice	string	Open price
+     ** list[2]: highPrice	string	Highest price
+     ** list[3]: lowPrice	string	Lowest price
+     ** list[4]: closePrice	string	Close price. Is the last traded price when the candle is not closed
+     */
     pub list: Vec<Vec<String>>, // A string array of individual candle, Sort in reverse by startTime
-
 }
 
 #[derive(Debug, Serialize, Deserialize)]

@@ -37,7 +37,7 @@ pub struct GetMarkPriceKlineParams {
 */
 
 #[derive(Debug, Serialize, Deserialize)]
-struct MarkPriceKlineResult {
+pub struct MarkPriceKlineResult {
     pub symbol: String,
     pub category: String,
     pub list: Vec<Vec<String>>,

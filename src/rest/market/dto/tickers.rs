@@ -44,7 +44,7 @@ pub struct GetTickersParams {
 */
 
 #[derive(Debug, Serialize, Deserialize)]
-struct Ticker {
+pub struct Ticker {
     pub symbol: String, // Symbol name
     #[serde(rename = "bid1Price")]
     pub bid1price: String, // Best bid price

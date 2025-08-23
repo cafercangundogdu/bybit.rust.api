@@ -24,13 +24,13 @@ pub enum CreateType {
     #[serde(rename = "CreateByLiq")]
     CreateByLiq, // Laddered liquidation to reduce the required maintenance margin
     #[serde(rename = "CreateByTakeOver_PassThrough")]
-    CreateByTakeOver_PassThrough, // If the position is still subject to liquidation (i.e., does not meet the required maintenance margin level), the position shall be taken over by the liquidation engine and closed at the bankruptcy price.
+    CreateByTakeOverPassThrough, // If the position is still subject to liquidation (i.e., does not meet the required maintenance margin level), the position shall be taken over by the liquidation engine and closed at the bankruptcy price.
     #[serde(rename = "CreateByAdl_PassThrough")]
-    CreateByAdl_PassThrough, // Auto-Deleveraging(ADL)
+    CreateByAdlPassThrough, // Auto-Deleveraging(ADL)
     #[serde(rename = "CreateByBlock_PassThrough")]
-    CreateByBlock_PassThrough, // Order placed via Paradigm
+    CreateByBlockPassThrough, // Order placed via Paradigm
     #[serde(rename = "CreateByBlockTradeMovePosition_PassThrough")]
-    CreateByBlockTradeMovePosition_PassThrough, // Order created by move position
+    CreateByBlockTradeMovePositionPassThrough, // Order created by move position
     #[serde(rename = "CreateByClosing")]
     CreateByClosing, // The close order placed via web or app position area - web/app
     #[serde(rename = "CreateByFGridBot")]
@@ -67,10 +67,10 @@ impl Display for CreateType {
             CreateType::CreateByPartialStopLoss => write!(f, "CreateByPartialStopLoss"),
             CreateType::CreateByTrailingStop => write!(f, "CreateByTrailingStop"),
             CreateType::CreateByLiq => write!(f, "CreateByLiq"),
-            CreateType::CreateByTakeOver_PassThrough => write!(f, "CreateByTakeOver_PassThrough"),
-            CreateType::CreateByAdl_PassThrough => write!(f, "CreateByAdl_PassThrough"),
-            CreateType::CreateByBlock_PassThrough => write!(f, "CreateByBlock_PassThrough"),
-            CreateType::CreateByBlockTradeMovePosition_PassThrough => {
+            CreateType::CreateByTakeOverPassThrough => write!(f, "CreateByTakeOver_PassThrough"),
+            CreateType::CreateByAdlPassThrough => write!(f, "CreateByAdl_PassThrough"),
+            CreateType::CreateByBlockPassThrough => write!(f, "CreateByBlock_PassThrough"),
+            CreateType::CreateByBlockTradeMovePositionPassThrough => {
                 write!(f, "CreateByBlockTradeMovePosition_PassThrough")
             }
             CreateType::CreateByClosing => write!(f, "CreateByClosing"),

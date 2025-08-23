@@ -1,8 +1,10 @@
 pub mod account;
+pub mod announcements;
 pub mod api_key_pair;
 pub mod asset;
 pub mod broker;
 pub mod client;
+pub mod crypto_loan;
 pub mod enums;
 pub mod errors;
 pub mod institutional_loan;
@@ -13,3 +15,20 @@ pub mod pre_upgrade;
 pub mod spot_leverage_token;
 pub mod spot_margin_trade;
 pub mod user;
+
+// Re-export commonly used types
+pub use account::AccountClient;
+pub use announcements::AnnouncementsClient;
+pub use api_key_pair::ApiKeyPair;
+pub use asset::AssetClient;
+pub use broker::BrokerClient;
+pub use client::{RestClient, SecType, ServerResponse};
+pub use crypto_loan::CryptoLoanClient;
+pub use institutional_loan::InstitutionalLoanClient;
+pub use market::MarketClient;
+pub use order::OrderClient;
+pub use position::PositionClient;
+pub use pre_upgrade::PreUpgradeClient;
+pub use spot_leverage_token::SpotLeverageTokenClient;
+pub use spot_margin_trade::SpotMarginTradeClient;
+pub use user::UserClient;
