@@ -19,11 +19,11 @@ impl CryptoLoanClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/crypto-loan/collateral-data";
         let mut params = json!({});
-        
+
         if let Some(ltv_type) = ltv_type {
             params["ltvType"] = json!(ltv_type);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -45,11 +45,11 @@ impl CryptoLoanClient {
             "loanAmount": loan_amount,
             "collateralCurrency": collateral_currency,
         });
-        
+
         if let Some(max_rate) = max_rate {
             body["maxRate"] = json!(max_rate);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -65,11 +65,11 @@ impl CryptoLoanClient {
         let mut body = json!({
             "orderId": order_id,
         });
-        
+
         if let Some(repay_amount) = repay_amount {
             body["repayAmount"] = json!(repay_amount);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -86,7 +86,7 @@ impl CryptoLoanClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/crypto-loan/ongoing-orders";
         let mut params = json!({});
-        
+
         if let Some(order_id) = order_id {
             params["orderId"] = json!(order_id);
         }
@@ -102,7 +102,7 @@ impl CryptoLoanClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -121,7 +121,7 @@ impl CryptoLoanClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/crypto-loan/borrow-history";
         let mut params = json!({});
-        
+
         if let Some(order_id) = order_id {
             params["orderId"] = json!(order_id);
         }
@@ -143,7 +143,7 @@ impl CryptoLoanClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -164,7 +164,7 @@ impl CryptoLoanClient {
             "loanAmount": loan_amount,
             "collateralCurrency": collateral_currency,
         });
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -183,7 +183,7 @@ impl CryptoLoanClient {
             "amount": amount,
             "direction": direction,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -201,7 +201,7 @@ impl CryptoLoanClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/crypto-loan/adjustment-history";
         let mut params = json!({});
-        
+
         if let Some(order_id) = order_id {
             params["orderId"] = json!(order_id);
         }
@@ -220,7 +220,7 @@ impl CryptoLoanClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -249,19 +249,18 @@ mod tests {
     fn test_client_creation() {
         let client = create_test_client();
         // Test that client was created successfully
-        assert_eq!(std::mem::size_of_val(&client), std::mem::size_of::<CryptoLoanClient>());
+        assert_eq!(
+            std::mem::size_of_val(&client),
+            std::mem::size_of::<CryptoLoanClient>()
+        );
     }
 
     #[tokio::test]
     async fn test_borrow_required_params() {
         let client = create_test_client();
-        let result = client.borrow(
-            "1",
-            "USDT",
-            "1000.0",
-            "BTC",
-            Some("0.05"),
-        ).await;
+        let result = client
+            .borrow("1", "USDT", "1000.0", "BTC", Some("0.05"))
+            .await;
         // Should not panic with valid required parameters
         assert!(result.is_err() || result.is_ok());
     }
@@ -269,10 +268,7 @@ mod tests {
     #[tokio::test]
     async fn test_repay_required_params() {
         let client = create_test_client();
-        let result = client.repay(
-            "order_123",
-            Some("500.0"),
-        ).await;
+        let result = client.repay("order_123", Some("500.0")).await;
         // Should not panic with valid required order_id parameter
         assert!(result.is_err() || result.is_ok());
     }
@@ -280,11 +276,13 @@ mod tests {
     #[tokio::test]
     async fn test_adjust_ltv_required_params() {
         let client = create_test_client();
-        let result = client.adjust_ltv(
-            "order_123",
-            "100.0",
-            1, // add collateral
-        ).await;
+        let result = client
+            .adjust_ltv(
+                "order_123",
+                "100.0",
+                1, // add collateral
+            )
+            .await;
         // Should not panic with valid required parameters
         assert!(result.is_err() || result.is_ok());
     }

@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::rest::enums::category::Category;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

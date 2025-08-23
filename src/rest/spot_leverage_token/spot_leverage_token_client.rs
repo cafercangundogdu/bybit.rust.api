@@ -19,11 +19,11 @@ impl SpotLeverageTokenClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/spot-lever-token/info";
         let mut params = json!({});
-        
+
         if let Some(lt_coin) = lt_coin {
             params["ltCoin"] = json!(lt_coin);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::None).await?;
         Ok(response)
     }
@@ -38,7 +38,7 @@ impl SpotLeverageTokenClient {
         let params = json!({
             "ltCoin": lt_coin,
         });
-        
+
         let response = self.client.get(endpoint, params, SecType::None).await?;
         Ok(response)
     }
@@ -56,11 +56,11 @@ impl SpotLeverageTokenClient {
             "ltCoin": lt_coin,
             "ltAmount": lt_amount,
         });
-        
+
         if let Some(serial_no) = serial_no {
             body["serialNo"] = json!(serial_no);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -78,11 +78,11 @@ impl SpotLeverageTokenClient {
             "ltCoin": lt_coin,
             "ltAmount": lt_amount,
         });
-        
+
         if let Some(serial_no) = serial_no {
             body["serialNo"] = json!(serial_no);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -101,7 +101,7 @@ impl SpotLeverageTokenClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/spot-lever-token/order-record";
         let mut params = json!({});
-        
+
         if let Some(lt_coin) = lt_coin {
             params["ltCoin"] = json!(lt_coin);
         }
@@ -123,7 +123,7 @@ impl SpotLeverageTokenClient {
         if let Some(serial_no) = serial_no {
             params["serialNo"] = json!(serial_no);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -152,17 +152,16 @@ mod tests {
     fn test_client_creation() {
         let client = create_test_client();
         // Test that client was created successfully
-        assert_eq!(std::mem::size_of_val(&client), std::mem::size_of::<SpotLeverageTokenClient>());
+        assert_eq!(
+            std::mem::size_of_val(&client),
+            std::mem::size_of::<SpotLeverageTokenClient>()
+        );
     }
 
     #[tokio::test]
     async fn test_purchase_required_params() {
         let client = create_test_client();
-        let result = client.purchase(
-            "BTC3LUSDT",
-            "100.0",
-            None,
-        ).await;
+        let result = client.purchase("BTC3LUSDT", "100.0", None).await;
         // Should not panic with valid required parameters
         assert!(result.is_err() || result.is_ok());
     }
@@ -170,11 +169,9 @@ mod tests {
     #[tokio::test]
     async fn test_redeem_required_params() {
         let client = create_test_client();
-        let result = client.redeem(
-            "BTC3LUSDT",
-            "50.0",
-            Some("test_serial_123"),
-        ).await;
+        let result = client
+            .redeem("BTC3LUSDT", "50.0", Some("test_serial_123"))
+            .await;
         // Should not panic with valid required parameters
         assert!(result.is_err() || result.is_ok());
     }

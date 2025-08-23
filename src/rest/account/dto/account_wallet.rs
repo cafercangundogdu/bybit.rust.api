@@ -1,5 +1,5 @@
-use crate::rest::enums::account_type::AccountType;
 use crate::rest::client::ServerResponse;
+use crate::rest::enums::account_type::AccountType;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/account/wallet-balance#request-parameters

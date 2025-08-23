@@ -20,14 +20,14 @@ impl SpotMarginTradeClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/spot-margin-trade/data";
         let mut params = json!({});
-        
+
         if let Some(vip_level) = vip_level {
             params["vipLevel"] = json!(vip_level);
         }
         if let Some(currency) = currency {
             params["currency"] = json!(currency);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -43,7 +43,7 @@ impl SpotMarginTradeClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/spot-margin-trade/interest-rate-history";
         let mut params = json!({});
-        
+
         if let Some(currency) = currency {
             params["currency"] = json!(currency);
         }
@@ -56,7 +56,7 @@ impl SpotMarginTradeClient {
         if let Some(end_time) = end_time {
             params["endTime"] = json!(end_time);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -66,7 +66,7 @@ impl SpotMarginTradeClient {
     pub async fn get_status_and_leverage(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/spot-margin-trade/state";
         let params = json!({});
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -81,22 +81,19 @@ impl SpotMarginTradeClient {
         let body = json!({
             "spotMarginMode": spot_margin_mode,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Set leverage
     /// Set spot margin trading leverage
-    pub async fn set_leverage(
-        &self,
-        leverage: i32,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn set_leverage(&self, leverage: i32) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/spot-margin-trade/set-leverage";
         let body = json!({
             "leverage": leverage,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -125,7 +122,10 @@ mod tests {
     fn test_client_creation() {
         let client = create_test_client();
         // Test that client was created successfully
-        assert_eq!(std::mem::size_of_val(&client), std::mem::size_of::<SpotMarginTradeClient>());
+        assert_eq!(
+            std::mem::size_of_val(&client),
+            std::mem::size_of::<SpotMarginTradeClient>()
+        );
     }
 
     #[tokio::test]
@@ -147,10 +147,7 @@ mod tests {
     #[tokio::test]
     async fn test_get_vip_margin_data_params() {
         let client = create_test_client();
-        let result = client.get_vip_margin_data(
-            Some("VIP1"),
-            Some("USDT"),
-        ).await;
+        let result = client.get_vip_margin_data(Some("VIP1"), Some("USDT")).await;
         // Should handle optional parameters correctly
         assert!(result.is_err() || result.is_ok());
     }

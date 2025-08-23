@@ -31,7 +31,7 @@ impl PreUpgradeClient {
         let mut params = json!({
             "category": category
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -62,7 +62,7 @@ impl PreUpgradeClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -86,7 +86,7 @@ impl PreUpgradeClient {
         let mut params = json!({
             "category": category
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -114,7 +114,7 @@ impl PreUpgradeClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -133,7 +133,7 @@ impl PreUpgradeClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/pre-upgrade/account/transaction-log";
         let mut params = json!({});
-        
+
         if let Some(category) = category {
             params["category"] = json!(category);
         }
@@ -155,7 +155,7 @@ impl PreUpgradeClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -175,7 +175,7 @@ impl PreUpgradeClient {
         let mut params = json!({
             "category": category
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -191,7 +191,7 @@ impl PreUpgradeClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -210,7 +210,7 @@ impl PreUpgradeClient {
         let mut params = json!({
             "category": category
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -223,7 +223,7 @@ impl PreUpgradeClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -241,7 +241,7 @@ impl PreUpgradeClient {
         let mut params = json!({
             "category": category
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -251,7 +251,7 @@ impl PreUpgradeClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -280,25 +280,30 @@ mod tests {
     fn test_client_creation() {
         let client = create_test_client();
         // Test that client was created successfully
-        assert_eq!(std::mem::size_of_val(&client), std::mem::size_of::<PreUpgradeClient>());
+        assert_eq!(
+            std::mem::size_of_val(&client),
+            std::mem::size_of::<PreUpgradeClient>()
+        );
     }
 
     #[tokio::test]
     async fn test_get_order_history_required_params() {
         let client = create_test_client();
-        let result = client.get_order_history(
-            "linear",
-            Some("BTCUSDT"),
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            Some(10),
-            None,
-        ).await;
+        let result = client
+            .get_order_history(
+                "linear",
+                Some("BTCUSDT"),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                Some(10),
+                None,
+            )
+            .await;
         // Should not panic with valid category parameter
         assert!(result.is_err() || result.is_ok());
     }
@@ -306,18 +311,20 @@ mod tests {
     #[tokio::test]
     async fn test_get_trade_history_required_params() {
         let client = create_test_client();
-        let result = client.get_trade_history(
-            "linear",
-            Some("BTCUSDT"),
-            None,
-            None,
-            None,
-            None,
-            None,
-            None,
-            Some(20),
-            None,
-        ).await;
+        let result = client
+            .get_trade_history(
+                "linear",
+                Some("BTCUSDT"),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                Some(20),
+                None,
+            )
+            .await;
         // Should not panic with valid category parameter
         assert!(result.is_err() || result.is_ok());
     }
@@ -325,14 +332,16 @@ mod tests {
     #[tokio::test]
     async fn test_get_closed_pnl_required_params() {
         let client = create_test_client();
-        let result = client.get_closed_pnl(
-            "linear",
-            Some("BTCUSDT"),
-            Some(1672531200000), // 2023-01-01
-            None,
-            Some(10),
-            None,
-        ).await;
+        let result = client
+            .get_closed_pnl(
+                "linear",
+                Some("BTCUSDT"),
+                Some(1672531200000), // 2023-01-01
+                None,
+                Some(10),
+                None,
+            )
+            .await;
         // Should not panic with valid category parameter
         assert!(result.is_err() || result.is_ok());
     }

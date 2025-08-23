@@ -1,5 +1,8 @@
+use crate::rest::enums::{
+    category::Category, order_type::OrderType, side::Side, smp_type::SmpType,
+    time_in_force::TimeInForce, trigger_by::TriggerBy,
+};
 use serde::{Deserialize, Serialize};
-use crate::rest::enums::{category::Category, order_type::OrderType, side::Side, time_in_force::TimeInForce, trigger_by::TriggerBy, smp_type::SmpType};
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

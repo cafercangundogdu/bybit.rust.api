@@ -22,11 +22,11 @@ impl AccountClient {
         let mut params = json!({
             "accountType": account_type,
         });
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -43,14 +43,14 @@ impl AccountClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
         if let Some(base_coin) = base_coin {
             params["baseCoin"] = json!(base_coin);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -59,7 +59,10 @@ impl AccountClient {
     /// https://bybit-exchange.github.io/docs/v5/account/account-info
     pub async fn get_account_info(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/info";
-        let response = self.client.get(endpoint, json!({}), SecType::Signed).await?;
+        let response = self
+            .client
+            .get(endpoint, json!({}), SecType::Signed)
+            .await?;
         Ok(response)
     }
 
@@ -79,7 +82,7 @@ impl AccountClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/transaction-log";
         let mut params = json!({});
-        
+
         if let Some(account_type) = account_type {
             params["accountType"] = json!(account_type);
         }
@@ -107,7 +110,7 @@ impl AccountClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -122,7 +125,7 @@ impl AccountClient {
         let body = json!({
             "setMarginMode": set_margin_mode,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -145,7 +148,7 @@ impl AccountClient {
             "qtyLimit": qty_limit,
             "deltaLimit": delta_limit,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -157,19 +160,22 @@ impl AccountClient {
         let body = json!({
             "baseCoin": base_coin,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Get MMP state
     /// https://bybit-exchange.github.io/docs/v5/account/get-mmp-state
-    pub async fn get_mmp_state(&self, base_coin: &str) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn get_mmp_state(
+        &self,
+        base_coin: &str,
+    ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/mmp-state";
         let params = json!({
             "baseCoin": base_coin,
         });
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -178,34 +184,43 @@ impl AccountClient {
     /// https://bybit-exchange.github.io/docs/v5/account/smp-group
     pub async fn get_smp_group_list(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/smp-group";
-        let response = self.client.get(endpoint, json!({}), SecType::Signed).await?;
+        let response = self
+            .client
+            .get(endpoint, json!({}), SecType::Signed)
+            .await?;
         Ok(response)
     }
 
     /// Get coin Greeks
     /// https://bybit-exchange.github.io/docs/v5/account/coin-greeks
-    pub async fn get_coin_greeks(&self, base_coin: Option<&str>) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn get_coin_greeks(
+        &self,
+        base_coin: Option<&str>,
+    ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/exchange/coin-greeks";
         let mut params = json!({});
-        
+
         if let Some(base_coin) = base_coin {
             params["baseCoin"] = json!(base_coin);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Get collateral info
     /// https://bybit-exchange.github.io/docs/v5/account/collateral-info
-    pub async fn get_collateral_info(&self, currency: Option<&str>) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn get_collateral_info(
+        &self,
+        currency: Option<&str>,
+    ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/collateral-info";
         let mut params = json!({});
-        
+
         if let Some(currency) = currency {
             params["currency"] = json!(currency);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -222,7 +237,7 @@ impl AccountClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/borrow-history";
         let mut params = json!({});
-        
+
         if let Some(currency) = currency {
             params["currency"] = json!(currency);
         }
@@ -238,7 +253,7 @@ impl AccountClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -253,7 +268,7 @@ impl AccountClient {
         let body = json!({
             "timeWindow": time_window,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -263,7 +278,7 @@ impl AccountClient {
     pub async fn upgrade_to_unified_account(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/upgrade-to-uta";
         let body = json!({});
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -282,7 +297,7 @@ impl AccountClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/contract-transaction-log";
         let mut params = json!({});
-        
+
         if let Some(category) = category {
             params["category"] = json!(category);
         }
@@ -304,7 +319,7 @@ impl AccountClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -313,7 +328,10 @@ impl AccountClient {
     /// https://bybit-exchange.github.io/docs/v5/account/query-dcp-info
     pub async fn query_dcp_info(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/query-dcp-info";
-        let response = self.client.get(endpoint, json!({}), SecType::Signed).await?;
+        let response = self
+            .client
+            .get(endpoint, json!({}), SecType::Signed)
+            .await?;
         Ok(response)
     }
 }
@@ -348,7 +366,7 @@ mod tests {
         // Test parameter handling (not actual API call in unit test)
         let account_type = "UNIFIED";
         let coin = Some("USDT");
-        
+
         assert_eq!(account_type, "UNIFIED");
         assert_eq!(coin, Some("USDT"));
     }
@@ -358,7 +376,7 @@ mod tests {
         let category = "spot";
         let symbol = Some("BTCUSDT");
         let base_coin: Option<&str> = None;
-        
+
         assert_eq!(category, "spot");
         assert_eq!(symbol, Some("BTCUSDT"));
         assert_eq!(base_coin, None);
@@ -375,7 +393,7 @@ mod tests {
         let end_time = Some(1234567899i64);
         let limit = Some(50);
         let cursor: Option<&str> = None;
-        
+
         assert_eq!(account_type, Some("UNIFIED"));
         assert_eq!(category, Some("spot"));
         assert_eq!(currency, Some("USDT"));
@@ -400,7 +418,7 @@ mod tests {
         let frozen_period = 100000;
         let qty_limit = "100";
         let delta_limit = "10";
-        
+
         assert_eq!(base_coin, "BTC");
         assert_eq!(window, 5000);
         assert_eq!(frozen_period, 100000);
@@ -415,7 +433,7 @@ mod tests {
         let end_time = Some(1234567899i64);
         let limit = Some(100);
         let cursor = Some("next_page");
-        
+
         assert_eq!(currency, Some("USDT"));
         assert_eq!(start_time, Some(1234567890));
         assert_eq!(end_time, Some(1234567899));
@@ -438,7 +456,7 @@ mod tests {
         let end_time = Some(1234567899i64);
         let limit = Some(50);
         let cursor: Option<&str> = None;
-        
+
         assert_eq!(category, Some("linear"));
         assert_eq!(base_coin, Some("BTC"));
         assert_eq!(log_type, Some("SETTLEMENT"));

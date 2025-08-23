@@ -23,7 +23,7 @@ impl InstitutionalLoanClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/ins-loan/ltv";
         let mut params = json!({});
-        
+
         if let Some(currency) = currency {
             params["currency"] = json!(currency);
         }
@@ -39,7 +39,7 @@ impl InstitutionalLoanClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -56,7 +56,7 @@ impl InstitutionalLoanClient {
             "uid": uid,
             "operate": operate,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -85,7 +85,10 @@ mod tests {
     fn test_client_creation() {
         let client = create_test_client();
         // Test that client was created successfully
-        assert_eq!(std::mem::size_of_val(&client), std::mem::size_of::<InstitutionalLoanClient>());
+        assert_eq!(
+            std::mem::size_of_val(&client),
+            std::mem::size_of::<InstitutionalLoanClient>()
+        );
     }
 
     #[tokio::test]
@@ -99,13 +102,15 @@ mod tests {
     #[tokio::test]
     async fn test_get_ltv_params() {
         let client = create_test_client();
-        let result = client.get_ltv(
-            Some("USDT"),
-            Some(1672531200000), // 2023-01-01
-            None,
-            Some(10),
-            None,
-        ).await;
+        let result = client
+            .get_ltv(
+                Some("USDT"),
+                Some(1672531200000), // 2023-01-01
+                None,
+                Some(10),
+                None,
+            )
+            .await;
         // Should handle optional parameters correctly
         assert!(result.is_err() || result.is_ok());
     }

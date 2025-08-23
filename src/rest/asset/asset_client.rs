@@ -22,7 +22,7 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/exchange/order-record";
         let mut params = json!({});
-        
+
         if let Some(from_coin) = from_coin {
             params["fromCoin"] = json!(from_coin);
         }
@@ -35,7 +35,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -54,7 +54,7 @@ impl AssetClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -67,7 +67,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -85,7 +85,7 @@ impl AssetClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -95,7 +95,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -108,11 +108,11 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/coin/query-info";
         let mut params = json!({});
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -128,22 +128,23 @@ impl AssetClient {
         let mut params = json!({
             "accountType": account_type,
         });
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Get sub member list
     /// https://bybit-exchange.github.io/docs/v5/asset/sub-member-list
-    pub async fn get_sub_member_list(
-        &self,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn get_sub_member_list(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/transfer/query-sub-member-list";
-        let response = self.client.get(endpoint, json!({}), SecType::Signed).await?;
+        let response = self
+            .client
+            .get(endpoint, json!({}), SecType::Signed)
+            .await?;
         Ok(response)
     }
 
@@ -159,7 +160,7 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/deposit/query-record";
         let mut params = json!({});
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
@@ -175,7 +176,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -195,7 +196,7 @@ impl AssetClient {
         let mut params = json!({
             "subMemberId": sub_member_id,
         });
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
@@ -211,7 +212,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -228,7 +229,7 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/deposit/query-internal-record";
         let mut params = json!({});
-        
+
         if let Some(start_time) = start_time {
             params["startTime"] = json!(start_time);
         }
@@ -244,7 +245,7 @@ impl AssetClient {
         if let Some(limit) = limit {
             params["limit"] = json!(limit);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -260,11 +261,11 @@ impl AssetClient {
         let mut params = json!({
             "coin": coin,
         });
-        
+
         if let Some(chain_type) = chain_type {
             params["chainType"] = json!(chain_type);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -283,7 +284,7 @@ impl AssetClient {
             "chainType": chain_type,
             "subMemberId": sub_member_id,
         });
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -299,7 +300,7 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/deposit/query-allowed-list";
         let mut params = json!({});
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
@@ -312,7 +313,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -331,7 +332,7 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/withdraw/query-record";
         let mut params = json!({});
-        
+
         if let Some(withdraw_id) = withdraw_id {
             params["withdrawID"] = json!(withdraw_id);
         }
@@ -353,7 +354,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -368,7 +369,7 @@ impl AssetClient {
         let params = json!({
             "coin": coin,
         });
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -394,7 +395,7 @@ impl AssetClient {
             "amount": amount,
             "timestamp": timestamp,
         });
-        
+
         if let Some(tag) = tag {
             body["tag"] = json!(tag);
         }
@@ -404,22 +405,19 @@ impl AssetClient {
         if let Some(account_type) = account_type {
             body["accountType"] = json!(account_type);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Cancel withdrawal
     /// https://bybit-exchange.github.io/docs/v5/asset/cancel-withdraw
-    pub async fn cancel_withdrawal(
-        &self,
-        id: &str,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn cancel_withdrawal(&self, id: &str) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/withdraw/cancel";
         let body = json!({
             "id": id,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -442,7 +440,7 @@ impl AssetClient {
             "fromAccountType": from_account_type,
             "toAccountType": to_account_type,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -461,7 +459,7 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/transfer/query-inter-transfer-list";
         let mut params = json!({});
-        
+
         if let Some(transfer_id) = transfer_id {
             params["transferId"] = json!(transfer_id);
         }
@@ -483,7 +481,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -510,7 +508,7 @@ impl AssetClient {
             "fromAccountType": from_account_type,
             "toAccountType": to_account_type,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -529,7 +527,7 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/transfer/query-universal-transfer-list";
         let mut params = json!({});
-        
+
         if let Some(transfer_id) = transfer_id {
             params["transferId"] = json!(transfer_id);
         }
@@ -551,7 +549,7 @@ impl AssetClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -568,7 +566,7 @@ impl AssetClient {
             "fromAccountType": from_account_type,
             "toAccountType": to_account_type,
         });
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -594,7 +592,7 @@ impl AssetClient {
             "requestAmount": request_amount,
             "accountType": account_type,
         });
-        
+
         if let Some(from_coin_type) = from_coin_type {
             body["fromCoinType"] = json!(from_coin_type);
         }
@@ -604,7 +602,7 @@ impl AssetClient {
         if let Some(request_id) = request_id {
             body["requestId"] = json!(request_id);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -619,7 +617,7 @@ impl AssetClient {
         let body = json!({
             "quoteTxId": quote_tx_id,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -633,14 +631,14 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/exchange/convert-result-query";
         let mut params = json!({});
-        
+
         if let Some(quote_tx_id) = quote_tx_id {
             params["quoteTxId"] = json!(quote_tx_id);
         }
         if let Some(account_type) = account_type {
             params["accountType"] = json!(account_type);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -655,7 +653,7 @@ impl AssetClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/exchange/query-convert-history";
         let mut params = json!({});
-        
+
         if let Some(account_type) = account_type {
             params["accountType"] = json!(account_type);
         }
@@ -665,7 +663,7 @@ impl AssetClient {
         if let Some(limit) = limit {
             params["limit"] = json!(limit);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -682,28 +680,31 @@ impl AssetClient {
         let mut params = json!({
             "accountType": account_type,
         });
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
         if let Some(side) = side {
             params["side"] = json!(side);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Get coin greeks
     /// https://bybit-exchange.github.io/docs/v5/asset/coin-greeks
-    pub async fn get_coin_greeks(&self, base_coin: Option<&str>) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn get_coin_greeks(
+        &self,
+        base_coin: Option<&str>,
+    ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/coin-greeks";
         let mut params = json!({});
-        
+
         if let Some(base_coin) = base_coin {
             params["baseCoin"] = json!(base_coin);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -726,7 +727,7 @@ impl AssetClient {
             "accountType": account_type,
             "coin": coin,
         });
-        
+
         if let Some(member_id) = member_id {
             params["memberId"] = json!(member_id);
         }
@@ -745,7 +746,7 @@ impl AssetClient {
         if let Some(with_ltv_transfer_safe_amount) = with_ltv_transfer_safe_amount {
             params["withLtvTransferSafeAmount"] = json!(with_ltv_transfer_safe_amount);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -763,7 +764,7 @@ impl AssetClient {
         let mut params = json!({
             "accountType": account_type,
         });
-        
+
         if let Some(member_id) = member_id {
             params["memberId"] = json!(member_id);
         }
@@ -773,7 +774,7 @@ impl AssetClient {
         if let Some(with_bonus) = with_bonus {
             params["withBonus"] = json!(with_bonus);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -790,7 +791,7 @@ impl AssetClient {
             "coin": coin,
             "memberIds": member_ids,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -826,7 +827,7 @@ mod tests {
         let to_coin = Some("USDT");
         let limit = Some(50);
         let cursor: Option<&str> = None;
-        
+
         assert_eq!(from_coin, Some("BTC"));
         assert_eq!(to_coin, Some("USDT"));
         assert_eq!(limit, Some(50));
@@ -843,7 +844,7 @@ mod tests {
         let timestamp = 1234567890i64;
         let for_ce_chain: Option<i32> = None;
         let account_type = Some("UNIFIED");
-        
+
         assert_eq!(coin, "BTC");
         assert_eq!(chain, "BTC");
         assert_eq!(address, "bc1qtest123456789");
@@ -861,7 +862,7 @@ mod tests {
         let amount = "100";
         let from_account_type = "UNIFIED";
         let to_account_type = "CONTRACT";
-        
+
         assert_eq!(transfer_id, "transfer123");
         assert_eq!(coin, "USDT");
         assert_eq!(amount, "100");
@@ -878,7 +879,7 @@ mod tests {
         let to_member_id = "member2";
         let from_account_type = "UNIFIED";
         let to_account_type = "SPOT";
-        
+
         assert_eq!(transfer_id, "transfer456");
         assert_eq!(coin, "BTC");
         assert_eq!(amount, "0.5");
@@ -898,7 +899,7 @@ mod tests {
         let request_amount = "0.1";
         let account_type = "UNIFIED";
         let request_id = Some("req123");
-        
+
         assert_eq!(from_coin, "BTC");
         assert_eq!(to_coin, "USDT");
         assert!(from_coin_type.is_none());
@@ -916,7 +917,7 @@ mod tests {
         let end_time = Some(1234567999i64);
         let limit = Some(100);
         let cursor: Option<&str> = None;
-        
+
         assert_eq!(coin, Some("ETH"));
         assert_eq!(start_time, Some(1234567890));
         assert_eq!(end_time, Some(1234567999));
@@ -934,7 +935,7 @@ mod tests {
         let with_bonus = Some(1);
         let with_transfer_safe_amount = Some(1);
         let with_ltv_transfer_safe_amount = Some(0);
-        
+
         assert_eq!(member_id, Some("member123"));
         assert!(to_member_id.is_none());
         assert_eq!(account_type, "UNIFIED");
@@ -949,7 +950,7 @@ mod tests {
     async fn test_save_transfer_sub_member_params() {
         let coin = vec!["BTC".to_string(), "ETH".to_string()];
         let member_ids = vec!["member1".to_string(), "member2".to_string()];
-        
+
         assert_eq!(coin.len(), 2);
         assert_eq!(coin[0], "BTC");
         assert_eq!(coin[1], "ETH");

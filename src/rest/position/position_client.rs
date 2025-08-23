@@ -26,7 +26,7 @@ impl PositionClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -42,7 +42,7 @@ impl PositionClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -63,7 +63,7 @@ impl PositionClient {
             "buyLeverage": buy_leverage,
             "sellLeverage": sell_leverage,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -86,7 +86,7 @@ impl PositionClient {
             "buyLeverage": buy_leverage,
             "sellLeverage": sell_leverage,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -105,14 +105,14 @@ impl PositionClient {
             "category": category,
             "mode": mode,
         });
-        
+
         if let Some(symbol) = symbol {
             body["symbol"] = json!(symbol);
         }
         if let Some(coin) = coin {
             body["coin"] = json!(coin);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -143,7 +143,7 @@ impl PositionClient {
             "symbol": symbol,
             "positionIdx": position_idx,
         });
-        
+
         if let Some(take_profit) = take_profit {
             body["takeProfit"] = json!(take_profit);
         }
@@ -180,7 +180,7 @@ impl PositionClient {
         if let Some(sl_order_type) = sl_order_type {
             body["slOrderType"] = json!(sl_order_type);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -200,11 +200,11 @@ impl PositionClient {
             "symbol": symbol,
             "autoAddMargin": auto_add_margin,
         });
-        
+
         if let Some(position_idx) = position_idx {
             body["positionIdx"] = json!(position_idx);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -224,7 +224,7 @@ impl PositionClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -240,7 +240,7 @@ impl PositionClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -259,7 +259,7 @@ impl PositionClient {
             "symbol": symbol,
             "tpSlMode": tp_sl_mode,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -279,11 +279,11 @@ impl PositionClient {
             "symbol": symbol,
             "riskId": risk_id,
         });
-        
+
         if let Some(position_idx) = position_idx {
             body["positionIdx"] = json!(position_idx);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -302,7 +302,7 @@ impl PositionClient {
             "toUid": to_uid,
             "list": list,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -322,7 +322,7 @@ impl PositionClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/position/move-history";
         let mut params = json!({});
-        
+
         if let Some(category) = category {
             params["category"] = json!(category);
         }
@@ -347,7 +347,7 @@ impl PositionClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -364,7 +364,7 @@ impl PositionClient {
             "category": category,
             "symbol": symbol,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -384,11 +384,11 @@ impl PositionClient {
             "symbol": symbol,
             "margin": margin,
         });
-        
+
         if let Some(position_idx) = position_idx {
             body["positionIdx"] = json!(position_idx);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -412,7 +412,7 @@ impl PositionClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -440,7 +440,7 @@ impl PositionClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -478,7 +478,7 @@ mod tests {
         let settle_coin: Option<&str> = None;
         let limit = Some(50);
         let cursor: Option<&str> = None;
-        
+
         assert_eq!(category, "linear");
         assert_eq!(symbol, Some("BTCUSDT"));
         assert!(base_coin.is_none());
@@ -493,7 +493,7 @@ mod tests {
         let symbol = "BTCUSDT";
         let buy_leverage = "10";
         let sell_leverage = "10";
-        
+
         assert_eq!(category, "linear");
         assert_eq!(symbol, "BTCUSDT");
         assert_eq!(buy_leverage, "10");
@@ -507,7 +507,7 @@ mod tests {
         let trade_mode = 1; // isolated margin
         let buy_leverage = "5";
         let sell_leverage = "5";
-        
+
         assert_eq!(category, "linear");
         assert_eq!(symbol, "BTCUSDT");
         assert_eq!(trade_mode, 1);
@@ -523,7 +523,7 @@ mod tests {
         let take_profit = Some("50000");
         let stop_loss = Some("40000");
         let trailing_stop: Option<&str> = None;
-        
+
         assert_eq!(category, "linear");
         assert_eq!(symbol, "BTCUSDT");
         assert_eq!(position_idx, 0);
@@ -540,7 +540,7 @@ mod tests {
         let end_time = Some(1234567899i64);
         let limit = Some(100);
         let cursor: Option<&str> = None;
-        
+
         assert_eq!(category, "linear");
         assert_eq!(symbol, Some("BTCUSDT"));
         assert_eq!(start_time, Some(1234567890));

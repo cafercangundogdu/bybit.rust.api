@@ -27,7 +27,7 @@ impl UserClient {
             "username": username,
             "memberType": member_type,
         });
-        
+
         if let Some(password) = password {
             body["password"] = json!(password);
         }
@@ -40,7 +40,7 @@ impl UserClient {
         if let Some(is_uta) = is_uta {
             body["isUta"] = json!(is_uta);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -61,14 +61,14 @@ impl UserClient {
             "readOnly": read_only,
             "permissions": permissions,
         });
-        
+
         if let Some(note) = note {
             body["note"] = json!(note);
         }
         if let Some(ips) = ips {
             body["ips"] = json!(ips);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -82,14 +82,14 @@ impl UserClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/query-sub-members";
         let mut params = json!({});
-        
+
         if let Some(page_size) = page_size {
             params["pageSize"] = json!(page_size);
         }
         if let Some(page) = page {
             params["page"] = json!(page);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -102,22 +102,23 @@ impl UserClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/submembers";
         let mut params = json!({});
-        
+
         if let Some(uid) = uid {
             params["uid"] = json!(uid);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Get API key information
     /// https://bybit-exchange.github.io/docs/v5/user/apikey-info
-    pub async fn query_api(
-        &self,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn query_api(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/query-api";
-        let response = self.client.get(endpoint, json!({}), SecType::Signed).await?;
+        let response = self
+            .client
+            .get(endpoint, json!({}), SecType::Signed)
+            .await?;
         Ok(response)
     }
 
@@ -133,25 +134,26 @@ impl UserClient {
         let mut params = json!({
             "subMemberId": sub_member_id,
         });
-        
+
         if let Some(limit) = limit {
             params["limit"] = json!(limit);
         }
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Get user account type
     /// https://bybit-exchange.github.io/docs/v5/user/account-type
-    pub async fn get_member_type(
-        &self,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn get_member_type(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/get-member-type";
-        let response = self.client.get(endpoint, json!({}), SecType::Signed).await?;
+        let response = self
+            .client
+            .get(endpoint, json!({}), SecType::Signed)
+            .await?;
         Ok(response)
     }
 
@@ -165,7 +167,7 @@ impl UserClient {
         let params = json!({
             "uid": uid,
         });
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -182,7 +184,7 @@ impl UserClient {
             "subuid": sub_uid,
             "frozen": frozen,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -197,7 +199,7 @@ impl UserClient {
         let body = json!({
             "subMemberId": sub_member_id,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -212,7 +214,7 @@ impl UserClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/update-api";
         let mut body = json!({});
-        
+
         if let Some(read_only) = read_only {
             body["readOnly"] = json!(read_only);
         }
@@ -222,19 +224,17 @@ impl UserClient {
         if let Some(permissions) = permissions {
             body["permissions"] = json!(permissions);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Delete master API key
     /// https://bybit-exchange.github.io/docs/v5/user/rm-master-apikey
-    pub async fn delete_api(
-        &self,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn delete_api(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/delete-api";
         let body = json!({});
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -252,7 +252,7 @@ impl UserClient {
         let mut body = json!({
             "apikey": api_key,
         });
-        
+
         if let Some(read_only) = read_only {
             body["readOnly"] = json!(read_only);
         }
@@ -262,22 +262,19 @@ impl UserClient {
         if let Some(permissions) = permissions {
             body["permissions"] = json!(permissions);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Delete sub API key
     /// https://bybit-exchange.github.io/docs/v5/user/rm-sub-apikey
-    pub async fn delete_sub_api(
-        &self,
-        api_key: &str,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn delete_sub_api(&self, api_key: &str) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/delete-sub-api";
         let body = json!({
             "apikey": api_key,
         });
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -315,7 +312,7 @@ mod tests {
         let note = Some("Test sub account");
         let switch_option = Some(1);
         let is_uta = Some(true);
-        
+
         assert_eq!(username, "test_sub_user");
         assert_eq!(member_type, 1);
         assert_eq!(password, Some("secure_password"));
@@ -334,7 +331,7 @@ mod tests {
             "Spot": ["SpotTrade"]
         });
         let ips = Some(vec!["192.168.1.1".to_string(), "10.0.0.1".to_string()]);
-        
+
         assert_eq!(sub_uid, 12345678);
         assert_eq!(note, Some("API for trading"));
         assert_eq!(read_only, 0);
@@ -347,7 +344,7 @@ mod tests {
         let sub_uid = 87654321i64;
         let frozen_freeze = 1;
         let frozen_unfreeze = 0;
-        
+
         assert_eq!(sub_uid, 87654321);
         assert_eq!(frozen_freeze, 1);
         assert_eq!(frozen_unfreeze, 0);
@@ -357,7 +354,7 @@ mod tests {
     async fn test_query_sub_members_params() {
         let page_size = Some(20);
         let page = Some(1);
-        
+
         assert_eq!(page_size, Some(20));
         assert_eq!(page, Some(1));
     }
@@ -367,7 +364,7 @@ mod tests {
         let sub_member_id = "sub_member_123";
         let limit = Some(50);
         let cursor = Some("next_page_cursor");
-        
+
         assert_eq!(sub_member_id, "sub_member_123");
         assert_eq!(limit, Some(50));
         assert_eq!(cursor, Some("next_page_cursor"));
@@ -380,7 +377,7 @@ mod tests {
         let permissions = Some(json!({
             "Spot": ["SpotTrade"]
         }));
-        
+
         assert_eq!(read_only, Some(1));
         assert_eq!(ips.as_ref().unwrap().len(), 1);
         assert!(permissions.as_ref().unwrap().is_object());
@@ -389,7 +386,7 @@ mod tests {
     #[tokio::test]
     async fn test_delete_sub_api_params() {
         let api_key = "test_api_key_123";
-        
+
         assert_eq!(api_key, "test_api_key_123");
     }
 }

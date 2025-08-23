@@ -15,95 +15,104 @@ impl OrderClient {
 
     /// Place an order
     /// https://bybit-exchange.github.io/docs/v5/order/create-order
-    pub async fn place_order(&self, order: PlaceOrderRequest) -> Result<ServerResponse<PlaceOrderResponse>> {
+    pub async fn place_order(
+        &self,
+        order: PlaceOrderRequest,
+    ) -> Result<ServerResponse<PlaceOrderResponse>> {
         let endpoint = "v5/order/create";
         let body = serde_json::to_value(&order)?;
-        
-        let response: ServerResponse<PlaceOrderResponse> = self
-            .client
-            .post(endpoint, body, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<PlaceOrderResponse> =
+            self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Batch place orders (Option only)
     /// https://bybit-exchange.github.io/docs/v5/order/batch-place
-    pub async fn batch_place_orders(&self, category: Category, orders: Vec<PlaceOrderRequest>) -> Result<ServerResponse<BatchPlaceOrderResponse>> {
+    pub async fn batch_place_orders(
+        &self,
+        category: Category,
+        orders: Vec<PlaceOrderRequest>,
+    ) -> Result<ServerResponse<BatchPlaceOrderResponse>> {
         let endpoint = "v5/order/create-batch";
         let body = json!({
             "category": category,
             "request": orders
         });
-        
-        let response: ServerResponse<BatchPlaceOrderResponse> = self
-            .client
-            .post(endpoint, body, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<BatchPlaceOrderResponse> =
+            self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Amend order
     /// https://bybit-exchange.github.io/docs/v5/order/amend-order
-    pub async fn amend_order(&self, amend_request: AmendOrderRequest) -> Result<ServerResponse<AmendOrderResponse>> {
+    pub async fn amend_order(
+        &self,
+        amend_request: AmendOrderRequest,
+    ) -> Result<ServerResponse<AmendOrderResponse>> {
         let endpoint = "v5/order/amend";
         let body = serde_json::to_value(&amend_request)?;
-        
-        let response: ServerResponse<AmendOrderResponse> = self
-            .client
-            .post(endpoint, body, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<AmendOrderResponse> =
+            self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Batch amend orders (Option only)
     /// https://bybit-exchange.github.io/docs/v5/order/batch-amend
-    pub async fn batch_amend_orders(&self, category: Category, amendments: Vec<AmendOrderRequest>) -> Result<ServerResponse<BatchAmendOrderResponse>> {
+    pub async fn batch_amend_orders(
+        &self,
+        category: Category,
+        amendments: Vec<AmendOrderRequest>,
+    ) -> Result<ServerResponse<BatchAmendOrderResponse>> {
         let endpoint = "v5/order/amend-batch";
         let body = json!({
             "category": category,
             "request": amendments
         });
-        
-        let response: ServerResponse<BatchAmendOrderResponse> = self
-            .client
-            .post(endpoint, body, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<BatchAmendOrderResponse> =
+            self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Cancel order
     /// https://bybit-exchange.github.io/docs/v5/order/cancel-order
-    pub async fn cancel_order(&self, cancel_request: CancelOrderRequest) -> Result<ServerResponse<CancelOrderResponse>> {
+    pub async fn cancel_order(
+        &self,
+        cancel_request: CancelOrderRequest,
+    ) -> Result<ServerResponse<CancelOrderResponse>> {
         let endpoint = "v5/order/cancel";
         let body = serde_json::to_value(&cancel_request)?;
-        
-        let response: ServerResponse<CancelOrderResponse> = self
-            .client
-            .post(endpoint, body, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<CancelOrderResponse> =
+            self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Batch cancel orders (Option only)
     /// https://bybit-exchange.github.io/docs/v5/order/batch-cancel
-    pub async fn batch_cancel_orders(&self, category: Category, cancellations: Vec<CancelOrderRequest>) -> Result<ServerResponse<BatchCancelOrderResponse>> {
+    pub async fn batch_cancel_orders(
+        &self,
+        category: Category,
+        cancellations: Vec<CancelOrderRequest>,
+    ) -> Result<ServerResponse<BatchCancelOrderResponse>> {
         let endpoint = "v5/order/cancel-batch";
         let body = json!({
             "category": category,
             "request": cancellations
         });
-        
-        let response: ServerResponse<BatchCancelOrderResponse> = self
-            .client
-            .post(endpoint, body, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<BatchCancelOrderResponse> =
+            self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Cancel all orders
     /// https://bybit-exchange.github.io/docs/v5/order/cancel-all
     pub async fn cancel_all_orders(
-        &self, 
+        &self,
         category: Category,
         symbol: Option<&str>,
         base_coin: Option<&str>,
@@ -114,7 +123,7 @@ impl OrderClient {
         let mut body = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             body["symbol"] = json!(symbol);
         }
@@ -127,11 +136,9 @@ impl OrderClient {
         if let Some(order_filter) = order_filter {
             body["orderFilter"] = json!(order_filter);
         }
-        
-        let response: ServerResponse<CancelAllOrdersResponse> = self
-            .client
-            .post(endpoint, body, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<CancelAllOrdersResponse> =
+            self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
@@ -154,7 +161,7 @@ impl OrderClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -182,11 +189,9 @@ impl OrderClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
-        let response: ServerResponse<GetOrdersResponse> = self
-            .client
-            .get(endpoint, params, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<GetOrdersResponse> =
+            self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
 
@@ -211,7 +216,7 @@ impl OrderClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -245,11 +250,9 @@ impl OrderClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
-        let response: ServerResponse<GetOrdersResponse> = self
-            .client
-            .get(endpoint, params, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<GetOrdersResponse> =
+            self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
 
@@ -272,7 +275,7 @@ impl OrderClient {
         let mut params = json!({
             "category": category,
         });
-        
+
         if let Some(symbol) = symbol {
             params["symbol"] = json!(symbol);
         }
@@ -300,11 +303,9 @@ impl OrderClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
-        let response: ServerResponse<GetTradeHistoryResponse> = self
-            .client
-            .get(endpoint, params, SecType::Signed)
-            .await?;
+
+        let response: ServerResponse<GetTradeHistoryResponse> =
+            self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
 
@@ -322,7 +323,7 @@ impl OrderClient {
             "symbol": symbol,
             "side": side,
         });
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -384,7 +385,7 @@ mod tests {
             tp_order_type: None,
             sl_order_type: None,
         };
-        
+
         assert_eq!(order.symbol, "BTCUSDT");
         assert_eq!(order.qty, "0.001");
     }
@@ -398,7 +399,7 @@ mod tests {
             order_link_id: None,
             order_filter: None,
         };
-        
+
         assert_eq!(cancel_request.symbol, "BTCUSDT");
         assert_eq!(cancel_request.order_id, Some("123456".to_string()));
     }
@@ -423,7 +424,7 @@ mod tests {
             tp_limit_price: None,
             sl_limit_price: None,
         };
-        
+
         assert_eq!(amend_request.symbol, "BTCUSDT");
         assert_eq!(amend_request.qty, Some("0.002".to_string()));
         assert_eq!(amend_request.price, Some("41000".to_string()));
@@ -493,7 +494,7 @@ mod tests {
                 sl_order_type: None,
             },
         ];
-        
+
         assert_eq!(orders.len(), 2);
         assert_eq!(orders[0].symbol, "BTCUSDT");
         assert_eq!(orders[1].symbol, "ETHUSDT");

@@ -133,7 +133,6 @@ struct InstrumentsInfoLinearResult {
     pub list: Vec<InstrumentsInfoLinear>,
     #[serde(rename = "nextPageCursor")]
     pub next_page_cursor: String,
-
 }
 
 #[derive(Debug, Serialize, Deserialize)]

@@ -15,7 +15,10 @@ impl BrokerClient {
     /// https://bybit-exchange.github.io/docs/v5/broker/account-info
     pub async fn get_account_info(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/broker/account-info";
-        let response = self.client.get(endpoint, json!({}), SecType::Signed).await?;
+        let response = self
+            .client
+            .get(endpoint, json!({}), SecType::Signed)
+            .await?;
         Ok(response)
     }
 
@@ -32,7 +35,7 @@ impl BrokerClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/broker/asset/query-sub-member-deposit-record";
         let mut params = json!({});
-        
+
         if let Some(sub_member_id) = sub_member_id {
             params["subMemberId"] = json!(sub_member_id);
         }
@@ -51,7 +54,7 @@ impl BrokerClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -69,7 +72,7 @@ impl BrokerClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/broker/earning-record";
         let mut params = json!({});
-        
+
         if let Some(biz_type) = biz_type {
             params["bizType"] = json!(biz_type);
         }
@@ -88,7 +91,7 @@ impl BrokerClient {
         if let Some(cursor) = cursor {
             params["cursor"] = json!(cursor);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -106,7 +109,7 @@ impl BrokerClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/broker/award/info";
         let mut params = json!({});
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
@@ -125,7 +128,7 @@ impl BrokerClient {
         if let Some(end_date) = end_date {
             params["endDate"] = json!(end_date);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -148,14 +151,14 @@ impl BrokerClient {
             "toUid": to_uid,
             "recordType": record_type,
         });
-        
+
         if let Some(from_memo) = from_memo {
             body["fromMemo"] = json!(from_memo);
         }
         if let Some(to_memo) = to_memo {
             body["toMemo"] = json!(to_memo);
         }
-        
+
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
@@ -172,7 +175,7 @@ impl BrokerClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/broker/award/distribution-record";
         let mut params = json!({});
-        
+
         if let Some(coin) = coin {
             params["coin"] = json!(coin);
         }
@@ -188,7 +191,7 @@ impl BrokerClient {
         if let Some(end_date) = end_date {
             params["endDate"] = json!(end_date);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::Signed).await?;
         Ok(response)
     }
@@ -217,20 +220,18 @@ mod tests {
     fn test_client_creation() {
         let client = create_test_client();
         // Test that client was created successfully
-        assert_eq!(std::mem::size_of_val(&client), std::mem::size_of::<BrokerClient>());
+        assert_eq!(
+            std::mem::size_of_val(&client),
+            std::mem::size_of::<BrokerClient>()
+        );
     }
 
     #[tokio::test]
     async fn test_distribute_award_required_params() {
         let client = create_test_client();
-        let result = client.distribute_award(
-            "USDT",
-            "100.0",
-            "12345",
-            "reward",
-            None,
-            None,
-        ).await;
+        let result = client
+            .distribute_award("USDT", "100.0", "12345", "reward", None, None)
+            .await;
         // Should not panic with valid required parameters
         assert!(result.is_err() || result.is_ok());
     }
@@ -238,14 +239,9 @@ mod tests {
     #[tokio::test]
     async fn test_get_sub_member_deposit_record_params() {
         let client = create_test_client();
-        let result = client.get_sub_member_deposit_record(
-            Some("sub123"),
-            Some("USDT"),
-            None,
-            None,
-            Some(10),
-            None,
-        ).await;
+        let result = client
+            .get_sub_member_deposit_record(Some("sub123"), Some("USDT"), None, None, Some(10), None)
+            .await;
         // Should handle optional parameters correctly
         assert!(result.is_err() || result.is_ok());
     }
@@ -253,14 +249,16 @@ mod tests {
     #[tokio::test]
     async fn test_get_earning_record_params() {
         let client = create_test_client();
-        let result = client.get_earning_record(
-            Some("trading"),
-            Some("2023-01-01"),
-            Some("2023-12-31"),
-            None,
-            Some(50),
-            None,
-        ).await;
+        let result = client
+            .get_earning_record(
+                Some("trading"),
+                Some("2023-01-01"),
+                Some("2023-12-31"),
+                None,
+                Some(50),
+                None,
+            )
+            .await;
         // Should handle optional parameters correctly
         assert!(result.is_err() || result.is_ok());
     }

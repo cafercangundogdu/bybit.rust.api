@@ -476,16 +476,8 @@ mod tests {
     use crate::rest::ApiKeyPair;
 
     fn create_test_client() -> MarketClient {
-        let api_key_pair = ApiKeyPair::new(
-            "test".to_string(),
-            "".to_string(),
-            "".to_string(),
-        );
-        let rest_client = RestClient::new(
-            api_key_pair,
-            "https://api.bybit.com".to_string(),
-            false,
-        );
+        let api_key_pair = ApiKeyPair::new("test".to_string(), "".to_string(), "".to_string());
+        let rest_client = RestClient::new(api_key_pair, "https://api.bybit.com".to_string(), false);
         MarketClient::new(rest_client)
     }
 
@@ -502,14 +494,16 @@ mod tests {
     #[tokio::test]
     async fn test_get_kline() {
         let client = create_test_client();
-        let result = client.get_kline(
-            Category::UTASpot,
-            "BTCUSDT",
-            Interval::OneHour,
-            None,
-            None,
-            Some(10),
-        ).await;
+        let result = client
+            .get_kline(
+                Category::UTASpot,
+                "BTCUSDT",
+                Interval::OneHour,
+                None,
+                None,
+                Some(10),
+            )
+            .await;
         assert!(result.is_ok());
         let response = result.unwrap();
         assert_eq!(response.ret_code, 0);
@@ -518,11 +512,9 @@ mod tests {
     #[tokio::test]
     async fn test_get_orderbook() {
         let client = create_test_client();
-        let result = client.get_orderbook(
-            Category::UTASpot,
-            "BTCUSDT",
-            Some(5),
-        ).await;
+        let result = client
+            .get_orderbook(Category::UTASpot, "BTCUSDT", Some(5))
+            .await;
         assert!(result.is_ok());
         let response = result.unwrap();
         assert_eq!(response.ret_code, 0);
@@ -532,12 +524,9 @@ mod tests {
     #[tokio::test]
     async fn test_get_tickers() {
         let client = create_test_client();
-        let result = client.get_tickers(
-            Category::UTASpot,
-            Some("BTCUSDT"),
-            None,
-            None,
-        ).await;
+        let result = client
+            .get_tickers(Category::UTASpot, Some("BTCUSDT"), None, None)
+            .await;
         assert!(result.is_ok());
         let response = result.unwrap();
         assert_eq!(response.ret_code, 0);
@@ -546,78 +535,69 @@ mod tests {
     #[tokio::test]
     async fn test_get_instruments_info() {
         let client = create_test_client();
-        let result = client.get_instruments_info(
-            Category::UTASpot,
-            Some("BTCUSDT"),
-            None,
-            Some(10),
-            None,
-        ).await;
+        let result = client
+            .get_instruments_info(Category::UTASpot, Some("BTCUSDT"), None, Some(10), None)
+            .await;
         assert!(result.is_ok());
     }
 
     #[tokio::test]
     async fn test_get_mark_price_kline() {
         let client = create_test_client();
-        let result = client.get_mark_price_kline(
-            Category::UTALinear,
-            "BTCUSDT",
-            Interval::OneHour,
-            None,
-            None,
-            Some(10),
-        ).await;
+        let result = client
+            .get_mark_price_kline(
+                Category::UTALinear,
+                "BTCUSDT",
+                Interval::OneHour,
+                None,
+                None,
+                Some(10),
+            )
+            .await;
         assert!(result.is_ok());
     }
 
     #[tokio::test]
     async fn test_get_funding_history() {
         let client = create_test_client();
-        let result = client.get_funding_history(
-            Category::UTALinear,
-            "BTCUSDT",
-            None,
-            None,
-            Some(10),
-        ).await;
+        let result = client
+            .get_funding_history(Category::UTALinear, "BTCUSDT", None, None, Some(10))
+            .await;
         assert!(result.is_ok());
     }
 
     #[tokio::test]
     async fn test_get_recent_trade() {
         let client = create_test_client();
-        let result = client.get_recent_trade(
-            Category::UTASpot,
-            Some("BTCUSDT"),
-            None,
-            None,
-            Some(10),
-        ).await;
+        let result = client
+            .get_recent_trade(Category::UTASpot, Some("BTCUSDT"), None, None, Some(10))
+            .await;
         assert!(result.is_ok());
     }
 
     #[tokio::test]
     async fn test_get_open_interest() {
         let client = create_test_client();
-        let result = client.get_open_interest(
-            Category::UTALinear,
-            "BTCUSDT",
-            IntervalTime::OneHour,
-            None,
-            None,
-            Some(10),
-            None,
-        ).await;
+        let result = client
+            .get_open_interest(
+                Category::UTALinear,
+                "BTCUSDT",
+                IntervalTime::OneHour,
+                None,
+                None,
+                Some(10),
+                None,
+            )
+            .await;
         assert!(result.is_ok());
     }
 
     #[tokio::test]
     async fn test_get_risk_limit() {
         let client = create_test_client();
-        let result = client.get_risk_limit(
-            Category::UTALinear,
-            Some("BTCUSDT"),
-        ).await;
+        let result = client
+            .get_risk_limit(Category::UTALinear, Some("BTCUSDT"))
+            .await;
         assert!(result.is_ok());
     }
 }

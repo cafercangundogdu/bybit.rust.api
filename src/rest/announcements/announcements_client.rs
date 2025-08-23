@@ -23,7 +23,7 @@ impl AnnouncementsClient {
     ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/announcements/index";
         let mut params = json!({});
-        
+
         if let Some(locale) = locale {
             params["locale"] = json!(locale);
         }
@@ -39,7 +39,7 @@ impl AnnouncementsClient {
         if let Some(limit) = limit {
             params["limit"] = json!(limit);
         }
-        
+
         let response = self.client.get(endpoint, params, SecType::None).await?;
         Ok(response)
     }
@@ -76,7 +76,7 @@ mod tests {
         let tag = Some("Spot");
         let page = Some(1);
         let limit = Some(20);
-        
+
         assert_eq!(locale, Some("en-US"));
         assert_eq!(type_list, Some("new_crypto"));
         assert_eq!(tag, Some("Spot"));

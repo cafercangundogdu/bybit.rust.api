@@ -1,9 +1,9 @@
-use bybit_rust_api::rest::{ApiKeyPair, OrderClient, RestClient};
-use bybit_rust_api::rest::order::dto::{PlaceOrderRequest, CancelOrderRequest};
 use bybit_rust_api::rest::enums::category::Category;
 use bybit_rust_api::rest::enums::order_type::OrderType;
 use bybit_rust_api::rest::enums::side::Side;
 use bybit_rust_api::rest::enums::time_in_force::TimeInForce;
+use bybit_rust_api::rest::order::dto::{CancelOrderRequest, PlaceOrderRequest};
+use bybit_rust_api::rest::{ApiKeyPair, OrderClient, RestClient};
 use std::env;
 
 #[tokio::main]
@@ -11,24 +11,20 @@ async fn main() -> anyhow::Result<()> {
     // Get API credentials from environment variables
     let api_key = env::var("BYBIT_API_KEY").expect("BYBIT_API_KEY not set");
     let api_secret = env::var("BYBIT_API_SECRET").expect("BYBIT_API_SECRET not set");
-    
+
     // Create API key pair
-    let api_key_pair = ApiKeyPair::new(
-        "trading".to_string(),
-        api_key,
-        api_secret,
-    );
-    
+    let api_key_pair = ApiKeyPair::new("trading".to_string(), api_key, api_secret);
+
     // Create REST client for testnet
     let rest_client = RestClient::new(
         api_key_pair,
         "https://api-testnet.bybit.com".to_string(),
         true, // debug mode
     );
-    
+
     // Create Order client
     let order_client = OrderClient::new(rest_client);
-    
+
     // Place a limit order
     println!("Placing a limit order...");
     let place_order_request = PlaceOrderRequest {
@@ -61,13 +57,13 @@ async fn main() -> anyhow::Result<()> {
         tp_order_type: None,
         sl_order_type: None,
     };
-    
+
     match order_client.place_order(place_order_request).await {
         Ok(response) => {
             println!("Order placed successfully!");
             println!("Order ID: {}", response.result.order_id);
             println!("Order Link ID: {}", response.result.order_link_id);
-            
+
             // Get open orders
             println!("\nGetting open orders...");
             let open_orders = order_client
@@ -85,7 +81,7 @@ async fn main() -> anyhow::Result<()> {
                 )
                 .await?;
             println!("Open orders count: {}", open_orders.result.list.len());
-            
+
             // Cancel the order
             println!("\nCancelling the order...");
             let cancel_request = CancelOrderRequest {
@@ -95,7 +91,7 @@ async fn main() -> anyhow::Result<()> {
                 order_link_id: None,
                 order_filter: None,
             };
-            
+
             let cancel_response = order_client.cancel_order(cancel_request).await?;
             println!("Order cancelled successfully!");
             println!("Cancelled Order ID: {}", cancel_response.result.order_id);
@@ -104,7 +100,7 @@ async fn main() -> anyhow::Result<()> {
             eprintln!("Failed to place order: {}", e);
         }
     }
-    
+
     // Get order history
     println!("\nGetting order history...");
     let order_history = order_client
@@ -124,6 +120,6 @@ async fn main() -> anyhow::Result<()> {
         )
         .await?;
     println!("Order history count: {}", order_history.result.list.len());
-    
+
     Ok(())
 }

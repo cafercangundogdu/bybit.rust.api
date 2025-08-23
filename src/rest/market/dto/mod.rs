@@ -1,11 +1,10 @@
-pub mod kline;
-pub mod server_time;
 pub mod delivery_price;
 pub mod funding_rate_history;
 pub mod historical_volatility;
 pub mod index_price_kline;
 pub mod instrument_info;
 pub mod insurance;
+pub mod kline;
 pub mod long_short_ratio;
 pub mod mark_price_kline;
 pub mod open_interest;
@@ -13,6 +12,7 @@ pub mod order_book;
 pub mod premium_index_price_kline;
 pub mod recent_trade;
 pub mod risk_limit;
+pub mod server_time;
 pub mod tickers;
 
 // Re-export commonly used structs
