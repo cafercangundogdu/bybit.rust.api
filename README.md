@@ -1,5 +1,9 @@
 # Bybit Rust SDK
 
+[![Crates.io](https://img.shields.io/crates/v/bybit-rust-api.svg)](https://crates.io/crates/bybit-rust-api)
+[![Docs](https://docs.rs/bybit-rust-api/badge.svg)](https://docs.rs/bybit-rust-api)
+[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](README.md)
+
 A Rust SDK for the Bybit API V5, providing easy access to market data and trading functionality.
 
 ## Features
@@ -41,21 +45,21 @@ async fn main() -> anyhow::Result<()> {
         "".to_string(),
         "".to_string(),
     );
-    
+
     // Create REST client
     let rest_client = RestClient::new(
         api_key_pair,
         "https://api.bybit.com".to_string(),
         false,
     );
-    
+
     // Create Market client
     let market_client = MarketClient::new(rest_client);
-    
+
     // Get server time
     let server_time = market_client.get_server_time().await?;
     println!("Server time: {:?}", server_time.result);
-    
+
     Ok(())
 }
 ```
@@ -72,24 +76,24 @@ async fn main() -> anyhow::Result<()> {
     // Get API credentials from environment
     let api_key = std::env::var("BYBIT_API_KEY")?;
     let api_secret = std::env::var("BYBIT_API_SECRET")?;
-    
+
     // Create API key pair
     let api_key_pair = ApiKeyPair::new(
         "trading".to_string(),
         api_key,
         api_secret,
     );
-    
+
     // Create REST client
     let rest_client = RestClient::new(
         api_key_pair,
         "https://api.bybit.com".to_string(),
         false,
     );
-    
+
     // Create Order client
     let order_client = OrderClient::new(rest_client);
-    
+
     // Place a limit order
     let order_request = PlaceOrderRequest {
         category: Category::UTASpot,
@@ -101,10 +105,10 @@ async fn main() -> anyhow::Result<()> {
         time_in_force: Some(TimeInForce::GTC),
         // ... other optional fields
     };
-    
+
     let response = order_client.place_order(order_request).await?;
     println!("Order placed: {}", response.result.order_id);
-    
+
     Ok(())
 }
 ```
@@ -112,6 +116,7 @@ async fn main() -> anyhow::Result<()> {
 ## API Coverage
 
 ### Market Data
+
 - [x] Server Time
 - [x] Kline/Candlestick
 - [x] Mark Price Kline
@@ -130,6 +135,7 @@ async fn main() -> anyhow::Result<()> {
 - [x] Historical Volatility
 
 ### Order Management
+
 - [x] Place Order
 - [x] Batch Place Orders
 - [x] Amend Order
@@ -142,6 +148,7 @@ async fn main() -> anyhow::Result<()> {
 - [x] Get Trade History
 
 ### Account Management
+
 - [x] Get Wallet Balance
 - [x] Get Fee Rate
 - [x] Get Account Info
@@ -154,6 +161,7 @@ async fn main() -> anyhow::Result<()> {
 - [x] Upgrade to Unified Account
 
 ### Position Management
+
 - [x] Get Position Info
 - [x] Set Leverage
 - [x] Switch Margin Mode
@@ -166,6 +174,7 @@ async fn main() -> anyhow::Result<()> {
 - [x] Add/Reduce Margin
 
 ### Asset Management
+
 - [x] Deposit/Withdrawal Operations
 - [x] Internal & Universal Transfers
 - [x] Get Asset Info
@@ -174,12 +183,14 @@ async fn main() -> anyhow::Result<()> {
 - [x] Delivery & Settlement Records
 
 ### User Management
+
 - [x] Create/Manage Sub Members
 - [x] Create/Manage API Keys
 - [x] Get Member Type
 - [x] Freeze/Delete Sub Members
 
 ### Spot Leverage Token
+
 - [x] Get Leverage Token Info
 - [x] Purchase/Redeem Operations
 - [x] Get Order Records
