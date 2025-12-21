@@ -67,7 +67,7 @@ pub struct Ticker {
     pub turnover24h: String, // Turnover for 24h
     pub volume24h: String, // Volume for 24h
     #[serde(rename = "usdIndexPrice")]
-    pub usd_index_price: String, // USD index price, used to calculate USD value of the assets in Unified account, non-collateral margin coin returns "", Only those trading pairs like "XXX/USDT" or "XXX/USDC" have the value
+    pub usd_index_price: Option<String>, // USD index price, used to calculate USD value of the assets in Unified account, non-collateral margin coin returns "", Only those trading pairs like "XXX/USDT" or "XXX/USDC" have the value
 }
 
 #[derive(Debug, Serialize, Deserialize)]

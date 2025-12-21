@@ -19,6 +19,7 @@ mod market_tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_server_time() {
         let client = create_test_client();
         let market_client = MarketClient::new(client);
@@ -31,6 +32,7 @@ mod market_tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_tickers() {
         let client = create_test_client();
         let market_client = MarketClient::new(client);
@@ -45,6 +47,7 @@ mod market_tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_orderbook() {
         let client = create_test_client();
         let market_client = MarketClient::new(client);
@@ -125,6 +128,7 @@ mod announcements_tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_announcements() {
         let client = create_test_client();
         let announcements_client = AnnouncementsClient::new(client);

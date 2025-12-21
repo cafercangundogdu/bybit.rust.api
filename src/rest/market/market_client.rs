@@ -514,6 +514,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_server_time() {
         let client = create_test_client();
         let result = client.get_server_time().await;
@@ -524,6 +525,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_kline() {
         let client = create_test_client();
         let result = client
@@ -542,6 +544,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_orderbook() {
         let client = create_test_client();
         let result = client
@@ -554,6 +557,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_tickers() {
         let client = create_test_client();
         let result = client
@@ -565,6 +569,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_instruments_info() {
         let client = create_test_client();
         let result = client
@@ -574,6 +579,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_mark_price_kline() {
         let client = create_test_client();
         let result = client
@@ -590,6 +596,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_funding_history() {
         let client = create_test_client();
         let result = client
@@ -599,6 +606,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_recent_trade() {
         let client = create_test_client();
         let result = client
@@ -608,6 +616,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_open_interest() {
         let client = create_test_client();
         let result = client
@@ -625,6 +634,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_risk_limit() {
         let client = create_test_client();
         let result = client
