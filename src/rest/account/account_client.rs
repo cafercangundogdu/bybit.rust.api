@@ -1,6 +1,13 @@
+use crate::rest::account::dto::account_info::AccountInfoResult;
+use crate::rest::account::dto::account_wallet::{GetWalletBalanceParams, WalletBalanceResult};
+use crate::rest::account::dto::collateral::{BorrowHistoryResult, CollateralInfoResult};
+use crate::rest::account::dto::contract_transaction_log::{ContractTransactionLogResult, GetContractTransactionLogParams};
+use crate::rest::account::dto::fee_rate::FeeRateResult;
+use crate::rest::account::dto::mmp::{MmpStateResult, ModifyMmpParams};
+use crate::rest::account::dto::transaction_log::{GetTransactionLogParams, TransactionLogResult};
 use crate::rest::client::{RestClient, SecType, ServerResponse};
 use anyhow::Result;
-use serde_json::json;
+use serde_json::{json, to_value};
 
 pub struct AccountClient {
     client: RestClient,
@@ -12,33 +19,29 @@ impl AccountClient {
     }
 
     /// Get wallet balance
+    ///
+    /// API: GET /v5/account/wallet-balance
     /// https://bybit-exchange.github.io/docs/v5/account/wallet-balance
     pub async fn get_wallet_balance(
         &self,
-        account_type: &str,
-        coin: Option<&str>,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+        params: GetWalletBalanceParams,
+    ) -> Result<ServerResponse<WalletBalanceResult>> {
         let endpoint = "v5/account/wallet-balance";
-        let mut params = json!({
-            "accountType": account_type,
-        });
-
-        if let Some(coin) = coin {
-            params["coin"] = json!(coin);
-        }
-
-        let response = self.client.get(endpoint, params, SecType::Signed).await?;
+        let query = to_value(&params)?;
+        let response = self.client.get(endpoint, query, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Get fee rate
+    ///
+    /// API: GET /v5/account/fee-rate
     /// https://bybit-exchange.github.io/docs/v5/account/fee-rate
     pub async fn get_fee_rate(
         &self,
         category: &str,
         symbol: Option<&str>,
         base_coin: Option<&str>,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    ) -> Result<ServerResponse<FeeRateResult>> {
         let endpoint = "v5/account/fee-rate";
         let mut params = json!({
             "category": category,
@@ -56,8 +59,10 @@ impl AccountClient {
     }
 
     /// Get account info
+    ///
+    /// API: GET /v5/account/info
     /// https://bybit-exchange.github.io/docs/v5/account/account-info
-    pub async fn get_account_info(&self) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn get_account_info(&self) -> Result<ServerResponse<AccountInfoResult>> {
         let endpoint = "v5/account/info";
         let response = self
             .client
@@ -67,63 +72,27 @@ impl AccountClient {
     }
 
     /// Get transaction log
+    ///
+    /// API: GET /v5/account/transaction-log
     /// https://bybit-exchange.github.io/docs/v5/account/transaction-log
     pub async fn get_transaction_log(
         &self,
-        account_type: Option<&str>,
-        category: Option<&str>,
-        currency: Option<&str>,
-        base_coin: Option<&str>,
-        log_type: Option<&str>,
-        start_time: Option<i64>,
-        end_time: Option<i64>,
-        limit: Option<i32>,
-        cursor: Option<&str>,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+        params: GetTransactionLogParams,
+    ) -> Result<ServerResponse<TransactionLogResult>> {
         let endpoint = "v5/account/transaction-log";
-        let mut params = json!({});
-
-        if let Some(account_type) = account_type {
-            params["accountType"] = json!(account_type);
-        }
-        if let Some(category) = category {
-            params["category"] = json!(category);
-        }
-        if let Some(currency) = currency {
-            params["currency"] = json!(currency);
-        }
-        if let Some(base_coin) = base_coin {
-            params["baseCoin"] = json!(base_coin);
-        }
-        if let Some(log_type) = log_type {
-            params["type"] = json!(log_type);
-        }
-        if let Some(start_time) = start_time {
-            params["startTime"] = json!(start_time);
-        }
-        if let Some(end_time) = end_time {
-            params["endTime"] = json!(end_time);
-        }
-        if let Some(limit) = limit {
-            params["limit"] = json!(limit);
-        }
-        if let Some(cursor) = cursor {
-            params["cursor"] = json!(cursor);
-        }
-
-        let response = self.client.get(endpoint, params, SecType::Signed).await?;
+        let query = to_value(&params)?;
+        let response = self.client.get(endpoint, query, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Set margin mode
+    ///
+    /// API: POST /v5/account/set-margin-mode
     /// https://bybit-exchange.github.io/docs/v5/account/set-margin-mode
-    pub async fn set_margin_mode(
-        &self,
-        set_margin_mode: &str,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn set_margin_mode(&self, margin_mode: &str) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/set-margin-mode";
         let body = json!({
-            "setMarginMode": set_margin_mode,
+            "setMarginMode": margin_mode,
         });
 
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
@@ -131,29 +100,19 @@ impl AccountClient {
     }
 
     /// Set MMP
+    ///
+    /// API: POST /v5/account/mmp-modify
     /// https://bybit-exchange.github.io/docs/v5/account/set-mmp
-    pub async fn set_mmp(
-        &self,
-        base_coin: &str,
-        window: i32,
-        frozen_period: i32,
-        qty_limit: &str,
-        delta_limit: &str,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn set_mmp(&self, params: ModifyMmpParams) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/mmp-modify";
-        let body = json!({
-            "baseCoin": base_coin,
-            "window": window,
-            "frozenPeriod": frozen_period,
-            "qtyLimit": qty_limit,
-            "deltaLimit": delta_limit,
-        });
-
+        let body = to_value(&params)?;
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Reset MMP
+    ///
+    /// API: POST /v5/account/mmp-reset
     /// https://bybit-exchange.github.io/docs/v5/account/reset-mmp
     pub async fn reset_mmp(&self, base_coin: &str) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/mmp-reset";
@@ -166,11 +125,13 @@ impl AccountClient {
     }
 
     /// Get MMP state
+    ///
+    /// API: GET /v5/account/mmp-state
     /// https://bybit-exchange.github.io/docs/v5/account/get-mmp-state
     pub async fn get_mmp_state(
         &self,
         base_coin: &str,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    ) -> Result<ServerResponse<MmpStateResult>> {
         let endpoint = "v5/account/mmp-state";
         let params = json!({
             "baseCoin": base_coin,
@@ -181,6 +142,8 @@ impl AccountClient {
     }
 
     /// Get SMP group list
+    ///
+    /// API: GET /v5/account/smp-group
     /// https://bybit-exchange.github.io/docs/v5/account/smp-group
     pub async fn get_smp_group_list(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/smp-group";
@@ -192,12 +155,14 @@ impl AccountClient {
     }
 
     /// Get coin Greeks
+    ///
+    /// API: GET /v5/asset/coin-greeks
     /// https://bybit-exchange.github.io/docs/v5/account/coin-greeks
     pub async fn get_coin_greeks(
         &self,
         base_coin: Option<&str>,
     ) -> Result<ServerResponse<serde_json::Value>> {
-        let endpoint = "v5/asset/exchange/coin-greeks";
+        let endpoint = "v5/asset/coin-greeks";
         let mut params = json!({});
 
         if let Some(base_coin) = base_coin {
@@ -209,11 +174,13 @@ impl AccountClient {
     }
 
     /// Get collateral info
+    ///
+    /// API: GET /v5/account/collateral-info
     /// https://bybit-exchange.github.io/docs/v5/account/collateral-info
     pub async fn get_collateral_info(
         &self,
         currency: Option<&str>,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    ) -> Result<ServerResponse<CollateralInfoResult>> {
         let endpoint = "v5/account/collateral-info";
         let mut params = json!({});
 
@@ -226,6 +193,8 @@ impl AccountClient {
     }
 
     /// Get borrow history
+    ///
+    /// API: GET /v5/account/borrow-history
     /// https://bybit-exchange.github.io/docs/v5/account/borrow-history
     pub async fn get_borrow_history(
         &self,
@@ -234,7 +203,7 @@ impl AccountClient {
         end_time: Option<i64>,
         limit: Option<i32>,
         cursor: Option<&str>,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    ) -> Result<ServerResponse<BorrowHistoryResult>> {
         let endpoint = "v5/account/borrow-history";
         let mut params = json!({});
 
@@ -259,6 +228,8 @@ impl AccountClient {
     }
 
     /// Set disconnect cancel all
+    ///
+    /// API: POST /v5/order/disconnected-cancel-all
     /// https://bybit-exchange.github.io/docs/v5/account/set-dcp
     pub async fn set_disconnect_cancel_all(
         &self,
@@ -274,6 +245,8 @@ impl AccountClient {
     }
 
     /// Upgrade to unified account
+    ///
+    /// API: POST /v5/account/upgrade-to-uta
     /// https://bybit-exchange.github.io/docs/v5/account/upgrade-unified-account
     pub async fn upgrade_to_unified_account(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/upgrade-to-uta";
@@ -284,47 +257,22 @@ impl AccountClient {
     }
 
     /// Get contract transaction log
+    ///
+    /// API: GET /v5/account/contract-transaction-log
     /// https://bybit-exchange.github.io/docs/v5/account/contract-transaction-log
     pub async fn get_contract_transaction_log(
         &self,
-        category: Option<&str>,
-        base_coin: Option<&str>,
-        log_type: Option<&str>,
-        start_time: Option<i64>,
-        end_time: Option<i64>,
-        limit: Option<i32>,
-        cursor: Option<&str>,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+        params: GetContractTransactionLogParams,
+    ) -> Result<ServerResponse<ContractTransactionLogResult>> {
         let endpoint = "v5/account/contract-transaction-log";
-        let mut params = json!({});
-
-        if let Some(category) = category {
-            params["category"] = json!(category);
-        }
-        if let Some(base_coin) = base_coin {
-            params["baseCoin"] = json!(base_coin);
-        }
-        if let Some(log_type) = log_type {
-            params["type"] = json!(log_type);
-        }
-        if let Some(start_time) = start_time {
-            params["startTime"] = json!(start_time);
-        }
-        if let Some(end_time) = end_time {
-            params["endTime"] = json!(end_time);
-        }
-        if let Some(limit) = limit {
-            params["limit"] = json!(limit);
-        }
-        if let Some(cursor) = cursor {
-            params["cursor"] = json!(cursor);
-        }
-
-        let response = self.client.get(endpoint, params, SecType::Signed).await?;
+        let query = to_value(&params)?;
+        let response = self.client.get(endpoint, query, SecType::Signed).await?;
         Ok(response)
     }
 
     /// Query DCP information
+    ///
+    /// API: GET /v5/account/query-dcp-info
     /// https://bybit-exchange.github.io/docs/v5/account/query-dcp-info
     pub async fn query_dcp_info(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/query-dcp-info";
@@ -340,6 +288,8 @@ impl AccountClient {
 mod tests {
     use super::*;
     use crate::rest::ApiKeyPair;
+    use crate::rest::enums::account_type::AccountType;
+    use crate::rest::enums::category::Category;
 
     fn create_test_client() -> AccountClient {
         let api_key_pair = ApiKeyPair::new(
@@ -362,13 +312,14 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_wallet_balance_params() {
-        let client = create_test_client();
-        // Test parameter handling (not actual API call in unit test)
-        let account_type = "UNIFIED";
-        let coin = Some("USDT");
+        let _client = create_test_client();
+        let params = GetWalletBalanceParams {
+            account_type: AccountType::UNIFIED,
+            coin: Some("USDT".to_string()),
+        };
 
-        assert_eq!(account_type, "UNIFIED");
-        assert_eq!(coin, Some("USDT"));
+        assert_eq!(params.account_type, AccountType::UNIFIED);
+        assert_eq!(params.coin, Some("USDT".to_string()));
     }
 
     #[tokio::test]
@@ -384,25 +335,20 @@ mod tests {
 
     #[tokio::test]
     async fn test_transaction_log_params() {
-        let account_type = Some("UNIFIED");
-        let category = Some("spot");
-        let currency = Some("USDT");
-        let base_coin: Option<&str> = None;
-        let log_type = Some("TRADE");
-        let start_time = Some(1234567890i64);
-        let end_time = Some(1234567899i64);
-        let limit = Some(50);
-        let cursor: Option<&str> = None;
+        let params = GetTransactionLogParams {
+            account_type: Some(AccountType::UNIFIED),
+            category: Some(Category::Spot),
+            currency: Some("USDT".to_string()),
+            log_type: Some("TRADE".to_string()),
+            limit: Some(50),
+            ..Default::default()
+        };
 
-        assert_eq!(account_type, Some("UNIFIED"));
-        assert_eq!(category, Some("spot"));
-        assert_eq!(currency, Some("USDT"));
-        assert!(base_coin.is_none());
-        assert_eq!(log_type, Some("TRADE"));
-        assert_eq!(start_time, Some(1234567890));
-        assert_eq!(end_time, Some(1234567899));
-        assert_eq!(limit, Some(50));
-        assert!(cursor.is_none());
+        assert_eq!(params.account_type, Some(AccountType::UNIFIED));
+        assert_eq!(params.category, Some(Category::Spot));
+        assert_eq!(params.currency, Some("USDT".to_string()));
+        assert_eq!(params.log_type, Some("TRADE".to_string()));
+        assert_eq!(params.limit, Some(50));
     }
 
     #[tokio::test]
@@ -413,17 +359,19 @@ mod tests {
 
     #[tokio::test]
     async fn test_set_mmp_params() {
-        let base_coin = "BTC";
-        let window = 5000;
-        let frozen_period = 100000;
-        let qty_limit = "100";
-        let delta_limit = "10";
+        let params = ModifyMmpParams {
+            base_coin: "BTC".to_string(),
+            window: 5000,
+            frozen_period: 100000,
+            qty_limit: "100".to_string(),
+            delta_limit: "10".to_string(),
+        };
 
-        assert_eq!(base_coin, "BTC");
-        assert_eq!(window, 5000);
-        assert_eq!(frozen_period, 100000);
-        assert_eq!(qty_limit, "100");
-        assert_eq!(delta_limit, "10");
+        assert_eq!(params.base_coin, "BTC");
+        assert_eq!(params.window, 5000);
+        assert_eq!(params.frozen_period, 100000);
+        assert_eq!(params.qty_limit, "100");
+        assert_eq!(params.delta_limit, "10");
     }
 
     #[tokio::test]
@@ -449,20 +397,17 @@ mod tests {
 
     #[tokio::test]
     async fn test_contract_transaction_log_params() {
-        let category = Some("linear");
-        let base_coin = Some("BTC");
-        let log_type = Some("SETTLEMENT");
-        let start_time = Some(1234567890i64);
-        let end_time = Some(1234567899i64);
-        let limit = Some(50);
-        let cursor: Option<&str> = None;
+        let params = GetContractTransactionLogParams {
+            category: Some(Category::Linear),
+            base_coin: Some("BTC".to_string()),
+            log_type: Some("SETTLEMENT".to_string()),
+            limit: Some(50),
+            ..Default::default()
+        };
 
-        assert_eq!(category, Some("linear"));
-        assert_eq!(base_coin, Some("BTC"));
-        assert_eq!(log_type, Some("SETTLEMENT"));
-        assert_eq!(start_time, Some(1234567890));
-        assert_eq!(end_time, Some(1234567899));
-        assert_eq!(limit, Some(50));
-        assert!(cursor.is_none());
+        assert_eq!(params.category, Some(Category::Linear));
+        assert_eq!(params.base_coin, Some("BTC".to_string()));
+        assert_eq!(params.log_type, Some("SETTLEMENT".to_string()));
+        assert_eq!(params.limit, Some(50));
     }
 }

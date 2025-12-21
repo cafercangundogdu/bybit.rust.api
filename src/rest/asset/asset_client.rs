@@ -12,6 +12,8 @@ impl AssetClient {
     }
 
     /// Get coin exchange records
+    ///
+    /// API: GET /v5/asset/exchange/order-record
     /// https://bybit-exchange.github.io/docs/v5/asset/exchange-order-record
     pub async fn get_exchange_order_record(
         &self,
@@ -41,6 +43,8 @@ impl AssetClient {
     }
 
     /// Get delivery record
+    ///
+    /// API: GET /v5/asset/delivery-record
     /// https://bybit-exchange.github.io/docs/v5/asset/delivery
     pub async fn get_delivery_record(
         &self,
@@ -73,6 +77,8 @@ impl AssetClient {
     }
 
     /// Get USDC settlement records
+    ///
+    /// API: GET /v5/asset/settlement-record
     /// https://bybit-exchange.github.io/docs/v5/asset/settlement
     pub async fn get_settlement_record(
         &self,
@@ -101,6 +107,8 @@ impl AssetClient {
     }
 
     /// Get coins
+    ///
+    /// API: GET /v5/asset/coin/query-info
     /// https://bybit-exchange.github.io/docs/v5/asset/coin-info
     pub async fn get_coin_info(
         &self,
@@ -118,6 +126,8 @@ impl AssetClient {
     }
 
     /// Get asset info
+    ///
+    /// API: GET /v5/asset/transfer/query-asset-info
     /// https://bybit-exchange.github.io/docs/v5/asset/asset-info
     pub async fn get_asset_info(
         &self,
@@ -138,6 +148,8 @@ impl AssetClient {
     }
 
     /// Get sub member list
+    ///
+    /// API: GET /v5/asset/transfer/query-sub-member-list
     /// https://bybit-exchange.github.io/docs/v5/asset/sub-member-list
     pub async fn get_sub_member_list(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/transfer/query-sub-member-list";
@@ -149,6 +161,8 @@ impl AssetClient {
     }
 
     /// Get deposit records
+    ///
+    /// API: GET /v5/asset/deposit/query-record
     /// https://bybit-exchange.github.io/docs/v5/asset/deposit-record
     pub async fn get_deposit_records(
         &self,
@@ -182,6 +196,8 @@ impl AssetClient {
     }
 
     /// Get sub deposit records
+    ///
+    /// API: GET /v5/asset/deposit/query-sub-member-record
     /// https://bybit-exchange.github.io/docs/v5/asset/sub-deposit-record
     pub async fn get_sub_deposit_records(
         &self,
@@ -218,6 +234,8 @@ impl AssetClient {
     }
 
     /// Get internal deposit records
+    ///
+    /// API: GET /v5/asset/deposit/query-internal-record
     /// https://bybit-exchange.github.io/docs/v5/asset/internal-deposit-record
     pub async fn get_internal_deposit_records(
         &self,
@@ -251,6 +269,8 @@ impl AssetClient {
     }
 
     /// Get master deposit address
+    ///
+    /// API: GET /v5/asset/deposit/query-address
     /// https://bybit-exchange.github.io/docs/v5/asset/master-deposit-addr
     pub async fn get_master_deposit_address(
         &self,
@@ -271,6 +291,8 @@ impl AssetClient {
     }
 
     /// Get sub deposit address
+    ///
+    /// API: GET /v5/asset/deposit/query-sub-member-address
     /// https://bybit-exchange.github.io/docs/v5/asset/sub-deposit-addr
     pub async fn get_sub_deposit_address(
         &self,
@@ -290,6 +312,8 @@ impl AssetClient {
     }
 
     /// Get allowed deposit coin info
+    ///
+    /// API: GET /v5/asset/deposit/query-allowed-list
     /// https://bybit-exchange.github.io/docs/v5/asset/deposit-coin-spec
     pub async fn get_allowed_deposit_list(
         &self,
@@ -319,6 +343,8 @@ impl AssetClient {
     }
 
     /// Get withdrawal records
+    ///
+    /// API: GET /v5/asset/withdraw/query-record
     /// https://bybit-exchange.github.io/docs/v5/asset/withdraw-record
     pub async fn get_withdrawal_records(
         &self,
@@ -360,6 +386,8 @@ impl AssetClient {
     }
 
     /// Get withdrawable amount
+    ///
+    /// API: GET /v5/asset/withdraw/withdrawable-amount
     /// https://bybit-exchange.github.io/docs/v5/asset/withdrawable-amount
     pub async fn get_withdrawable_amount(
         &self,
@@ -375,6 +403,8 @@ impl AssetClient {
     }
 
     /// Withdraw
+    ///
+    /// API: POST /v5/asset/withdraw/create
     /// https://bybit-exchange.github.io/docs/v5/asset/withdraw
     pub async fn withdraw(
         &self,
@@ -411,6 +441,8 @@ impl AssetClient {
     }
 
     /// Cancel withdrawal
+    ///
+    /// API: POST /v5/asset/withdraw/cancel
     /// https://bybit-exchange.github.io/docs/v5/asset/cancel-withdraw
     pub async fn cancel_withdrawal(&self, id: &str) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/asset/withdraw/cancel";
@@ -423,6 +455,8 @@ impl AssetClient {
     }
 
     /// Create internal transfer
+    ///
+    /// API: POST /v5/asset/transfer/inter-transfer
     /// https://bybit-exchange.github.io/docs/v5/asset/create-inter-transfer
     pub async fn create_internal_transfer(
         &self,
@@ -446,6 +480,8 @@ impl AssetClient {
     }
 
     /// Get internal transfer records
+    ///
+    /// API: GET /v5/asset/transfer/query-inter-transfer-list
     /// https://bybit-exchange.github.io/docs/v5/asset/inter-transfer-list
     pub async fn get_internal_transfer_records(
         &self,
@@ -487,6 +523,8 @@ impl AssetClient {
     }
 
     /// Create universal transfer
+    ///
+    /// API: POST /v5/asset/transfer/universal-transfer
     /// https://bybit-exchange.github.io/docs/v5/asset/create-universal-transfer
     pub async fn create_universal_transfer(
         &self,
@@ -514,6 +552,8 @@ impl AssetClient {
     }
 
     /// Get universal transfer records
+    ///
+    /// API: GET /v5/asset/transfer/query-universal-transfer-list
     /// https://bybit-exchange.github.io/docs/v5/asset/universal-transfer-list
     pub async fn get_universal_transfer_records(
         &self,
@@ -555,6 +595,8 @@ impl AssetClient {
     }
 
     /// Get allowed transfer coin list
+    ///
+    /// API: GET /v5/asset/transfer/query-transfer-coin-list
     /// https://bybit-exchange.github.io/docs/v5/asset/transferable-coin
     pub async fn get_allowed_transfer_coin_list(
         &self,
@@ -572,6 +614,8 @@ impl AssetClient {
     }
 
     /// Request quote for convert
+    ///
+    /// API: POST /v5/asset/exchange/quote-apply
     /// https://bybit-exchange.github.io/docs/v5/asset/request-quote
     pub async fn request_convert_quote(
         &self,
@@ -608,6 +652,8 @@ impl AssetClient {
     }
 
     /// Confirm quote for convert
+    ///
+    /// API: POST /v5/asset/exchange/convert-execute
     /// https://bybit-exchange.github.io/docs/v5/asset/confirm-quote
     pub async fn confirm_convert_quote(
         &self,
@@ -623,6 +669,8 @@ impl AssetClient {
     }
 
     /// Get convert status
+    ///
+    /// API: GET /v5/asset/exchange/convert-result-query
     /// https://bybit-exchange.github.io/docs/v5/asset/convert-status
     pub async fn get_convert_result(
         &self,
@@ -644,6 +692,8 @@ impl AssetClient {
     }
 
     /// Get convert history
+    ///
+    /// API: GET /v5/asset/exchange/query-convert-history
     /// https://bybit-exchange.github.io/docs/v5/asset/convert-history
     pub async fn get_convert_history(
         &self,
@@ -669,6 +719,8 @@ impl AssetClient {
     }
 
     /// Get convert coin list
+    ///
+    /// API: GET /v5/asset/exchange/query-coin-list
     /// https://bybit-exchange.github.io/docs/v5/asset/convert-coin-list
     pub async fn get_convert_coin_list(
         &self,
@@ -693,6 +745,8 @@ impl AssetClient {
     }
 
     /// Get coin greeks
+    ///
+    /// API: GET /v5/asset/coin-greeks
     /// https://bybit-exchange.github.io/docs/v5/asset/coin-greeks
     pub async fn get_coin_greeks(
         &self,
@@ -710,6 +764,8 @@ impl AssetClient {
     }
 
     /// Query account coin balance
+    ///
+    /// API: GET /v5/asset/transfer/query-account-coin-balance
     /// https://bybit-exchange.github.io/docs/v5/asset/account-coin-balance
     pub async fn query_account_coin_balance(
         &self,
@@ -752,6 +808,8 @@ impl AssetClient {
     }
 
     /// Query account coins balance
+    ///
+    /// API: GET /v5/asset/transfer/query-account-coins-balance
     /// https://bybit-exchange.github.io/docs/v5/asset/account-coins-balance
     pub async fn query_account_coins_balance(
         &self,
@@ -780,6 +838,8 @@ impl AssetClient {
     }
 
     /// Set deposit account
+    ///
+    /// API: POST /v5/asset/transfer/save-transfer-sub-member
     /// https://bybit-exchange.github.io/docs/v5/asset/set-deposit-account
     pub async fn save_transfer_sub_member(
         &self,

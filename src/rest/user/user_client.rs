@@ -12,6 +12,8 @@ impl UserClient {
     }
 
     /// Create a new sub user
+    ///
+    /// API: POST /v5/user/create-sub-member
     /// https://bybit-exchange.github.io/docs/v5/user/create-subuid
     pub async fn create_sub_member(
         &self,
@@ -46,6 +48,8 @@ impl UserClient {
     }
 
     /// Create sub UID API key
+    ///
+    /// API: POST /v5/user/create-sub-api
     /// https://bybit-exchange.github.io/docs/v5/user/create-subuid-apikey
     pub async fn create_sub_api(
         &self,
@@ -74,6 +78,8 @@ impl UserClient {
     }
 
     /// Get sub UID list
+    ///
+    /// API: GET /v5/user/query-sub-members
     /// https://bybit-exchange.github.io/docs/v5/user/subuid-list
     pub async fn query_sub_members(
         &self,
@@ -95,6 +101,8 @@ impl UserClient {
     }
 
     /// Get all sub UID list (Alternative method)
+    ///
+    /// API: GET /v5/user/submembers
     /// https://bybit-exchange.github.io/docs/v5/user/subuid-list-all
     pub async fn get_sub_members(
         &self,
@@ -112,6 +120,8 @@ impl UserClient {
     }
 
     /// Get API key information
+    ///
+    /// API: GET /v5/user/query-api
     /// https://bybit-exchange.github.io/docs/v5/user/apikey-info
     pub async fn query_api(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/query-api";
@@ -123,6 +133,8 @@ impl UserClient {
     }
 
     /// Get sub account API keys
+    ///
+    /// API: GET /v5/user/sub-apikeys
     /// https://bybit-exchange.github.io/docs/v5/user/sub-apikey-list
     pub async fn get_sub_api_keys(
         &self,
@@ -147,6 +159,8 @@ impl UserClient {
     }
 
     /// Get user account type
+    ///
+    /// API: GET /v5/user/get-member-type
     /// https://bybit-exchange.github.io/docs/v5/user/account-type
     pub async fn get_member_type(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/get-member-type";
@@ -158,6 +172,8 @@ impl UserClient {
     }
 
     /// Get affiliate user info
+    ///
+    /// API: GET /v5/user/aff-customer-info
     /// https://bybit-exchange.github.io/docs/v5/user/affiliate-info
     pub async fn get_affiliate_customer_info(
         &self,
@@ -173,6 +189,8 @@ impl UserClient {
     }
 
     /// Freeze sub UID
+    ///
+    /// API: POST /v5/user/frozen-sub-member
     /// https://bybit-exchange.github.io/docs/v5/user/frozen-subuid
     pub async fn freeze_sub_member(
         &self,
@@ -190,6 +208,8 @@ impl UserClient {
     }
 
     /// Delete sub member
+    ///
+    /// API: POST /v5/user/del-submember
     /// https://bybit-exchange.github.io/docs/v5/user/del-submember
     pub async fn delete_sub_member(
         &self,
@@ -205,6 +225,8 @@ impl UserClient {
     }
 
     /// Modify master API key
+    ///
+    /// API: POST /v5/user/update-api
     /// https://bybit-exchange.github.io/docs/v5/user/modify-master-apikey
     pub async fn update_api(
         &self,
@@ -230,6 +252,8 @@ impl UserClient {
     }
 
     /// Delete master API key
+    ///
+    /// API: POST /v5/user/delete-api
     /// https://bybit-exchange.github.io/docs/v5/user/rm-master-apikey
     pub async fn delete_api(&self) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/delete-api";
@@ -240,6 +264,8 @@ impl UserClient {
     }
 
     /// Modify sub API key
+    ///
+    /// API: POST /v5/user/update-sub-api
     /// https://bybit-exchange.github.io/docs/v5/user/modify-sub-apikey
     pub async fn update_sub_api(
         &self,
@@ -268,6 +294,8 @@ impl UserClient {
     }
 
     /// Delete sub API key
+    ///
+    /// API: POST /v5/user/delete-sub-api
     /// https://bybit-exchange.github.io/docs/v5/user/rm-sub-apikey
     pub async fn delete_sub_api(&self, api_key: &str) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/user/delete-sub-api";

@@ -2,8 +2,9 @@ use std::fmt::{Display, Formatter, Result};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Clone, Copy, Default)]
 pub enum SmpType {
+    #[default]
     #[serde(rename = "None")]
     None,
     #[serde(rename = "CancelMaker")]

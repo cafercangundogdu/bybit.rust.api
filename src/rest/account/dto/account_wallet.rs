@@ -1,4 +1,3 @@
-use crate::rest::client::ServerResponse;
 use crate::rest::enums::account_type::AccountType;
 use serde::{Deserialize, Serialize};
 
@@ -7,7 +6,8 @@ use serde::{Deserialize, Serialize};
 pub struct GetWalletBalanceParams {
     #[serde(rename = "accountType")]
     pub account_type: AccountType,
-    // coin: String, // BTC
+    #[serde(rename = "coin", skip_serializing_if = "Option::is_none")]
+    pub coin: Option<String>,
 }
 
 // https://bybit-exchange.github.io/docs/v5/account/wallet-balance#response-parameters
@@ -123,20 +123,71 @@ pub struct WalletBalanceDetails {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct WalletBalanceResult {
-    // optional
-    #[serde(rename = "list")]
-    pub list: Option<Vec<WalletBalanceDetails>>,
+    pub list: Vec<WalletBalanceDetails>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct GetWalletBalanceResponse(ServerResponse<WalletBalanceResult>);
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::rest::client::ServerResponse;
+    use serde_json::from_str;
 
-impl GetWalletBalanceResponse {
-    pub fn into_inner(self) -> WalletBalanceResult {
-        self.0.result
-    }
+    #[test]
+    fn test_deserialize_wallet_balance() {
+        let json_data = r#"
+        {
+            "retCode": 0,
+            "retMsg": "OK",
+            "result": {
+                "list": [
+                    {
+                        "totalEquity": "3.31216591",
+                        "accountIMRate": "0",
+                        "totalMarginBalance": "3.00326056",
+                        "totalInitialMargin": "0",
+                        "accountType": "UNIFIED",
+                        "totalAvailableBalance": "3.00326056",
+                        "accountMMRate": "0",
+                        "totalPerpUPL": "0",
+                        "totalWalletBalance": "3.00326056",
+                        "accountLTV": "0",
+                        "totalMaintenanceMargin": "0",
+                        "coin": [
+                            {
+                                "availableToBorrow": "3",
+                                "bonus": "0",
+                                "accruedInterest": "0",
+                                "availableToWithdraw": "0",
+                                "totalOrderIM": "0",
+                                "equity": "0",
+                                "totalPositionMM": "0",
+                                "usdValue": "0",
+                                "spotHedgingQty": "0.01592413",
+                                "unrealisedPnl": "0",
+                                "collateralSwitch": true,
+                                "borrowAmount": "0.0",
+                                "totalPositionIM": "0",
+                                "walletBalance": "0",
+                                "cumRealisedPnl": "0",
+                                "locked": "0",
+                                "marginCollateral": true,
+                                "coin": "BTC"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "retExtInfo": {},
+            "time": 1690872862481
+        }
+        "#;
 
-    pub fn into_response(self) -> ServerResponse<WalletBalanceResult> {
-        self.0
+        let response: ServerResponse<WalletBalanceResult> = from_str(json_data).expect("Failed to deserialize WalletBalanceResponse");
+        assert_eq!(response.ret_code, 0);
+        let result = response.result;
+        assert_eq!(result.list.len(), 1);
+        assert_eq!(result.list[0].total_equity, "3.31216591");
+        assert_eq!(result.list[0].coin[0].coin, "BTC");
+        assert_eq!(result.list[0].coin[0].margin_collateral, true);
     }
 }

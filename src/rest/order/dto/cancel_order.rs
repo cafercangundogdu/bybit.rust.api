@@ -1,7 +1,7 @@
 use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct CancelOrderRequest {
     pub category: Category,

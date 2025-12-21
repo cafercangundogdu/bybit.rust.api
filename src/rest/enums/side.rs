@@ -1,8 +1,9 @@
 use serde::{Deserialize, Serialize};
 use std::fmt::{Display, Formatter, Result};
 
-#[derive(Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Clone, Copy, Default)]
 pub enum Side {
+    #[default]
     #[serde(rename = "Buy")]
     Buy, // Buy side
     #[serde(rename = "Sell")]

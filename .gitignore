@@ -18,3 +18,5 @@ api_keys.json
 
 .idea/
 .vscode/
+
+.DS_Store

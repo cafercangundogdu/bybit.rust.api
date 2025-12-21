@@ -12,6 +12,8 @@ impl PositionClient {
     }
 
     /// Get position info
+    ///
+    /// API: GET /v5/position/list
     /// https://bybit-exchange.github.io/docs/v5/position
     pub async fn get_position_info(
         &self,
@@ -48,6 +50,8 @@ impl PositionClient {
     }
 
     /// Set leverage
+    ///
+    /// API: POST /v5/position/set-leverage
     /// https://bybit-exchange.github.io/docs/v5/position/set-leverage
     pub async fn set_leverage(
         &self,
@@ -69,6 +73,8 @@ impl PositionClient {
     }
 
     /// Switch between cross/isolated margin
+    ///
+    /// API: POST /v5/position/switch-isolated
     /// https://bybit-exchange.github.io/docs/v5/position/switch-isolated
     pub async fn switch_margin_mode(
         &self,
@@ -92,6 +98,8 @@ impl PositionClient {
     }
 
     /// Switch position mode
+    ///
+    /// API: POST /v5/position/switch-mode
     /// https://bybit-exchange.github.io/docs/v5/position/switch-mode
     pub async fn switch_position_mode(
         &self,
@@ -118,6 +126,8 @@ impl PositionClient {
     }
 
     /// Set Trading Stop (Take profit/Stop loss)
+    ///
+    /// API: POST /v5/position/trading-stop
     /// https://bybit-exchange.github.io/docs/v5/position/trading-stop
     pub async fn set_trading_stop(
         &self,
@@ -186,6 +196,8 @@ impl PositionClient {
     }
 
     /// Set auto add margin
+    ///
+    /// API: POST /v5/position/set-auto-add-margin
     /// https://bybit-exchange.github.io/docs/v5/position/set-auto-add-margin
     pub async fn set_auto_add_margin(
         &self,
@@ -210,6 +222,8 @@ impl PositionClient {
     }
 
     /// Get closed PnL
+    ///
+    /// API: GET /v5/position/closed-pnl
     /// https://bybit-exchange.github.io/docs/v5/position/closed-pnl
     pub async fn get_closed_pnl(
         &self,
@@ -246,6 +260,8 @@ impl PositionClient {
     }
 
     /// Set TP/SL mode
+    ///
+    /// API: POST /v5/position/set-tpsl-mode
     /// https://bybit-exchange.github.io/docs/v5/position/set-tpsl-mode
     pub async fn set_tpsl_mode(
         &self,
@@ -265,6 +281,8 @@ impl PositionClient {
     }
 
     /// Set risk limit
+    ///
+    /// API: POST /v5/position/set-risk-limit
     /// https://bybit-exchange.github.io/docs/v5/position/set-risk-limit
     pub async fn set_risk_limit(
         &self,
@@ -289,6 +307,8 @@ impl PositionClient {
     }
 
     /// Move positions
+    ///
+    /// API: POST /v5/position/move-positions
     /// https://bybit-exchange.github.io/docs/v5/position/move-positions
     pub async fn move_positions(
         &self,
@@ -308,6 +328,8 @@ impl PositionClient {
     }
 
     /// Get move position history
+    ///
+    /// API: GET /v5/position/move-history
     /// https://bybit-exchange.github.io/docs/v5/position/move-history
     pub async fn get_move_position_history(
         &self,
@@ -353,6 +375,8 @@ impl PositionClient {
     }
 
     /// Confirm new risk limit
+    ///
+    /// API: POST /v5/position/confirm-pending-mmr
     /// https://bybit-exchange.github.io/docs/v5/position/confirm-pending-mmr
     pub async fn confirm_new_risk_limit(
         &self,
@@ -370,6 +394,8 @@ impl PositionClient {
     }
 
     /// Add/Reduce margin
+    ///
+    /// API: POST /v5/position/add-margin
     /// https://bybit-exchange.github.io/docs/v5/position/manual-add-margin
     pub async fn update_margin(
         &self,
@@ -394,6 +420,8 @@ impl PositionClient {
     }
 
     /// Get execution
+    ///
+    /// API: GET /v5/execution/list
     /// https://bybit-exchange.github.io/docs/v5/position/execution
     pub async fn get_execution(
         &self,

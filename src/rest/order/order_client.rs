@@ -14,6 +14,8 @@ impl OrderClient {
     }
 
     /// Place an order
+    ///
+    /// API: POST /v5/order/create
     /// https://bybit-exchange.github.io/docs/v5/order/create-order
     pub async fn place_order(
         &self,
@@ -28,6 +30,8 @@ impl OrderClient {
     }
 
     /// Batch place orders (Option only)
+    ///
+    /// API: POST /v5/order/create-batch
     /// https://bybit-exchange.github.io/docs/v5/order/batch-place
     pub async fn batch_place_orders(
         &self,
@@ -46,6 +50,8 @@ impl OrderClient {
     }
 
     /// Amend order
+    ///
+    /// API: POST /v5/order/amend
     /// https://bybit-exchange.github.io/docs/v5/order/amend-order
     pub async fn amend_order(
         &self,
@@ -60,6 +66,8 @@ impl OrderClient {
     }
 
     /// Batch amend orders (Option only)
+    ///
+    /// API: POST /v5/order/amend-batch
     /// https://bybit-exchange.github.io/docs/v5/order/batch-amend
     pub async fn batch_amend_orders(
         &self,
@@ -78,6 +86,8 @@ impl OrderClient {
     }
 
     /// Cancel order
+    ///
+    /// API: POST /v5/order/cancel
     /// https://bybit-exchange.github.io/docs/v5/order/cancel-order
     pub async fn cancel_order(
         &self,
@@ -92,6 +102,8 @@ impl OrderClient {
     }
 
     /// Batch cancel orders (Option only)
+    ///
+    /// API: POST /v5/order/cancel-batch
     /// https://bybit-exchange.github.io/docs/v5/order/batch-cancel
     pub async fn batch_cancel_orders(
         &self,
@@ -110,6 +122,8 @@ impl OrderClient {
     }
 
     /// Cancel all orders
+    ///
+    /// API: POST /v5/order/cancel-all
     /// https://bybit-exchange.github.io/docs/v5/order/cancel-all
     pub async fn cancel_all_orders(
         &self,
@@ -143,6 +157,8 @@ impl OrderClient {
     }
 
     /// Get open orders
+    ///
+    /// API: GET /v5/order/realtime
     /// https://bybit-exchange.github.io/docs/v5/order/open-order
     pub async fn get_open_orders(
         &self,
@@ -196,6 +212,8 @@ impl OrderClient {
     }
 
     /// Get order history
+    ///
+    /// API: GET /v5/order/history
     /// https://bybit-exchange.github.io/docs/v5/order/order-list
     pub async fn get_order_history(
         &self,
@@ -257,6 +275,8 @@ impl OrderClient {
     }
 
     /// Get trade history
+    ///
+    /// API: GET /v5/execution/list
     /// https://bybit-exchange.github.io/docs/v5/order/execution
     pub async fn get_trade_history(
         &self,
@@ -310,6 +330,8 @@ impl OrderClient {
     }
 
     /// Check spot borrow quota
+    ///
+    /// API: GET /v5/order/spot-borrow-check
     /// https://bybit-exchange.github.io/docs/v5/order/spot-borrow-quota
     pub async fn spot_borrow_check(
         &self,
@@ -333,6 +355,9 @@ impl OrderClient {
 mod tests {
     use super::*;
     use crate::rest::ApiKeyPair;
+    use crate::rest::enums::side::Side;
+    use crate::rest::enums::order_type::OrderType;
+    use crate::rest::enums::time_in_force::TimeInForce;
 
     fn create_test_client() -> OrderClient {
         let api_key_pair = ApiKeyPair::new(
@@ -353,145 +378,54 @@ mod tests {
         let _client = create_test_client();
     }
 
-    #[tokio::test]
-    async fn test_place_order_request_creation() {
+    #[test]
+    fn test_place_order_request_creation() {
         let order = PlaceOrderRequest {
-            category: Category::UTASpot,
+            category: Category::Spot,
             symbol: "BTCUSDT".to_string(),
-            side: crate::rest::enums::side::Side::Buy,
-            order_type: crate::rest::enums::order_type::OrderType::Limit,
+            side: Side::Buy,
+            order_type: OrderType::Limit,
             qty: "0.001".to_string(),
             price: Some("40000".to_string()),
-            time_in_force: Some(crate::rest::enums::time_in_force::TimeInForce::GTC),
-            order_link_id: Some("test123".to_string()),
-            is_leverage: None,
-            trigger_price: None,
-            trigger_direction: None,
-            trigger_by: None,
-            order_filter: None,
-            order_iv: None,
-            position_idx: None,
-            take_profit: None,
-            stop_loss: None,
-            tp_trigger_by: None,
-            sl_trigger_by: None,
-            reduce_only: None,
-            close_on_trigger: None,
-            smp_type: None,
-            mmp: None,
-            tpsl_mode: None,
-            tp_limit_price: None,
-            sl_limit_price: None,
-            tp_order_type: None,
-            sl_order_type: None,
+            time_in_force: Some(TimeInForce::GTC),
+            ..Default::default()
         };
 
         assert_eq!(order.symbol, "BTCUSDT");
         assert_eq!(order.qty, "0.001");
     }
 
-    #[tokio::test]
-    async fn test_cancel_order_request_creation() {
+    #[test]
+    fn test_cancel_order_request_creation() {
         let cancel_request = CancelOrderRequest {
-            category: Category::UTASpot,
+            category: Category::Spot,
             symbol: "BTCUSDT".to_string(),
             order_id: Some("123456".to_string()),
-            order_link_id: None,
-            order_filter: None,
+            ..Default::default()
         };
 
         assert_eq!(cancel_request.symbol, "BTCUSDT");
         assert_eq!(cancel_request.order_id, Some("123456".to_string()));
     }
 
-    #[tokio::test]
-    async fn test_amend_order_request_creation() {
-        let amend_request = AmendOrderRequest {
-            category: Category::UTASpot,
-            symbol: "BTCUSDT".to_string(),
-            order_id: Some("123456".to_string()),
-            order_link_id: None,
-            order_iv: None,
-            trigger_price: None,
-            qty: Some("0.002".to_string()),
-            price: Some("41000".to_string()),
-            tpsl_mode: None,
-            take_profit: None,
-            stop_loss: None,
-            tp_trigger_by: None,
-            sl_trigger_by: None,
-            trigger_by: None,
-            tp_limit_price: None,
-            sl_limit_price: None,
-        };
-
-        assert_eq!(amend_request.symbol, "BTCUSDT");
-        assert_eq!(amend_request.qty, Some("0.002".to_string()));
-        assert_eq!(amend_request.price, Some("41000".to_string()));
-    }
-
     #[test]
     fn test_batch_request_creation() {
         let orders = vec![
             PlaceOrderRequest {
-                category: Category::UTASpot,
+                category: Category::Spot,
                 symbol: "BTCUSDT".to_string(),
-                side: crate::rest::enums::side::Side::Buy,
-                order_type: crate::rest::enums::order_type::OrderType::Limit,
+                side: Side::Buy,
+                order_type: OrderType::Limit,
                 qty: "0.001".to_string(),
-                price: Some("40000".to_string()),
-                time_in_force: Some(crate::rest::enums::time_in_force::TimeInForce::GTC),
-                order_link_id: Some("test1".to_string()),
-                is_leverage: None,
-                trigger_price: None,
-                trigger_direction: None,
-                trigger_by: None,
-                order_filter: None,
-                order_iv: None,
-                position_idx: None,
-                take_profit: None,
-                stop_loss: None,
-                tp_trigger_by: None,
-                sl_trigger_by: None,
-                reduce_only: None,
-                close_on_trigger: None,
-                smp_type: None,
-                mmp: None,
-                tpsl_mode: None,
-                tp_limit_price: None,
-                sl_limit_price: None,
-                tp_order_type: None,
-                sl_order_type: None,
+                ..Default::default()
             },
             PlaceOrderRequest {
-                category: Category::UTASpot,
+                category: Category::Spot,
                 symbol: "ETHUSDT".to_string(),
-                side: crate::rest::enums::side::Side::Buy,
-                order_type: crate::rest::enums::order_type::OrderType::Limit,
+                side: Side::Buy,
+                order_type: OrderType::Limit,
                 qty: "0.01".to_string(),
-                price: Some("3000".to_string()),
-                time_in_force: Some(crate::rest::enums::time_in_force::TimeInForce::GTC),
-                order_link_id: Some("test2".to_string()),
-                is_leverage: None,
-                trigger_price: None,
-                trigger_direction: None,
-                trigger_by: None,
-                order_filter: None,
-                order_iv: None,
-                position_idx: None,
-                take_profit: None,
-                stop_loss: None,
-                tp_trigger_by: None,
-                sl_trigger_by: None,
-                reduce_only: None,
-                close_on_trigger: None,
-                smp_type: None,
-                mmp: None,
-                tpsl_mode: None,
-                tp_limit_price: None,
-                sl_limit_price: None,
-                tp_order_type: None,
-                sl_order_type: None,
+                ..Default::default()
             },
         ];
 

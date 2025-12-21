@@ -21,6 +21,8 @@ impl MarketClient {
     }
 
     /// Get server time
+    ///
+    /// API: GET /v5/market/time
     /// https://bybit-exchange.github.io/docs/v5/market/time
     pub async fn get_server_time(&self) -> Result<ServerResponse<ServerTimeResult>> {
         let endpoint = "v5/market/time";
@@ -30,6 +32,8 @@ impl MarketClient {
     }
 
     /// Get kline data
+    ///
+    /// API: GET /v5/market/kline
     /// https://bybit-exchange.github.io/docs/v5/market/kline
     pub async fn get_kline(
         &self,
@@ -63,6 +67,8 @@ impl MarketClient {
     }
 
     /// Get mark price kline
+    ///
+    /// API: GET /v5/market/mark-price-kline
     /// https://bybit-exchange.github.io/docs/v5/market/mark-price-kline
     pub async fn get_mark_price_kline(
         &self,
@@ -96,6 +102,8 @@ impl MarketClient {
     }
 
     /// Get index price kline
+    ///
+    /// API: GET /v5/market/index-price-kline
     /// https://bybit-exchange.github.io/docs/v5/market/index-price-kline
     pub async fn get_index_price_kline(
         &self,
@@ -129,6 +137,8 @@ impl MarketClient {
     }
 
     /// Get premium index price kline
+    ///
+    /// API: GET /v5/market/premium-index-price-kline
     /// https://bybit-exchange.github.io/docs/v5/market/preimum-index-price-kline
     pub async fn get_premium_index_price_kline(
         &self,
@@ -162,6 +172,8 @@ impl MarketClient {
     }
 
     /// Get orderbook
+    ///
+    /// API: GET /v5/market/orderbook
     /// https://bybit-exchange.github.io/docs/v5/market/orderbook
     pub async fn get_orderbook(
         &self,
@@ -185,6 +197,8 @@ impl MarketClient {
     }
 
     /// Get instruments info
+    ///
+    /// API: GET /v5/market/instruments-info
     /// https://bybit-exchange.github.io/docs/v5/market/instrument
     pub async fn get_instruments_info(
         &self,
@@ -218,6 +232,8 @@ impl MarketClient {
     }
 
     /// Get tickers
+    ///
+    /// API: GET /v5/market/tickers
     /// https://bybit-exchange.github.io/docs/v5/market/tickers
     pub async fn get_tickers(
         &self,
@@ -247,6 +263,8 @@ impl MarketClient {
     }
 
     /// Get funding rate history
+    ///
+    /// API: GET /v5/market/funding/history
     /// https://bybit-exchange.github.io/docs/v5/market/funding-rate
     pub async fn get_funding_history(
         &self,
@@ -278,6 +296,8 @@ impl MarketClient {
     }
 
     /// Get risk limit
+    ///
+    /// API: GET /v5/market/risk-limit
     /// https://bybit-exchange.github.io/docs/v5/market/risk-limit
     pub async fn get_risk_limit(
         &self,
@@ -299,6 +319,8 @@ impl MarketClient {
     }
 
     /// Get open interest
+    ///
+    /// API: GET /v5/market/open-interest
     /// https://bybit-exchange.github.io/docs/v5/market/open-interest
     pub async fn get_open_interest(
         &self,
@@ -336,6 +358,8 @@ impl MarketClient {
     }
 
     /// Get insurance
+    ///
+    /// API: GET /v5/market/insurance
     /// https://bybit-exchange.github.io/docs/v5/market/insurance
     pub async fn get_insurance(
         &self,
@@ -354,6 +378,8 @@ impl MarketClient {
     }
 
     /// Get recent trades
+    ///
+    /// API: GET /v5/market/recent-trade
     /// https://bybit-exchange.github.io/docs/v5/market/recent-trade
     pub async fn get_recent_trade(
         &self,
@@ -387,6 +413,8 @@ impl MarketClient {
     }
 
     /// Get delivery price
+    ///
+    /// API: GET /v5/market/delivery-price
     /// https://bybit-exchange.github.io/docs/v5/market/delivery-price
     pub async fn get_delivery_price(
         &self,
@@ -420,6 +448,8 @@ impl MarketClient {
     }
 
     /// Get long short ratio
+    ///
+    /// API: GET /v5/market/account-ratio
     /// https://bybit-exchange.github.io/docs/v5/market/long-short-ratio
     pub async fn get_long_short_ratio(
         &self,
@@ -445,6 +475,8 @@ impl MarketClient {
     }
 
     /// Get historical volatility
+    ///
+    /// API: GET /v5/market/historical-volatility
     /// https://bybit-exchange.github.io/docs/v5/market/iv
     pub async fn get_historical_volatility(
         &self,
@@ -496,7 +528,7 @@ mod tests {
         let client = create_test_client();
         let result = client
             .get_kline(
-                Category::UTASpot,
+                Category::Spot,
                 "BTCUSDT",
                 Interval::OneHour,
                 None,
@@ -513,7 +545,7 @@ mod tests {
     async fn test_get_orderbook() {
         let client = create_test_client();
         let result = client
-            .get_orderbook(Category::UTASpot, "BTCUSDT", Some(5))
+            .get_orderbook(Category::Spot, "BTCUSDT", Some(5))
             .await;
         assert!(result.is_ok());
         let response = result.unwrap();
@@ -525,7 +557,7 @@ mod tests {
     async fn test_get_tickers() {
         let client = create_test_client();
         let result = client
-            .get_tickers(Category::UTASpot, Some("BTCUSDT"), None, None)
+            .get_tickers(Category::Spot, Some("BTCUSDT"), None, None)
             .await;
         assert!(result.is_ok());
         let response = result.unwrap();
@@ -536,7 +568,7 @@ mod tests {
     async fn test_get_instruments_info() {
         let client = create_test_client();
         let result = client
-            .get_instruments_info(Category::UTASpot, Some("BTCUSDT"), None, Some(10), None)
+            .get_instruments_info(Category::Spot, Some("BTCUSDT"), None, Some(10), None)
             .await;
         assert!(result.is_ok());
     }
@@ -546,7 +578,7 @@ mod tests {
         let client = create_test_client();
         let result = client
             .get_mark_price_kline(
-                Category::UTALinear,
+                Category::Linear,
                 "BTCUSDT",
                 Interval::OneHour,
                 None,
@@ -561,7 +593,7 @@ mod tests {
     async fn test_get_funding_history() {
         let client = create_test_client();
         let result = client
-            .get_funding_history(Category::UTALinear, "BTCUSDT", None, None, Some(10))
+            .get_funding_history(Category::Linear, "BTCUSDT", None, None, Some(10))
             .await;
         assert!(result.is_ok());
     }
@@ -570,7 +602,7 @@ mod tests {
     async fn test_get_recent_trade() {
         let client = create_test_client();
         let result = client
-            .get_recent_trade(Category::UTASpot, Some("BTCUSDT"), None, None, Some(10))
+            .get_recent_trade(Category::Spot, Some("BTCUSDT"), None, None, Some(10))
             .await;
         assert!(result.is_ok());
     }
@@ -580,7 +612,7 @@ mod tests {
         let client = create_test_client();
         let result = client
             .get_open_interest(
-                Category::UTALinear,
+                Category::Linear,
                 "BTCUSDT",
                 IntervalTime::OneHour,
                 None,
@@ -596,7 +628,7 @@ mod tests {
     async fn test_get_risk_limit() {
         let client = create_test_client();
         let result = client
-            .get_risk_limit(Category::UTALinear, Some("BTCUSDT"))
+            .get_risk_limit(Category::Linear, Some("BTCUSDT"))
             .await;
         assert!(result.is_ok());
     }
