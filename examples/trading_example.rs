@@ -16,11 +16,7 @@ async fn main() -> anyhow::Result<()> {
     let api_key_pair = ApiKeyPair::new("trading".to_string(), api_key, api_secret);
 
     // Create REST client for testnet
-    let rest_client = RestClient::new(
-        api_key_pair,
-        "https://api-testnet.bybit.com".to_string(),
-        true, // debug mode
-    );
+    let rest_client = RestClient::new(api_key_pair, "https://api-testnet.bybit.com".to_string());
 
     // Create Order client
     let order_client = OrderClient::new(rest_client);
@@ -28,7 +24,7 @@ async fn main() -> anyhow::Result<()> {
     // Place a limit order
     println!("Placing a limit order...");
     let place_order_request = PlaceOrderRequest {
-        category: Category::UTASpot,
+        category: Category::Spot,
         symbol: "BTCUSDT".to_string(),
         side: Side::Buy,
         order_type: OrderType::Limit,
@@ -68,7 +64,7 @@ async fn main() -> anyhow::Result<()> {
             println!("\nGetting open orders...");
             let open_orders = order_client
                 .get_open_orders(
-                    Category::UTASpot,
+                    Category::Spot,
                     Some("BTCUSDT"),
                     None,
                     None,
@@ -85,7 +81,7 @@ async fn main() -> anyhow::Result<()> {
             // Cancel the order
             println!("\nCancelling the order...");
             let cancel_request = CancelOrderRequest {
-                category: Category::UTASpot,
+                category: Category::Spot,
                 symbol: "BTCUSDT".to_string(),
                 order_id: Some(response.result.order_id.clone()),
                 order_link_id: None,
@@ -105,7 +101,7 @@ async fn main() -> anyhow::Result<()> {
     println!("\nGetting order history...");
     let order_history = order_client
         .get_order_history(
-            Category::UTASpot,
+            Category::Spot,
             Some("BTCUSDT"),
             None,
             None,

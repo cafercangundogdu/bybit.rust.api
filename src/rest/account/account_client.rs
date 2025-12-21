@@ -1,7 +1,9 @@
 use crate::rest::account::dto::account_info::AccountInfoResult;
 use crate::rest::account::dto::account_wallet::{GetWalletBalanceParams, WalletBalanceResult};
 use crate::rest::account::dto::collateral::{BorrowHistoryResult, CollateralInfoResult};
-use crate::rest::account::dto::contract_transaction_log::{ContractTransactionLogResult, GetContractTransactionLogParams};
+use crate::rest::account::dto::contract_transaction_log::{
+    ContractTransactionLogResult, GetContractTransactionLogParams,
+};
 use crate::rest::account::dto::fee_rate::FeeRateResult;
 use crate::rest::account::dto::mmp::{MmpStateResult, ModifyMmpParams};
 use crate::rest::account::dto::transaction_log::{GetTransactionLogParams, TransactionLogResult};
@@ -89,7 +91,10 @@ impl AccountClient {
     ///
     /// API: POST /v5/account/set-margin-mode
     /// https://bybit-exchange.github.io/docs/v5/account/set-margin-mode
-    pub async fn set_margin_mode(&self, margin_mode: &str) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn set_margin_mode(
+        &self,
+        margin_mode: &str,
+    ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/set-margin-mode";
         let body = json!({
             "setMarginMode": margin_mode,
@@ -103,7 +108,10 @@ impl AccountClient {
     ///
     /// API: POST /v5/account/mmp-modify
     /// https://bybit-exchange.github.io/docs/v5/account/set-mmp
-    pub async fn set_mmp(&self, params: ModifyMmpParams) -> Result<ServerResponse<serde_json::Value>> {
+    pub async fn set_mmp(
+        &self,
+        params: ModifyMmpParams,
+    ) -> Result<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/account/mmp-modify";
         let body = to_value(&params)?;
         let response = self.client.post(endpoint, body, SecType::Signed).await?;
@@ -128,10 +136,7 @@ impl AccountClient {
     ///
     /// API: GET /v5/account/mmp-state
     /// https://bybit-exchange.github.io/docs/v5/account/get-mmp-state
-    pub async fn get_mmp_state(
-        &self,
-        base_coin: &str,
-    ) -> Result<ServerResponse<MmpStateResult>> {
+    pub async fn get_mmp_state(&self, base_coin: &str) -> Result<ServerResponse<MmpStateResult>> {
         let endpoint = "v5/account/mmp-state";
         let params = json!({
             "baseCoin": base_coin,
@@ -287,9 +292,9 @@ impl AccountClient {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::rest::ApiKeyPair;
     use crate::rest::enums::account_type::AccountType;
     use crate::rest::enums::category::Category;
+    use crate::rest::ApiKeyPair;
 
     fn create_test_client() -> AccountClient {
         let api_key_pair = ApiKeyPair::new(
@@ -297,11 +302,8 @@ mod tests {
             "test_key".to_string(),
             "test_secret".to_string(),
         );
-        let rest_client = RestClient::new(
-            api_key_pair,
-            "https://api-testnet.bybit.com".to_string(),
-            false,
-        );
+        let rest_client =
+            RestClient::new(api_key_pair, "https://api-testnet.bybit.com".to_string());
         AccountClient::new(rest_client)
     }
 

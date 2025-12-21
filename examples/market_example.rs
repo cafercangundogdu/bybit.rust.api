@@ -8,7 +8,7 @@ async fn main() -> anyhow::Result<()> {
     let api_key_pair = ApiKeyPair::new("default".to_string(), "".to_string(), "".to_string());
 
     // Create REST client
-    let rest_client = RestClient::new(api_key_pair, "https://api.bybit.com".to_string(), false);
+    let rest_client = RestClient::new(api_key_pair, "https://api.bybit.com".to_string());
 
     // Create Market client
     let market_client = MarketClient::new(rest_client);
@@ -22,7 +22,7 @@ async fn main() -> anyhow::Result<()> {
     println!("\nGetting BTC/USDT kline data...");
     let kline_data = market_client
         .get_kline(
-            Category::UTASpot,
+            Category::Spot,
             "BTCUSDT",
             Interval::OneHour,
             None,
@@ -35,14 +35,14 @@ async fn main() -> anyhow::Result<()> {
     // Get orderbook
     println!("\nGetting BTC/USDT orderbook...");
     let orderbook = market_client
-        .get_orderbook(Category::UTASpot, "BTCUSDT", Some(5))
+        .get_orderbook(Category::Spot, "BTCUSDT", Some(5))
         .await?;
     println!("Orderbook: {:?}", orderbook.result);
 
     // Get tickers
     println!("\nGetting tickers...");
     let tickers = market_client
-        .get_tickers(Category::UTASpot, Some("BTCUSDT"), None, None)
+        .get_tickers(Category::Spot, Some("BTCUSDT"), None, None)
         .await?;
     println!("Tickers: {:?}", tickers.result);
 

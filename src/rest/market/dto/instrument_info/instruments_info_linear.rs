@@ -1,5 +1,5 @@
 use crate::rest::client::ServerResponse;
-use crate::rest::enums::category::Category;
+
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/instrument#response-parameters
@@ -54,7 +54,7 @@ use serde::{Deserialize, Serialize};
 */
 
 #[derive(Debug, Serialize, Deserialize)]
-struct LotSizeFilter {
+pub struct LotSizeFilter {
     #[serde(rename = "maxOrderQty")]
     pub max_order_qty: String,
     #[serde(rename = "maxMktOrderQty")]
@@ -70,7 +70,7 @@ struct LotSizeFilter {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct PriceFilter {
+pub struct PriceFilter {
     #[serde(rename = "minPrice")]
     pub min_price: String,
     #[serde(rename = "maxPrice")]
@@ -80,7 +80,7 @@ struct PriceFilter {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct LeverageFilter {
+pub struct LeverageFilter {
     #[serde(rename = "minLeverage")]
     pub min_leverage: String,
     #[serde(rename = "maxLeverage")]
@@ -90,7 +90,7 @@ struct LeverageFilter {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct InstrumentsInfoLinear {
+pub struct InstrumentsInfoLinear {
     pub symbol: String,
     #[serde(rename = "contractType")]
     pub contract_type: String,
@@ -128,7 +128,7 @@ struct InstrumentsInfoLinear {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct InstrumentsInfoLinearResult {
+pub struct InstrumentsInfoLinearResult {
     pub category: String,
     pub list: Vec<InstrumentsInfoLinear>,
     #[serde(rename = "nextPageCursor")]

@@ -34,6 +34,7 @@ pub struct GetRiskLimitParams {
 */
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct RiskLimit {
     pub id: i64,
     pub symbol: String,
@@ -42,6 +43,7 @@ pub struct RiskLimit {
     pub initial_margin: String,
     pub is_lowest_risk: i64,
     pub max_leverage: String,
+    pub mm_deduction: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

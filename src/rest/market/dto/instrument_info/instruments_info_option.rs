@@ -39,7 +39,7 @@ use serde::{Deserialize, Serialize};
 */
 
 #[derive(Debug, Serialize, Deserialize)]
-struct LotSizeFilter {
+pub struct LotSizeFilter {
     #[serde(rename = "maxOrderQty")]
     pub max_order_qty: String,
     #[serde(rename = "minOrderQty")]
@@ -49,7 +49,7 @@ struct LotSizeFilter {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct PriceFilter {
+pub struct PriceFilter {
     #[serde(rename = "minPrice")]
     pub min_price: String,
     #[serde(rename = "maxPrice")]
@@ -59,7 +59,7 @@ struct PriceFilter {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct InstrumentsInfoOption {
+pub struct InstrumentsInfoOption {
     pub symbol: String,
     pub status: String,
     #[serde(rename = "baseCoin")]
@@ -83,7 +83,7 @@ struct InstrumentsInfoOption {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct InstrumentsInfoOptionResult {
+pub struct InstrumentsInfoOptionResult {
     pub category: String,
     #[serde(rename = "nextPageCursor")]
     pub next_page_cursor: String,

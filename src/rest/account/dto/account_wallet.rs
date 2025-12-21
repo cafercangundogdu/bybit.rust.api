@@ -182,7 +182,8 @@ mod tests {
         }
         "#;
 
-        let response: ServerResponse<WalletBalanceResult> = from_str(json_data).expect("Failed to deserialize WalletBalanceResponse");
+        let response: ServerResponse<WalletBalanceResult> =
+            from_str(json_data).expect("Failed to deserialize WalletBalanceResponse");
         assert_eq!(response.ret_code, 0);
         let result = response.result;
         assert_eq!(result.list.len(), 1);

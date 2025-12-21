@@ -67,7 +67,8 @@ mod tests {
             "time": 1690872862481
         }
         "#;
-        let response: ServerResponse<MmpStateResult> = from_str(json_data).expect("Failed to deserialize MmpStateResult");
+        let response: ServerResponse<MmpStateResult> =
+            from_str(json_data).expect("Failed to deserialize MmpStateResult");
         assert_eq!(response.ret_code, 0);
         let result = response.result;
         assert_eq!(result.result.len(), 1);

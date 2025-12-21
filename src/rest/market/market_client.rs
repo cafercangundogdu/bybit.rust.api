@@ -509,7 +509,7 @@ mod tests {
 
     fn create_test_client() -> MarketClient {
         let api_key_pair = ApiKeyPair::new("test".to_string(), "".to_string(), "".to_string());
-        let rest_client = RestClient::new(api_key_pair, "https://api.bybit.com".to_string(), false);
+        let rest_client = RestClient::new(api_key_pair, "https://api.bybit.com".to_string());
         MarketClient::new(rest_client)
     }
 

@@ -56,7 +56,7 @@ mod tests {
 
     #[test]
     fn test_deserialize_collateral_info() {
-         let json_data = r#"
+        let json_data = r#"
         {
             "retCode": 0,
             "retMsg": "OK",
@@ -79,7 +79,8 @@ mod tests {
             "time": 1690872862481
         }
         "#;
-        let response: ServerResponse<CollateralInfoResult> = from_str(json_data).expect("Failed to deserialize CollateralInfoResult");
+        let response: ServerResponse<CollateralInfoResult> =
+            from_str(json_data).expect("Failed to deserialize CollateralInfoResult");
         assert_eq!(response.ret_code, 0);
         let result = response.result;
         assert_eq!(result.list.len(), 1);
@@ -87,9 +88,9 @@ mod tests {
         assert_eq!(result.list[0].collateral_switch, true);
     }
 
-     #[test]
+    #[test]
     fn test_deserialize_borrow_history() {
-         let json_data = r#"
+        let json_data = r#"
         {
             "retCode": 0,
             "retMsg": "OK",
@@ -111,7 +112,8 @@ mod tests {
             "time": 1690872862481
         }
         "#;
-        let response: ServerResponse<BorrowHistoryResult> = from_str(json_data).expect("Failed to deserialize BorrowHistoryResult");
+        let response: ServerResponse<BorrowHistoryResult> =
+            from_str(json_data).expect("Failed to deserialize BorrowHistoryResult");
         assert_eq!(response.ret_code, 0);
         let result = response.result;
         assert_eq!(result.list.len(), 1);

@@ -1,9 +1,36 @@
 use crate::rest::client::{RestClient, SecType, ServerResponse};
 use anyhow::Result;
+use serde::Deserialize;
 use serde_json::json;
 
 pub struct AnnouncementsClient {
     client: RestClient,
+}
+
+#[derive(Debug, Deserialize)]
+struct AnnouncementsResponse {
+    #[serde(rename = "retCode")]
+    ret_code: i32,
+    #[serde(rename = "retMsg")]
+    ret_msg: String,
+    #[serde(rename = "result", default)]
+    result: serde_json::Value,
+    #[serde(rename = "retExtInfo")]
+    ret_ext_info: serde_json::Value,
+    #[serde(rename = "time")]
+    time: i64,
+}
+
+impl From<AnnouncementsResponse> for ServerResponse<serde_json::Value> {
+    fn from(r: AnnouncementsResponse) -> Self {
+        ServerResponse {
+            ret_code: r.ret_code,
+            ret_msg: r.ret_msg,
+            result: r.result,
+            ret_ext_info: r.ret_ext_info,
+            time: r.time,
+        }
+    }
 }
 
 impl AnnouncementsClient {
@@ -40,8 +67,9 @@ impl AnnouncementsClient {
             params["limit"] = json!(limit);
         }
 
-        let response = self.client.get(endpoint, params, SecType::None).await?;
-        Ok(response)
+        let response: AnnouncementsResponse =
+            self.client.get(endpoint, params, SecType::None).await?;
+        Ok(response.into())
     }
 }
 
@@ -56,11 +84,8 @@ mod tests {
             "test_key".to_string(),
             "test_secret".to_string(),
         );
-        let rest_client = RestClient::new(
-            api_key_pair,
-            "https://api-testnet.bybit.com".to_string(),
-            false,
-        );
+        let rest_client =
+            RestClient::new(api_key_pair, "https://api-testnet.bybit.com".to_string());
         AnnouncementsClient::new(rest_client)
     }
 

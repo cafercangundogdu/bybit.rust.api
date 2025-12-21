@@ -50,7 +50,6 @@ async fn main() -> anyhow::Result<()> {
     let rest_client = RestClient::new(
         api_key_pair,
         "https://api.bybit.com".to_string(),
-        false,
     );
 
     // Create Market client
@@ -88,7 +87,6 @@ async fn main() -> anyhow::Result<()> {
     let rest_client = RestClient::new(
         api_key_pair,
         "https://api.bybit.com".to_string(),
-        false,
     );
 
     // Create Order client
@@ -224,7 +222,6 @@ For testing, use the Bybit testnet:
 let rest_client = RestClient::new(
     api_key_pair,
     "https://api-testnet.bybit.com".to_string(),
-    true, // enable debug mode
 );
 ```
 
@@ -235,6 +232,19 @@ MIT
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+### Development Setup
+
+This project uses a **pre-commit hook** to verify code quality before committing.
+This hook is **automatically installed** when you run `cargo build`.
+
+It runs:
+
+- `cargo fmt`
+- `cargo check`
+- `cargo check --examples`
+- `cargo check --tests`
+- `cargo test`
 
 ## Disclaimer
 

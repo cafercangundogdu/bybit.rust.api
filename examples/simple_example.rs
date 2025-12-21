@@ -9,7 +9,7 @@ async fn main() -> anyhow::Result<()> {
     // Public endpoints (no API key required)
     let api_key_pair = ApiKeyPair::new("public".to_string(), "".to_string(), "".to_string());
 
-    let rest_client = RestClient::new(api_key_pair, "https://api.bybit.com".to_string(), false);
+    let rest_client = RestClient::new(api_key_pair, "https://api.bybit.com".to_string());
 
     let market_client = MarketClient::new(rest_client);
 
@@ -25,12 +25,12 @@ async fn main() -> anyhow::Result<()> {
     // Get tickers
     println!("\n📊 Market Tickers:");
     match market_client
-        .get_tickers(Category::UTASpot, None, None, None)
+        .get_tickers(Category::Spot, None, None, None)
         .await
     {
         Ok(response) => {
             // The response is already deserialized, just print it
-            println!("  Response received successfully");
+            println!("  Response received successfully: {:#?}", response);
         }
         Err(e) => println!("  Error: {}", e),
     }

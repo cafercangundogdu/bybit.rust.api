@@ -1,4 +1,3 @@
-use crate::rest::client::ServerResponse;
 use crate::rest::enums::account_type::AccountType;
 use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
@@ -110,7 +109,8 @@ mod tests {
             "time": 1690872862481
         }
         "#;
-        let response: ServerResponse<TransactionLogResult> = from_str(json_data).expect("Failed to deserialize TransactionLogResult");
+        let response: ServerResponse<TransactionLogResult> =
+            from_str(json_data).expect("Failed to deserialize TransactionLogResult");
         assert_eq!(response.ret_code, 0);
         let result = response.result;
         assert_eq!(result.list.len(), 1);

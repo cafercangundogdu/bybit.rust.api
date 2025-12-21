@@ -40,7 +40,7 @@ use serde::{Deserialize, Serialize};
 */
 
 #[derive(Debug, Serialize, Deserialize)]
-struct RiskParameters {
+pub struct RiskParameters {
     #[serde(rename = "limitParameter")]
     pub limit_parameter: String,
     #[serde(rename = "marketParameter")]
@@ -48,13 +48,13 @@ struct RiskParameters {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct PriceFilter {
+pub struct PriceFilter {
     #[serde(rename = "tickSize")]
     pub tick_size: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct LotSizeFilter {
+pub struct LotSizeFilter {
     #[serde(rename = "basePrecision")]
     pub base_precision: String,
     #[serde(rename = "quotePrecision")]
@@ -70,7 +70,7 @@ struct LotSizeFilter {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct InstrumentsInfoSpot {
+pub struct InstrumentsInfoSpot {
     pub symbol: String,
     #[serde(rename = "baseCoin")]
     pub base_coin: String,
@@ -89,7 +89,7 @@ struct InstrumentsInfoSpot {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct InstrumentsInfoSpotResult {
+pub struct InstrumentsInfoSpotResult {
     pub category: String,
     pub list: Vec<InstrumentsInfoSpot>,
 }

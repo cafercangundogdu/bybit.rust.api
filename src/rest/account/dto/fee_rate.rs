@@ -39,7 +39,8 @@ mod tests {
             "time": 1690872862481
         }
         "#;
-        let response: ServerResponse<FeeRateResult> = from_str(json_data).expect("Failed to deserialize FeeRateResult");
+        let response: ServerResponse<FeeRateResult> =
+            from_str(json_data).expect("Failed to deserialize FeeRateResult");
         assert_eq!(response.ret_code, 0);
         let result = response.result;
         assert_eq!(result.list.len(), 1);

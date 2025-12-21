@@ -208,11 +208,8 @@ mod tests {
             "test_secret".to_string(),
             "".to_string(),
         );
-        let rest_client = RestClient::new(
-            api_key_pair,
-            "https://api-testnet.bybit.com".to_string(),
-            false,
-        );
+        let rest_client =
+            RestClient::new(api_key_pair, "https://api-testnet.bybit.com".to_string());
         BrokerClient::new(rest_client)
     }
 

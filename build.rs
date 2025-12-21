@@ -5,6 +5,9 @@ use std::io::{self, Write};
 use std::path::Path;
 
 fn main() -> io::Result<()> {
+    // Attempt to install git hook, ignore errors to avoid breaking build
+    let _ = install_git_hook();
+
     let json_data = fs::read_to_string("./src/rest/errors/errors.json")?;
     let json: Value = from_str(&json_data).unwrap();
 
@@ -57,7 +60,7 @@ fn main() -> io::Result<()> {
         "    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {{"
     )?;
     writeln!(file, "        match self {{")?;
-    for (code, err_type, desc) in types.iter() {
+    for (code, _err_type, desc) in types.iter() {
         writeln!(
             file,
             "            ErrorCodes::E{} => write!(f, \"{} - {}\"),",
@@ -81,7 +84,7 @@ fn main() -> io::Result<()> {
     writeln!(file, "impl ErrorCodes {{")?;
     writeln!(file, "    pub fn get_error_type(&self) -> ErrorTypes {{")?;
     writeln!(file, "        match self {{")?;
-    for (code, err_type, desc) in types {
+    for (code, err_type, _desc) in types {
         writeln!(
             file,
             "            ErrorCodes::E{} => ErrorTypes::{},",
@@ -92,5 +95,48 @@ fn main() -> io::Result<()> {
     writeln!(file, "    }}")?;
     writeln!(file, "}}")?;
 
+    Ok(())
+}
+
+fn install_git_hook() -> std::io::Result<()> {
+    let manifest_dir =
+        env::var("CARGO_MANIFEST_DIR").map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+    let root = Path::new(&manifest_dir);
+    let hook_path = root.join(".git/hooks/pre-commit");
+    let script_path = root.join("scripts/pre-commit.sh");
+
+    if !script_path.exists() {
+        return Ok(());
+    }
+
+    // Ensure .git/hooks directory exists
+    if let Some(parent) = hook_path.parent() {
+        if !parent.exists() {
+            return Ok(());
+        }
+    }
+
+    // Check if hook needs update
+    let should_copy = if !hook_path.exists() {
+        true
+    } else {
+        let hook_content = fs::read(&hook_path)?;
+        let script_content = fs::read(&script_path)?;
+        hook_content != script_content
+    };
+
+    if should_copy {
+        println!("cargo:warning=Installing pre-commit hook...");
+        fs::copy(&script_path, &hook_path)?;
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            let mut perms = fs::metadata(&hook_path)?.permissions();
+            perms.set_mode(0o755);
+            fs::set_permissions(&hook_path, perms)?;
+        }
+    }
+
+    println!("cargo:rerun-if-changed=scripts/pre-commit.sh");
     Ok(())
 }

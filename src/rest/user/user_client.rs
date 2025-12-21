@@ -319,11 +319,8 @@ mod tests {
             "test_key".to_string(),
             "test_secret".to_string(),
         );
-        let rest_client = RestClient::new(
-            api_key_pair,
-            "https://api-testnet.bybit.com".to_string(),
-            false,
-        );
+        let rest_client =
+            RestClient::new(api_key_pair, "https://api-testnet.bybit.com".to_string());
         UserClient::new(rest_client)
     }
 

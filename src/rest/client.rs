@@ -16,7 +16,6 @@ pub enum SecType {
 pub struct RestClient {
     api_key_pair: ApiKeyPair,
     base_url: String,
-    debug: bool,
 
     http_client: reqwest::Client,
     //ws_client: tungstenite::client::AutoStream,
@@ -37,11 +36,10 @@ pub struct ServerResponse<T> {
 }
 
 impl RestClient {
-    pub fn new(api_key_pair: ApiKeyPair, base_url: String, debug: bool) -> RestClient {
+    pub fn new(api_key_pair: ApiKeyPair, base_url: String) -> RestClient {
         RestClient {
             api_key_pair,
             base_url,
-            debug,
             http_client: reqwest::Client::new(),
         }
     }

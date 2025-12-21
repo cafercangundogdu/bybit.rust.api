@@ -354,10 +354,10 @@ impl OrderClient {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::rest::ApiKeyPair;
-    use crate::rest::enums::side::Side;
     use crate::rest::enums::order_type::OrderType;
+    use crate::rest::enums::side::Side;
     use crate::rest::enums::time_in_force::TimeInForce;
+    use crate::rest::ApiKeyPair;
 
     fn create_test_client() -> OrderClient {
         let api_key_pair = ApiKeyPair::new(
@@ -365,11 +365,8 @@ mod tests {
             "test_key".to_string(),
             "test_secret".to_string(),
         );
-        let rest_client = RestClient::new(
-            api_key_pair,
-            "https://api-testnet.bybit.com".to_string(),
-            false,
-        );
+        let rest_client =
+            RestClient::new(api_key_pair, "https://api-testnet.bybit.com".to_string());
         OrderClient::new(rest_client)
     }
 
