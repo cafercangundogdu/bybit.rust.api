@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CollateralInfoDetails {
     pub currency: String,
     pub equity: String,
@@ -19,12 +19,12 @@ pub struct CollateralInfoDetails {
     pub max_borrowing_amount: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CollateralInfoResult {
     pub list: Vec<CollateralInfoDetails>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BorrowHistoryDetails {
     pub currency: String,
     #[serde(rename = "borrowTime")]
@@ -41,7 +41,7 @@ pub struct BorrowHistoryDetails {
     pub interest_rate: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BorrowHistoryResult {
     #[serde(rename = "nextPageCursor")]
     pub next_page_cursor: String,

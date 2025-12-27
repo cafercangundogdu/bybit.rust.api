@@ -4,7 +4,7 @@ use crate::rest::enums::interval_time::IntervalTime;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/long-short-ratio#request-parameters
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetLongShortRatioParams {
     pub category: Category,   // Product type. linear,inverse
     pub symbol: String,       // Symbol name. e.g. BTCUSD
@@ -32,7 +32,7 @@ pub struct GetLongShortRatioParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LongShortRatio {
     pub symbol: String,
     #[serde(rename = "buyRatio")]
@@ -42,12 +42,12 @@ pub struct LongShortRatio {
     pub timestamp: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LongShortRatioResult {
     pub list: Vec<LongShortRatio>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LongShortRatioResponse(ServerResponse<LongShortRatioResult>);
 
 impl LongShortRatioResponse {

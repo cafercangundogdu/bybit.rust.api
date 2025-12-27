@@ -25,7 +25,7 @@ pub struct GetTransactionLogParams {
     pub cursor: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TransactionLog {
     pub id: String,
     pub symbol: String,
@@ -59,7 +59,7 @@ pub struct TransactionLog {
     pub trade_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TransactionLogResult {
     #[serde(rename = "nextPageCursor")]
     pub next_page_cursor: String,

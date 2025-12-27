@@ -91,12 +91,10 @@ impl ApiKeyPairs {
     */
 
     pub fn load_from_yaml_file(file_path: &str) -> Result<ApiKeyPairs, Box<dyn std::error::Error>> {
-        let mut file = File::open(file_path).expect(&format!("Unable to open file: {}", file_path));
+        let mut file = File::open(file_path)?;
         let mut contents = String::new();
-        file.read_to_string(&mut contents)
-            .expect(&format!("Unable to read file: {}", file_path));
-        let pairs: ApiKeyPairs =
-            serde_yaml::from_str(&contents).expect(&format!("Unable to parse file: {}", file_path));
+        file.read_to_string(&mut contents)?;
+        let pairs: ApiKeyPairs = serde_yaml::from_str(&contents)?;
 
         Ok(pairs)
     }

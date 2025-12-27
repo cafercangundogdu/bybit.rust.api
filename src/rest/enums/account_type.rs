@@ -2,7 +2,7 @@ use std::fmt::{Display, Formatter, Result};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub enum AccountType {
     // Check the value of unifiedMarginStatus to see if you're on the Unified Trading Account or the classic account.
     #[serde(rename = "UNIFIED")]

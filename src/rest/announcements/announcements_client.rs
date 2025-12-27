@@ -3,6 +3,7 @@ use anyhow::Result;
 use serde::Deserialize;
 use serde_json::json;
 
+#[derive(Clone)]
 pub struct AnnouncementsClient {
     client: RestClient,
 }

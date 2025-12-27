@@ -4,6 +4,7 @@ use crate::rest::order::dto::*;
 use anyhow::Result;
 use serde_json::json;
 
+#[derive(Clone)]
 pub struct OrderClient {
     client: RestClient,
 }

@@ -4,7 +4,7 @@ use crate::rest::enums::option_period::OptionPeriod;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/iv#http-request
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetHistoricalVolatilityParams {
     pub category: Category, // Product type. spot, linear, inverse, option
     #[serde(rename = "baseCoin")]
@@ -32,20 +32,20 @@ pub struct GetHistoricalVolatilityParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HistoricalVolatility {
     pub period: i64,
     pub value: String,
     pub time: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HistoricalVolatilityResult {
     pub category: String,
     pub list: Vec<HistoricalVolatility>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HistoricalVolatilityResponse(ServerResponse<HistoricalVolatilityResult>);
 
 impl HistoricalVolatilityResponse {

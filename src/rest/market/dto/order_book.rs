@@ -3,7 +3,7 @@ use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/orderbook#request-parameters
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetOrderBookParams {
     pub category: Category, // Product type. spot, linear, inverse, option
     pub symbol: String,     // Symbol name. e.g. BTCUSDT
@@ -38,7 +38,7 @@ pub struct GetOrderBookParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OrderBookResult {
     pub s: String, // Symbol name
     pub b: Vec<
@@ -58,7 +58,7 @@ pub struct OrderBookResult {
     pub seq: i64, // Cross sequence, You can use this field to compare different levels orderbook data, and for the smaller seq, then it means the data is generated earlier. Option does not have this field currently
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OrderBookResponse(ServerResponse<OrderBookResult>);
 
 impl OrderBookResponse {

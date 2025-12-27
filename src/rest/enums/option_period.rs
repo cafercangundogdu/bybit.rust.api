@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::fmt::{Display, Formatter, Result};
 
 // https://bybit-exchange.github.io/docs/v5/enum#optionperiod
-#[derive(Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub enum OptionPeriod {
     #[serde(rename = "7")] // valid for BTC, ETH, SOL
     SevenDay, // 7 days

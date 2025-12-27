@@ -3,7 +3,7 @@ use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/mark-kline#request-parameters
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetMarkPriceKlineParams {
     pub category: Option<Category>, // Product type. spot,linear,inverse. When category is not passed, use linear by default
     pub symbol: String,             // Symbol name. e.g. BTCUSD
@@ -36,14 +36,14 @@ pub struct GetMarkPriceKlineParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MarkPriceKlineResult {
     pub symbol: String,
     pub category: String,
     pub list: Vec<Vec<String>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MarkPriceKlineResponse(ServerResponse<MarkPriceKlineResult>);
 
 impl MarkPriceKlineResponse {

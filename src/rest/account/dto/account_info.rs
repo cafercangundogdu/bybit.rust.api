@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccountInfoResult {
     #[serde(rename = "unifiedMarginStatus")]
     pub unified_margin_status: i32,

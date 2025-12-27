@@ -3,7 +3,7 @@ use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/risk-limit#request-parameters
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetRiskLimitParams {
     pub category: Category, // Product type. linear,inverse
     pub symbol: String,     // Symbol name. e.g. BTCUSD
@@ -33,7 +33,7 @@ pub struct GetRiskLimitParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RiskLimit {
     pub id: i64,
@@ -46,13 +46,13 @@ pub struct RiskLimit {
     pub mm_deduction: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RiskLimitResult {
     pub category: String,
     pub list: Vec<RiskLimit>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RiskLimitResponse(ServerResponse<RiskLimitResult>);
 
 impl RiskLimitResponse {

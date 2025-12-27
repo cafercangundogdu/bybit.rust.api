@@ -19,7 +19,7 @@ pub struct GetContractTransactionLogParams {
     pub cursor: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ContractTransactionLog {
     pub symbol: String,
     pub side: String,
@@ -48,7 +48,7 @@ pub struct ContractTransactionLog {
     pub trade_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ContractTransactionLogResult {
     #[serde(rename = "nextPageCursor")]
     pub next_page_cursor: String,

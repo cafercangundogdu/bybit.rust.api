@@ -2,7 +2,7 @@ use crate::rest::client::ServerResponse;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/insurance#request-parameters
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetInsuranceParams {
     pub coin: Option<String>, // coin. Default: return all insurance coins
 }
@@ -27,21 +27,21 @@ pub struct GetInsuranceParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Insurance {
     pub coin: String,
     pub balance: String,
     pub value: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct InsuranceResult {
     #[serde(rename = "updatedTime")]
     pub updated_time: String,
     pub list: Vec<Insurance>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct InsuranceResponse(ServerResponse<InsuranceResult>);
 
 impl InsuranceResponse {

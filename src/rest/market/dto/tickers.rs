@@ -3,7 +3,7 @@ use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/tickers#http-request
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetTickersParams {
     pub category: Category,     // Product type. spot, linear, inverse, option
     pub symbol: Option<String>, // Symbol name. e.g. BTCUSDT

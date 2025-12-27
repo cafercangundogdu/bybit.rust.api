@@ -3,7 +3,7 @@ use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/orderbook#request-parameters
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetFundingRateHistoryParams {
     pub category: Category, // Product type. spot, linear, inverse, option
     pub symbol: String,     // Symbol name. e.g. BTCUSDT
@@ -34,7 +34,7 @@ pub struct GetFundingRateHistoryParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Funding {
     pub symbol: String,
     #[serde(rename = "fundingRate")]
@@ -43,13 +43,13 @@ pub struct Funding {
     pub funding_rate_timestamp: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FundingRateHistoryResult {
     pub category: String,
     pub list: Vec<Funding>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FundingRateHistoryResponse(ServerResponse<FundingRateHistoryResult>);
 
 impl FundingRateHistoryResponse {

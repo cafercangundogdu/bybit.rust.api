@@ -14,14 +14,14 @@ pub struct CancelOrderRequest {
     pub order_filter: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CancelOrderResponse {
     pub order_id: String,
     pub order_link_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCancelOrderResponse {
     pub ret_code: i32,
@@ -30,7 +30,7 @@ pub struct BatchCancelOrderResponse {
     pub ret_ext_info: BatchCancelExtInfo,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCancelResult {
     pub category: Category,
@@ -39,20 +39,20 @@ pub struct BatchCancelResult {
     pub order_link_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCancelExtInfo {
     pub list: Vec<BatchCancelOrderExtInfo>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCancelOrderExtInfo {
     pub code: i32,
     pub msg: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CancelAllOrdersResponse {
     pub list: Vec<CancelAllOrderResult>,
@@ -60,7 +60,7 @@ pub struct CancelAllOrdersResponse {
     pub success: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CancelAllOrderResult {
     pub order_id: String,

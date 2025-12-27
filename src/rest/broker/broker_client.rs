@@ -2,6 +2,7 @@ use crate::rest::client::{RestClient, SecType, ServerResponse};
 use anyhow::Result;
 use serde_json::json;
 
+#[derive(Clone)]
 pub struct BrokerClient {
     client: RestClient,
 }

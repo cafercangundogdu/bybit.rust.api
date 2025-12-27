@@ -11,6 +11,7 @@ use crate::rest::client::{RestClient, SecType, ServerResponse};
 use anyhow::Result;
 use serde_json::{json, to_value};
 
+#[derive(Clone)]
 pub struct AccountClient {
     client: RestClient,
 }

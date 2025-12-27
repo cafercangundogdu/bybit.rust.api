@@ -3,7 +3,7 @@ use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/preimum-index-kline#http-request
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetPremiumIndexPriceKlineParams {
     pub category: Option<Category>, // Product type. spot,linear,inverse. When category is not passed, use linear by default
     pub symbol: String,             // Symbol name. e.g. BTCUSD
@@ -43,7 +43,7 @@ pub struct GetPremiumIndexPriceKlineParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PremiumIndexPriceKlineResult {
     pub symbol: String,   // Symbol name
     pub category: String, // Product type
@@ -57,7 +57,7 @@ pub struct PremiumIndexPriceKlineResult {
     pub list: Vec<Vec<String>>, // A string array of individual candle, Sort in reverse by startTime
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PremiumIndexPriceKlineResponse(ServerResponse<PremiumIndexPriceKlineResult>);
 
 impl PremiumIndexPriceKlineResponse {

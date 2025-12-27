@@ -2,7 +2,7 @@ use crate::rest::enums::account_type::AccountType;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/account/wallet-balance#request-parameters
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetWalletBalanceParams {
     #[serde(rename = "accountType")]
     pub account_type: AccountType,
@@ -58,7 +58,7 @@ pub struct GetWalletBalanceParams {
     "time": 1690872862481
 }
 */
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CoinWalletBalanceDetails {
     #[serde(rename = "availableToBorrow")]
     pub available_to_borrow: String,
@@ -94,7 +94,7 @@ pub struct CoinWalletBalanceDetails {
     pub coin: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WalletBalanceDetails {
     #[serde(rename = "totalEquity")]
     pub total_equity: String,

@@ -1,7 +1,7 @@
 use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmendOrderRequest {
     pub category: Category,
@@ -36,14 +36,14 @@ pub struct AmendOrderRequest {
     pub sl_limit_price: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AmendOrderResponse {
     pub order_id: String,
     pub order_link_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchAmendOrderResponse {
     pub ret_code: i32,
@@ -52,7 +52,7 @@ pub struct BatchAmendOrderResponse {
     pub ret_ext_info: BatchAmendExtInfo,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchAmendResult {
     pub category: Category,
@@ -61,13 +61,13 @@ pub struct BatchAmendResult {
     pub order_link_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchAmendExtInfo {
     pub list: Vec<BatchAmendOrderExtInfo>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchAmendOrderExtInfo {
     pub code: i32,

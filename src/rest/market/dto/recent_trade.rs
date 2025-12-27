@@ -3,7 +3,7 @@ use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/tickers#http-request
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetRecentTradeParams {
     pub category: Category, // Product type. spot, linear, inverse, option
     pub symbol: String,     // Symbol name. e.g. BTCUSDT
@@ -38,7 +38,7 @@ pub struct GetRecentTradeParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RecentTrade {
     #[serde(rename = "execId")]
     pub exec_id: String,
@@ -51,13 +51,13 @@ pub struct RecentTrade {
     pub is_block_trade: bool,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RecentTradeResult {
     pub category: String, // Product type
     pub list: Vec<RecentTrade>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RecentTradeResponse(ServerResponse<RecentTradeResult>);
 
 impl RecentTradeResponse {

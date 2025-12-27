@@ -60,14 +60,14 @@ pub struct PlaceOrderRequest {
     pub sl_order_type: Option<OrderType>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PlaceOrderResponse {
     pub order_id: String,
     pub order_link_id: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchPlaceOrderResponse {
     pub ret_code: i32,
@@ -76,7 +76,7 @@ pub struct BatchPlaceOrderResponse {
     pub ret_ext_info: BatchRetExtInfo,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchOrderResult {
     pub category: Category,
@@ -86,13 +86,13 @@ pub struct BatchOrderResult {
     pub create_at: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchRetExtInfo {
     pub list: Vec<BatchOrderExtInfo>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchOrderExtInfo {
     pub code: i32,

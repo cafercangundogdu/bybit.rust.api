@@ -3,6 +3,7 @@ use crate::consts::{
 };
 use crate::rest::api_key_pair::ApiKeyPair;
 use crate::utils::{millis, sign};
+use anyhow::Result;
 use reqwest::RequestBuilder;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
@@ -13,15 +14,16 @@ pub enum SecType {
     Signed = 1,
 }
 
+#[derive(Clone)]
 pub struct RestClient {
     api_key_pair: ApiKeyPair,
     base_url: String,
 
     http_client: reqwest::Client,
-    //ws_client: tungstenite::client::AutoStream,
+    recv_window: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ServerResponse<T> {
     #[serde(rename = "retCode")]
     pub ret_code: i32,
@@ -41,11 +43,20 @@ impl RestClient {
             api_key_pair,
             base_url,
             http_client: reqwest::Client::new(),
+            recv_window: "5000".to_string(),
         }
     }
 
-    fn query_string(&self, query: serde_json::Value) -> String {
-        serde_urlencoded::to_string(query.as_object().unwrap()).unwrap()
+    pub fn with_recv_window(mut self, recv_window: impl Into<String>) -> Self {
+        self.recv_window = recv_window.into();
+        self
+    }
+
+    fn query_string(&self, query: serde_json::Value) -> Result<String> {
+        let object = query
+            .as_object()
+            .ok_or(anyhow::anyhow!("Query params must be a JSON object"))?;
+        Ok(serde_urlencoded::to_string(object)?)
     }
 
     fn sign_request(
@@ -53,7 +64,7 @@ impl RestClient {
         request_builder: RequestBuilder,
         query_or_body_param: String,
     ) -> RequestBuilder {
-        let recv_window = "5000";
+        let recv_window = &self.recv_window;
         let timestamp_str = millis().to_string();
         let signature = sign(
             &self.api_key_pair.secret(),
@@ -79,9 +90,9 @@ impl RestClient {
         endpoint: &str,
         query: serde_json::Value,
         sec_type: SecType,
-    ) -> Result<A, reqwest::Error> {
+    ) -> Result<A> {
         let mut url = format!("{}/{}", self.base_url, endpoint);
-        let query_string = self.query_string(query);
+        let query_string = self.query_string(query)?;
 
         if !query_string.is_empty() {
             url.push_str(&format!("?{}", query_string));
@@ -92,7 +103,7 @@ impl RestClient {
             request_builder = self.sign_request(request_builder, query_string);
         }
 
-        println!("url: {}", url);
+        log::debug!("url: {}", url);
 
         let r = request_builder.send().await?;
         let server_response: A = r.json().await?;

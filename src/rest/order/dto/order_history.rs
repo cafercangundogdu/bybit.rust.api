@@ -4,7 +4,7 @@ use crate::rest::enums::{
 };
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetOrdersResponse {
     pub list: Vec<OrderInfo>,
@@ -12,7 +12,7 @@ pub struct GetOrdersResponse {
     pub category: Category,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderInfo {
     pub order_id: String,
@@ -59,7 +59,7 @@ pub struct OrderInfo {
     pub updated_time: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTradeHistoryResponse {
     pub list: Vec<TradeHistory>,
@@ -67,7 +67,7 @@ pub struct GetTradeHistoryResponse {
     pub category: Category,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TradeHistory {
     pub symbol: String,

@@ -3,7 +3,7 @@ use crate::rest::enums::category::Category;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/delivery-price#request-parameters
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetDeliveryPriceParams {
     pub category: Category, // Product type. linear,inverse
     pub symbol: String,     // Symbol name. e.g. BTCUSD
@@ -30,7 +30,7 @@ pub struct GetDeliveryPriceParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DeliveryPrice {
     pub symbol: String,
     #[serde(rename = "deliveryPrice")]
@@ -39,7 +39,7 @@ pub struct DeliveryPrice {
     pub delivery_time: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DeliveryPriceResult {
     pub category: String,
     #[serde(rename = "nextPageCursor")]
@@ -47,7 +47,7 @@ pub struct DeliveryPriceResult {
     pub list: Vec<DeliveryPrice>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DeliveryPriceResponse(ServerResponse<DeliveryPriceResult>);
 
 impl DeliveryPriceResponse {

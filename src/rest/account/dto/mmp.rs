@@ -13,7 +13,7 @@ pub struct ModifyMmpParams {
     pub delta_limit: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MmpStateDetails {
     #[serde(rename = "baseCoin")]
     pub base_coin: String,
@@ -32,7 +32,7 @@ pub struct MmpStateDetails {
     pub mmp_frozen_until: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MmpStateResult {
     pub result: Vec<MmpStateDetails>,
 }

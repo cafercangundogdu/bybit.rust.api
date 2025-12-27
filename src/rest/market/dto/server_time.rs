@@ -16,7 +16,7 @@ use serde::{Deserialize, Serialize};
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ServerTimeResult {
     #[serde(rename = "timeSecond")]
     pub time_second: String,
@@ -24,7 +24,7 @@ pub struct ServerTimeResult {
     pub time_nano: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ServerTimeResponse(ServerResponse<ServerTimeResult>);
 
 impl ServerTimeResponse {

@@ -4,7 +4,7 @@ use crate::rest::enums::interval_time::IntervalTime;
 use serde::{Deserialize, Serialize};
 
 // https://bybit-exchange.github.io/docs/v5/market/open-interest#http-request
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GetOpenInterestParams {
     pub category: Category, // Product type. spot, linear, inverse, option
     pub symbol: String,     // Symbol name. e.g. BTCUSDT
@@ -43,14 +43,14 @@ pub struct GetOpenInterestParams {
 }
 */
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OpenInterest {
     #[serde(rename = "openInterest")]
     pub open_interest: String,
     pub timestamp: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OpenInterestResult {
     pub symbol: String,
     pub category: String,
@@ -59,7 +59,7 @@ pub struct OpenInterestResult {
     pub next_page_cursor: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OpenInterestResponse(ServerResponse<OpenInterestResult>);
 
 impl OpenInterestResponse {

@@ -11,6 +11,7 @@ use crate::rest::market::dto::{
 use anyhow::Result;
 use serde_json::json;
 
+#[derive(Clone)]
 pub struct MarketClient {
     client: RestClient,
 }

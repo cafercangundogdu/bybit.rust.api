@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FeeRateDetails {
     pub symbol: String,
     #[serde(rename = "takerFeeRate")]
@@ -9,7 +9,7 @@ pub struct FeeRateDetails {
     pub maker_fee_rate: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FeeRateResult {
     pub list: Vec<FeeRateDetails>,
 }
