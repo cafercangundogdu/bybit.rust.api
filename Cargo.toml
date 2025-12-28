@@ -1,6 +1,6 @@
 [package]
 name = "bybit-rust-api"
-version = "0.2.1"
+version = "0.3.0"
 edition = "2021"
 authors = ["Cafer Can Gundogdu <cafercangundogdu@gmail.com>"]
 description = "Complete Rust SDK for Bybit API V5 with all endpoints, comprehensive type safety and full test coverage"

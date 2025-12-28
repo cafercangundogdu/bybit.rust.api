@@ -26,7 +26,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-bybit_rust_api = "0.2.1"
+bybit_rust_api = "0.3.0"
 ```
 
 ## Quick Start
