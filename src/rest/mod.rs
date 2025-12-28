@@ -24,6 +24,7 @@ pub use asset::AssetClient;
 pub use broker::BrokerClient;
 pub use client::{RestClient, SecType, ServerResponse};
 pub use crypto_loan::CryptoLoanClient;
+pub use errors::{BybitError, BybitResult};
 pub use institutional_loan::InstitutionalLoanClient;
 pub use market::MarketClient;
 pub use order::OrderClient;

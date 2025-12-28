@@ -99,8 +99,7 @@ fn main() -> io::Result<()> {
 }
 
 fn install_git_hook() -> std::io::Result<()> {
-    let manifest_dir =
-        env::var("CARGO_MANIFEST_DIR").map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+    let manifest_dir = env::var("CARGO_MANIFEST_DIR").map_err(io::Error::other)?;
     let root = Path::new(&manifest_dir);
     let hook_path = root.join(".git/hooks/pre-commit");
     let script_path = root.join("scripts/pre-commit.sh");

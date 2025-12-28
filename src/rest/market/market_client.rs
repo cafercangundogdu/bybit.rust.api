@@ -8,7 +8,7 @@ use crate::rest::market::dto::{
     MarkPriceKlineResult, OpenInterestResult, OrderBookResult, PremiumIndexPriceKlineResult,
     RecentTradeResult, RiskLimitResult, ServerTimeResult, TickersResult,
 };
-use anyhow::Result;
+use crate::rest::BybitResult as Result;
 use serde_json::json;
 
 #[derive(Clone)]

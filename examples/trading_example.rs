@@ -1,9 +1,5 @@
-use bybit_rust_api::rest::enums::category::Category;
-use bybit_rust_api::rest::enums::order_type::OrderType;
-use bybit_rust_api::rest::enums::side::Side;
-use bybit_rust_api::rest::enums::time_in_force::TimeInForce;
-use bybit_rust_api::rest::order::dto::{CancelOrderRequest, PlaceOrderRequest};
-use bybit_rust_api::rest::{ApiKeyPair, OrderClient, RestClient};
+use bybit_rust_api::dto::{CancelOrderRequest, PlaceOrderRequest};
+use bybit_rust_api::{ApiKeyPair, Category, OrderClient, OrderType, RestClient, Side, TimeInForce};
 use std::env;
 
 #[tokio::main]

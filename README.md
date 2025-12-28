@@ -34,8 +34,7 @@ bybit_rust_api = "0.2.1"
 ### Market Data (Public)
 
 ```rust
-use bybit_rust_api::rest::{ApiKeyPair, MarketClient, RestClient};
-use bybit_rust_api::rest::enums::category::Category;
+use bybit_rust_api::{ApiKeyPair, Category, MarketClient, RestClient};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -66,9 +65,8 @@ async fn main() -> anyhow::Result<()> {
 ### Trading (Private)
 
 ```rust
-use bybit_rust_api::rest::{ApiKeyPair, OrderClient, RestClient};
-use bybit_rust_api::rest::order::dto::PlaceOrderRequest;
-use bybit_rust_api::rest::enums::{Category, OrderType, Side, TimeInForce};
+use bybit_rust_api::{ApiKeyPair, Category, OrderClient, OrderType, RestClient, Side, TimeInForce};
+use bybit_rust_api::dto::PlaceOrderRequest;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -94,7 +92,7 @@ async fn main() -> anyhow::Result<()> {
 
     // Place a limit order
     let order_request = PlaceOrderRequest {
-        category: Category::UTASpot,
+        category: Category::Spot,
         symbol: "BTCUSDT".to_string(),
         side: Side::Buy,
         order_type: OrderType::Limit,

@@ -1,5 +1,5 @@
 use crate::rest::client::{RestClient, SecType, ServerResponse};
-use anyhow::Result;
+use crate::rest::BybitResult as Result;
 use serde_json::json;
 
 #[derive(Clone)]

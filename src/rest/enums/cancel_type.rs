@@ -3,7 +3,7 @@ use std::fmt::{Display, Formatter, Result};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
-pub enum TriggerBy {
+pub enum CancelType {
     #[serde(rename = "CancelByUser")]
     CancelByUser,
     #[serde(rename = "CancelByReduceOnly")]
@@ -42,27 +42,27 @@ pub enum TriggerBy {
     CancelBySmp, // cancelled by SMP
 }
 
-impl Display for TriggerBy {
+impl Display for CancelType {
     fn fmt(&self, f: &mut Formatter) -> Result {
         match self {
-            TriggerBy::CancelByUser => write!(f, "CancelByUser"),
-            TriggerBy::CancelByReduceOnly => write!(f, "CancelByReduceOnly"),
-            TriggerBy::CancelByPrepareLiq => write!(f, "CancelByPrepareLiq"),
-            TriggerBy::CancelAllBeforeLiq => write!(f, "CancelAllBeforeLiq"),
-            TriggerBy::CancelByPrepareAdl => write!(f, "CancelByPrepareAdl"),
-            TriggerBy::CancelAllBeforeAdl => write!(f, "CancelAllBeforeAdl"),
-            TriggerBy::CancelByAdmin => write!(f, "CancelByAdmin"),
-            TriggerBy::CancelByTpSlTsClear => write!(f, "CancelByTpSlTsClear"),
-            TriggerBy::CancelBySmp => write!(f, "CancelBySmp"),
-            TriggerBy::CancelBySettle => write!(f, "CancelBySettle"),
-            TriggerBy::CancelByCannotAffordOrderCost => write!(f, "CancelByCannotAffordOrderCost"),
-            TriggerBy::CancelByPmTrialMmOverEquity => write!(f, "CancelByPmTrialMmOverEquity"),
-            TriggerBy::CancelByAccountBlocking => write!(f, "CancelByAccountBlocking"),
-            TriggerBy::CancelByDelivery => write!(f, "CancelByDelivery"),
-            TriggerBy::CancelByMmpTriggered => write!(f, "CancelByMmpTriggered"),
-            TriggerBy::CancelByCrossSelfMuch => write!(f, "CancelByCrossSelfMuch"),
-            TriggerBy::CancelByCrossReachMaxTradeNum => write!(f, "CancelByCrossReachMaxTradeNum"),
-            TriggerBy::CancelByDCP => write!(f, "CancelByDCP"),
+            CancelType::CancelByUser => write!(f, "CancelByUser"),
+            CancelType::CancelByReduceOnly => write!(f, "CancelByReduceOnly"),
+            CancelType::CancelByPrepareLiq => write!(f, "CancelByPrepareLiq"),
+            CancelType::CancelAllBeforeLiq => write!(f, "CancelAllBeforeLiq"),
+            CancelType::CancelByPrepareAdl => write!(f, "CancelByPrepareAdl"),
+            CancelType::CancelAllBeforeAdl => write!(f, "CancelAllBeforeAdl"),
+            CancelType::CancelByAdmin => write!(f, "CancelByAdmin"),
+            CancelType::CancelByTpSlTsClear => write!(f, "CancelByTpSlTsClear"),
+            CancelType::CancelBySmp => write!(f, "CancelBySmp"),
+            CancelType::CancelBySettle => write!(f, "CancelBySettle"),
+            CancelType::CancelByCannotAffordOrderCost => write!(f, "CancelByCannotAffordOrderCost"),
+            CancelType::CancelByPmTrialMmOverEquity => write!(f, "CancelByPmTrialMmOverEquity"),
+            CancelType::CancelByAccountBlocking => write!(f, "CancelByAccountBlocking"),
+            CancelType::CancelByDelivery => write!(f, "CancelByDelivery"),
+            CancelType::CancelByMmpTriggered => write!(f, "CancelByMmpTriggered"),
+            CancelType::CancelByCrossSelfMuch => write!(f, "CancelByCrossSelfMuch"),
+            CancelType::CancelByCrossReachMaxTradeNum => write!(f, "CancelByCrossReachMaxTradeNum"),
+            CancelType::CancelByDCP => write!(f, "CancelByDCP"),
         }
     }
 }

@@ -1,6 +1,4 @@
-use bybit_rust_api::rest::enums::category::Category;
-use bybit_rust_api::rest::enums::interval::Interval;
-use bybit_rust_api::rest::{ApiKeyPair, MarketClient, RestClient};
+use bybit_rust_api::{ApiKeyPair, Category, Interval, MarketClient, RestClient};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {

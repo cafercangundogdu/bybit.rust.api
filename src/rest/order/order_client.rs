@@ -1,7 +1,7 @@
 use crate::rest::client::{RestClient, SecType, ServerResponse};
 use crate::rest::enums::category::Category;
 use crate::rest::order::dto::*;
-use anyhow::Result;
+use crate::rest::BybitResult as Result;
 use serde_json::json;
 
 #[derive(Clone)]

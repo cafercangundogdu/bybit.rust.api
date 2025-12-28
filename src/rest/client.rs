@@ -2,8 +2,8 @@ use crate::consts::{
     API_REQUEST_KEY, RECV_WINDOW_KEY, SIGNATURE_KEY, SIGN_TYPE_KEY, TIMESTAMP_KEY,
 };
 use crate::rest::api_key_pair::ApiKeyPair;
+use crate::rest::errors::{BybitResult, ErrorCodes};
 use crate::utils::{millis, sign};
-use anyhow::Result;
 use reqwest::RequestBuilder;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
@@ -37,6 +37,20 @@ pub struct ServerResponse<T> {
     pub time: i64,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone)]
+struct RawServerResponse {
+    #[serde(rename = "retCode")]
+    pub ret_code: i32,
+    #[serde(rename = "retMsg")]
+    pub ret_msg: String,
+    #[serde(rename = "result")]
+    pub result: serde_json::Value,
+    #[serde(rename = "retExtInfo")]
+    pub ret_ext_info: serde_json::Value,
+    #[serde(rename = "time")]
+    pub time: i64,
+}
+
 impl RestClient {
     pub fn new(api_key_pair: ApiKeyPair, base_url: String) -> RestClient {
         RestClient {
@@ -52,10 +66,12 @@ impl RestClient {
         self
     }
 
-    fn query_string(&self, query: serde_json::Value) -> Result<String> {
-        let object = query
-            .as_object()
-            .ok_or(anyhow::anyhow!("Query params must be a JSON object"))?;
+    fn query_string(&self, query: serde_json::Value) -> BybitResult<String> {
+        let object = query.as_object().ok_or_else(|| {
+            crate::rest::errors::BybitError::Internal(
+                "Query params must be a JSON object".to_string(),
+            )
+        })?;
         Ok(serde_urlencoded::to_string(object)?)
     }
 
@@ -90,7 +106,7 @@ impl RestClient {
         endpoint: &str,
         query: serde_json::Value,
         sec_type: SecType,
-    ) -> Result<A> {
+    ) -> BybitResult<ServerResponse<A>> {
         let mut url = format!("{}/{}", self.base_url, endpoint);
         let query_string = self.query_string(query)?;
 
@@ -106,8 +122,28 @@ impl RestClient {
         log::debug!("url: {}", url);
 
         let r = request_builder.send().await?;
-        let server_response: A = r.json().await?;
-        Ok(server_response)
+        let raw_response: RawServerResponse = r.json().await?;
+
+        if raw_response.ret_code != 0 {
+            let code_str = raw_response.ret_code.to_string();
+            // Try to parse into known ErrorCodes, otherwise fallback to generic
+            if let Ok(error_code) = serde_json::from_value(serde_json::json!(code_str)) {
+                return Err(crate::rest::errors::BybitError::Api(error_code));
+            } else {
+                return Err(crate::rest::errors::BybitError::Api(
+                    crate::rest::errors::ErrorCodes::E10001,
+                )); // System error fallback or similar
+            }
+        }
+
+        let result: A = serde_json::from_value(raw_response.result)?;
+        Ok(ServerResponse {
+            ret_code: raw_response.ret_code,
+            ret_msg: raw_response.ret_msg,
+            result,
+            ret_ext_info: raw_response.ret_ext_info,
+            time: raw_response.time,
+        })
     }
 
     pub async fn post<A: DeserializeOwned>(
@@ -115,17 +151,34 @@ impl RestClient {
         endpoint: &str,
         body: serde_json::Value,
         sec_type: SecType,
-    ) -> Result<A, reqwest::Error> {
+    ) -> BybitResult<ServerResponse<A>> {
         let url = format!("{}/{}", self.base_url, endpoint);
         let mut request_builder = self.http_client.post(&url);
         if sec_type == SecType::Signed {
-            request_builder = self.sign_request(
-                request_builder,
-                serde_urlencoded::to_string(body.as_object().unwrap()).unwrap(),
-            );
+            let body_str =
+                serde_json::to_string(&body).map_err(crate::rest::errors::BybitError::Json)?;
+            request_builder = self.sign_request(request_builder, body_str);
         }
 
-        let server_response = request_builder.json(&body).send().await?.json().await?;
-        Ok(server_response)
+        let r = request_builder.json(&body).send().await?;
+        let raw_response: RawServerResponse = r.json().await?;
+
+        if raw_response.ret_code != 0 {
+            let code_str = raw_response.ret_code.to_string();
+            if let Ok(error_code) = serde_json::from_value(serde_json::json!(code_str)) {
+                return Err(crate::rest::errors::BybitError::Api(error_code));
+            } else {
+                return Err(crate::rest::errors::BybitError::Api(ErrorCodes::E10001));
+            }
+        }
+
+        let result: A = serde_json::from_value(raw_response.result)?;
+        Ok(ServerResponse {
+            ret_code: raw_response.ret_code,
+            ret_msg: raw_response.ret_msg,
+            result,
+            ret_ext_info: raw_response.ret_ext_info,
+            time: raw_response.time,
+        })
     }
 }

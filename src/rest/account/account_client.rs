@@ -8,7 +8,7 @@ use crate::rest::account::dto::fee_rate::FeeRateResult;
 use crate::rest::account::dto::mmp::{MmpStateResult, ModifyMmpParams};
 use crate::rest::account::dto::transaction_log::{GetTransactionLogParams, TransactionLogResult};
 use crate::rest::client::{RestClient, SecType, ServerResponse};
-use anyhow::Result;
+use crate::rest::BybitResult as Result;
 use serde_json::{json, to_value};
 
 #[derive(Clone)]

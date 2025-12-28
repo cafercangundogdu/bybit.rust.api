@@ -1,5 +1,4 @@
 use crate::rest::client::{RestClient, SecType, ServerResponse};
-use anyhow::Result;
 use serde::Deserialize;
 use serde_json::json;
 
@@ -48,7 +47,7 @@ impl AnnouncementsClient {
         tag: Option<&str>,
         page: Option<i32>,
         limit: Option<i32>,
-    ) -> Result<ServerResponse<serde_json::Value>> {
+    ) -> crate::rest::BybitResult<ServerResponse<serde_json::Value>> {
         let endpoint = "v5/announcements/index";
         let mut params = json!({});
 
@@ -68,9 +67,7 @@ impl AnnouncementsClient {
             params["limit"] = json!(limit);
         }
 
-        let response: AnnouncementsResponse =
-            self.client.get(endpoint, params, SecType::None).await?;
-        Ok(response.into())
+        self.client.get(endpoint, params, SecType::None).await
     }
 }
 
