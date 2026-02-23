@@ -59,7 +59,7 @@ pub struct GetKlineParams {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct KlineResult {
     pub symbol: String,
-    pub category: String,
+    pub category: Option<String>,
     pub list: Vec<Vec<String>>,
 }
 
