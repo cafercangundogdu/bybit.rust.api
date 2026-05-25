@@ -41,10 +41,10 @@ impl ApiKeyPair {
     /// let keys = ApiKeyPair::from_env()?;
     /// ```
     pub fn from_env() -> anyhow::Result<Self> {
-        let key = std::env::var("BYBIT_API_KEY")
-            .context("BYBIT_API_KEY environment variable not set")?;
-        let secret = std::env::var("BYBIT_API_SECRET")
-            .context("BYBIT_API_SECRET environment variable not set")?;
+        let key =
+            std::env::var("BYBIT_API_KEY").context("BYBIT_API_KEY environment variable not set")?;
+        let secret =
+            std::env::var("BYBIT_API_SECRET").context("BYBIT_API_SECRET environment variable not set")?;
         Ok(ApiKeyPair::new("env".to_string(), key, secret))
     }
 
