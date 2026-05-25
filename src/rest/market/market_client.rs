@@ -554,7 +554,7 @@ mod tests {
         assert!(result.is_ok());
         let response = result.unwrap();
         assert_eq!(response.ret_code, 0);
-        assert!(response.result.s.len() > 0);
+        assert!(!response.result.s.is_empty());
     }
 
     #[tokio::test]

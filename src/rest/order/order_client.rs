@@ -408,7 +408,7 @@ mod tests {
 
     #[test]
     fn test_batch_request_creation() {
-        let orders = vec![
+        let orders = [
             PlaceOrderRequest {
                 category: Category::Spot,
                 symbol: "BTCUSDT".to_string(),

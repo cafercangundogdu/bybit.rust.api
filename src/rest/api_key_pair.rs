@@ -78,7 +78,15 @@ impl ApiKeyPairs {
             pairs: HashMap::new(),
         }
     }
+}
 
+impl Default for ApiKeyPairs {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl ApiKeyPairs {
     pub fn add(&mut self, profile_name: String, key: String, secret: String) {
         self.pairs.insert(
             profile_name.to_string(),

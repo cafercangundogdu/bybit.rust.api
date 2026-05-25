@@ -49,6 +49,6 @@ mod tests {
         let result = response.result;
         assert_eq!(result.unified_margin_status, 3);
         assert_eq!(result.margin_mode, "PORTFOLIO_MARGIN");
-        assert_eq!(result.is_master_player, true);
+        assert!(result.is_master_player);
     }
 }

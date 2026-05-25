@@ -73,6 +73,6 @@ mod tests {
         let result = response.result;
         assert_eq!(result.result.len(), 1);
         assert_eq!(result.result[0].base_coin, "BTC");
-        assert_eq!(result.result[0].mmp_enabled, true);
+        assert!(result.result[0].mmp_enabled);
     }
 }

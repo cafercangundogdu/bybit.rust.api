@@ -189,6 +189,6 @@ mod tests {
         assert_eq!(result.list.len(), 1);
         assert_eq!(result.list[0].total_equity, "3.31216591");
         assert_eq!(result.list[0].coin[0].coin, "BTC");
-        assert_eq!(result.list[0].coin[0].margin_collateral, true);
+        assert!(result.list[0].coin[0].margin_collateral);
     }
 }

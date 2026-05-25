@@ -94,7 +94,7 @@ impl RestClient {
         let recv_window = &self.recv_window;
         let timestamp_str = millis().to_string();
         let signature = sign(
-            &self.api_key_pair.secret(),
+            self.api_key_pair.secret(),
             &format!(
                 "{}{}{}{}",
                 timestamp_str,

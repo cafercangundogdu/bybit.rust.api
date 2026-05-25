@@ -85,7 +85,7 @@ mod tests {
         let result = response.result;
         assert_eq!(result.list.len(), 1);
         assert_eq!(result.list[0].currency, "BTC");
-        assert_eq!(result.list[0].collateral_switch, true);
+        assert!(result.list[0].collateral_switch);
     }
 
     #[test]

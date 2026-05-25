@@ -1006,8 +1006,8 @@ mod tests {
 
     #[tokio::test]
     async fn test_save_transfer_sub_member_params() {
-        let coin = vec!["BTC".to_string(), "ETH".to_string()];
-        let member_ids = vec!["member1".to_string(), "member2".to_string()];
+        let coin = ["BTC".to_string(), "ETH".to_string()];
+        let member_ids = ["member1".to_string(), "member2".to_string()];
 
         assert_eq!(coin.len(), 2);
         assert_eq!(coin[0], "BTC");

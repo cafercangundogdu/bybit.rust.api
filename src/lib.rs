@@ -6,6 +6,10 @@
 //! **full WebSocket support** with 17 streaming channels.
 //!
 //! ## Features
+
+// Bybit API endpoints naturally have many optional parameters;
+// this is an intentional design choice for ergonomic usage.
+#![allow(clippy::too_many_arguments)]
 //!
 //! - **REST API**: 129/129 endpoints (Market, Trade, Account, Position, Asset, User, Broker, etc.)
 //! - **WebSocket Public**: Orderbook (snapshot/delta), Trade, Ticker, Kline, Liquidation
