@@ -1,48 +1,78 @@
-use bybit_rust_api::{ApiKeyPair, Category, Interval, MarketClient, RestClient};
+//! Market data example — public endpoints, no API key needed.
+//!
+//! Usage:
+//! ```bash
+//! cargo run --example market
+//! ```
+
+use bybit_rust_api::rest::{ApiKeyPair, MarketClient, RestClient};
+use bybit_rust_api::{Category, Interval};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    // Create API key pair (for public endpoints, you can use empty strings)
-    let api_key_pair = ApiKeyPair::new("default".to_string(), "".to_string(), "".to_string());
+    // Load .env if present (for optional API key)
+    dotenvy::dotenv().ok();
 
-    // Create REST client
-    let rest_client = RestClient::new(api_key_pair, "https://api.bybit.com".to_string());
+    // Public endpoints don't need API keys
+    let api_key_pair = ApiKeyPair::new("public".to_string(), String::new(), String::new());
+    let rest_client = RestClient::new(
+        api_key_pair,
+        bybit_rust_api::consts::REST_MAINNET.to_string(),
+    );
 
-    // Create Market client
-    let market_client = MarketClient::new(rest_client);
+    let market = MarketClient::new(rest_client);
 
-    // Get server time
-    println!("Getting server time...");
-    let server_time = market_client.get_server_time().await?;
-    println!("Server time: {:?}", server_time.result);
+    // 1. Server time
+    println!("=== Server Time ===");
+    let time = market.get_server_time().await?;
+    println!("  ret_msg: {}", time.ret_msg);
+    println!("  server:  {}", time.result.time_second);
 
-    // Get BTC/USDT kline data for spot market
-    println!("\nGetting BTC/USDT kline data...");
-    let kline_data = market_client
+    // 2. BTC/USDT kline (last 5 hourly candles)
+    println!("\n=== BTCUSDT 1h Klines ===");
+    let klines = market
         .get_kline(
             Category::Spot,
             "BTCUSDT",
             Interval::OneHour,
             None,
             None,
-            Some(10),
+            Some(5),
         )
         .await?;
-    println!("Kline data count: {}", kline_data.result.list.len());
+    for k in &klines.result.list {
+        println!(
+            "  {} open={} high={} low={} close={}",
+            k[0], k[1], k[2], k[3], k[4]
+        );
+    }
 
-    // Get orderbook
-    println!("\nGetting BTC/USDT orderbook...");
-    let orderbook = market_client
+    // 3. Orderbook (top 5 levels)
+    println!("\n=== BTCUSDT Orderbook (top 5) ===");
+    let ob = market
         .get_orderbook(Category::Spot, "BTCUSDT", Some(5))
         .await?;
-    println!("Orderbook: {:?}", orderbook.result);
+    println!("  Bids:");
+    for bid in ob.result.b.iter().rev() {
+        println!("    {} @ {}", bid[1], bid[0]);
+    }
+    println!("  Asks:");
+    for ask in &ob.result.a {
+        println!("    {} @ {}", ask[1], ask[0]);
+    }
 
-    // Get tickers
-    println!("\nGetting tickers...");
-    let tickers = market_client
+    // 4. Ticker
+    println!("\n=== BTCUSDT Ticker ===");
+    let ticker = market
         .get_tickers(Category::Spot, Some("BTCUSDT"), None, None)
         .await?;
-    println!("Tickers: {:?}", tickers.result);
+    if let Some(t) = ticker.result.list.first() {
+        println!("  last:    {}", t.last_price);
+        println!("  24h_hi:  {}", t.high_price24h);
+        println!("  24h_lo:  {}", t.low_price24h);
+        println!("  24h_vol: {}", t.volume24h);
+        println!("  change:  {}%", t.price24h_pcnt);
+    }
 
     Ok(())
 }

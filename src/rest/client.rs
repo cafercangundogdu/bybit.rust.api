@@ -3,7 +3,7 @@ use crate::consts::{
 };
 use crate::rest::api_key_pair::ApiKeyPair;
 use crate::rest::errors::{BybitResult, ErrorCodes};
-use crate::utils::{millis, sign};
+use crate::utils::{millis, sign, RateLimiter};
 use reqwest::RequestBuilder;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
@@ -21,6 +21,7 @@ pub struct RestClient {
 
     http_client: reqwest::Client,
     recv_window: String,
+    rate_limiter: Option<RateLimiter>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -58,7 +59,17 @@ impl RestClient {
             base_url,
             http_client: reqwest::Client::new(),
             recv_window: "5000".to_string(),
+            rate_limiter: None,
         }
+    }
+
+    /// Set a rate limiter for this client.
+    ///
+    /// Bybit limits: 50 req/s for both public and private endpoints.
+    /// Use `RateLimiter::public_rest()` or `RateLimiter::private_rest()`.
+    pub fn with_rate_limiter(mut self, limiter: RateLimiter) -> Self {
+        self.rate_limiter = Some(limiter);
+        self
     }
 
     pub fn with_recv_window(mut self, recv_window: impl Into<String>) -> Self {
@@ -107,6 +118,9 @@ impl RestClient {
         query: serde_json::Value,
         sec_type: SecType,
     ) -> BybitResult<ServerResponse<A>> {
+        if let Some(ref limiter) = self.rate_limiter {
+            limiter.acquire().await;
+        }
         let mut url = format!("{}/{}", self.base_url, endpoint);
         let query_string = self.query_string(query)?;
 
@@ -152,6 +166,9 @@ impl RestClient {
         body: serde_json::Value,
         sec_type: SecType,
     ) -> BybitResult<ServerResponse<A>> {
+        if let Some(ref limiter) = self.rate_limiter {
+            limiter.acquire().await;
+        }
         let url = format!("{}/{}", self.base_url, endpoint);
         let mut request_builder = self.http_client.post(&url);
         if sec_type == SecType::Signed {

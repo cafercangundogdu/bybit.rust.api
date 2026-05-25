@@ -1,4 +1,5 @@
 use hex;
+use hmac::digest::KeyInit;
 use hmac::{Hmac, Mac};
 use sha2::Sha256;
 use std::time::SystemTime;

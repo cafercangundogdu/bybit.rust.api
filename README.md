@@ -15,10 +15,11 @@ A Rust SDK for the Bybit API V5, providing easy access to market data and tradin
 - ✅ Asset Management (deposits, withdrawals, transfers)
 - ✅ User Management (sub-accounts, API keys)
 - ✅ Spot Leverage Token
+- ✅ WebSocket Support (public & private streams)
+- ✅ Orderbook, Trade, Ticker, Kline (real-time)
+- ✅ Position, Execution, Order, Wallet (private WS)
+- ✅ Auto-reconnect with ping/pong heartbeat
 - ✅ Comprehensive error handling
-- ✅ Type-safe request/response structures
-- ✅ Authentication and request signing
-- 🚧 WebSocket support (coming soon)
 
 ## Installation
 
@@ -210,6 +211,36 @@ cargo run --example market
 
 # Trading example (requires API credentials)
 cargo run --example trading
+
+# WebSocket streaming example (real-time market data)
+cargo run --example websocket
+```
+
+### WebSocket Quick Start
+
+```rust
+use bybit_rust_api::ws::{WsClient, topics};
+use futures_util::StreamExt;
+
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
+    // Connect to public stream
+    let mut client = WsClient::connect(
+        "wss://stream.bybit.com/v5/public/linear"
+    ).await?;
+
+    // Subscribe to topics
+    client.subscribe(vec![
+        topics::orderbook(1, "BTCUSDT"),
+        topics::trade("BTCUSDT"),
+    ]).await?;
+
+    // Read real-time messages
+    while let Some(msg) = client.next().await {
+        println!("{:?}", msg);
+    }
+    Ok(())
+}
 ```
 
 ## Testing

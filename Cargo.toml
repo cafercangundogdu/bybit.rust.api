@@ -1,6 +1,6 @@
 [package]
 name = "bybit-rust-api"
-version = "0.3.0"
+version = "0.4.0"
 edition = "2021"
 authors = ["Cafer Can Gundogdu <cafercangundogdu@gmail.com>"]
 description = "Complete Rust SDK for Bybit API V5 with all endpoints, comprehensive type safety and full test coverage"
@@ -29,28 +29,36 @@ path = "examples/market_example.rs"
 name = "trading"
 path = "examples/trading_example.rs"
 
+[[example]]
+name = "websocket"
+path = "examples/websocket_example.rs"
+
 [dependencies]
-reqwest = { version = "0.12.23", features = ["json", "rustls-tls"] }
-serde = { version = "1.0.219", features = ["derive"] }
-serde_json = "1.0"
-anyhow = "1.0.99"
-log = "0.4.27"
-hmac = "0.12.1"
-sha2 = "0.10.9"
-tokio = { version = "1.47.1", features = ["full"] }
+reqwest = { version = "0.13.4", features = ["json", "rustls"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+anyhow = "1.0.102"
+log = "0.4.30"
+hmac = "0.13.0"
+sha2 = "0.11.0"
+tokio = { version = "1.52.3", features = ["full"] }
 hex = "0.4.3"
-ring = "0.17.14"
-tokio-tungstenite = { version = "0.27.0", features = [
+tokio-tungstenite = { version = "0.29.0", features = [
     "rustls-tls-native-roots",
 ] }
 serde_urlencoded = "0.7.1"
-serde_yaml = "0.9.33"
-chrono = { version = "0.4.41", features = ["serde"] }
-thiserror = "2.0.16"
-url = "2.5.6"
-futures-util = "0.3.31"
+chrono = { version = "0.4.44", features = ["serde"] }
+thiserror = "2.0.18"
+url = "2.5.8"
+futures-util = "0.3.32"
+dotenvy = "0.15.7"
+
+[dev-dependencies]
+wiremock = "0.6.5"
+tokio-test = "0.4.5"
+env_logger = "0.11.10"
 
 [build-dependencies]
-serde_json = "1.0.143"
-askama = "0.14.0"                                      # Optional, for templating Rust code
-serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.150"
+askama = "0.16.0"                                      # Optional, for templating Rust code
+serde = { version = "1.0.228", features = ["derive"] }
